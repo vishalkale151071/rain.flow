@@ -54,7 +54,9 @@ interface IFlowV1 {
         SignedContext[] calldata signedContexts
     ) external view;
 
-    function flow(Evaluable calldata evaluable, uint256[] calldata callerContext, SignedContext[] calldata signedContexts)
-        external
-        payable returns (FlowTransfer calldata flowTransfer);
+    function flow(
+        Evaluable calldata evaluable,
+        uint256[] calldata callerContext,
+        SignedContext[] calldata signedContexts
+    ) external payable returns (FlowTransfer calldata flowTransfer);
 }
