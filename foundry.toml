@@ -11,8 +11,8 @@ optimizer_runs = 100000
 
 fuzz.runs = 1024
 
-[profile.default.model_checker]
-contracts = {'src/LibQAKitMemory.sol' = ['LibQAKitMemory']}
-engine = 'chc'
-timeout = 10000
-targets = ['assert', 'underflow', 'overflow', 'divByZero', 'constantCondition', 'popEmptyArray', 'outOfBounds']
+# [profile.default.model_checker]
+# contracts = {'src/IFlowV1.sol' = ['IFlowV1']}
+# engine = 'chc'
+# timeout = 10000
+# targets = ['assert', 'underflow', 'overflow', 'divByZero', 'constantCondition', 'popEmptyArray', 'outOfBounds']
