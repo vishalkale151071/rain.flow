@@ -74,9 +74,8 @@ interface IFlowERC20V1 {
         SignedContext[] memory signedContexts_
     ) external view returns (FlowERC20IO memory);
 
-    function flow(
-        Evaluable memory evaluable_,
-        uint256[] memory callerContext_,
-        SignedContext[] memory signedContexts_
-    ) external payable returns (FlowERC20IO memory);
+    function flow(Evaluable memory evaluable_, uint256[] memory callerContext_, SignedContext[] memory signedContexts_)
+        external
+        payable
+        returns (FlowERC20IO memory);
 }

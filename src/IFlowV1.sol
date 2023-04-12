@@ -19,9 +19,7 @@ interface IFlowV1 {
         SignedContext[] memory signedContexts_
     ) external view;
 
-    function flow(
-        Evaluable memory evaluable_,
-        uint256[] memory callerContext_,
-        SignedContext[] memory signedContexts_
-    ) external payable;
+    function flow(Evaluable memory evaluable_, uint256[] memory callerContext_, SignedContext[] memory signedContexts_)
+        external
+        payable;
 }
