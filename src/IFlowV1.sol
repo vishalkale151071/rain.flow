@@ -52,7 +52,7 @@ interface IFlowV1 {
         Evaluable calldata evaluable,
         uint256[] calldata callerContext,
         SignedContext[] calldata signedContexts
-    ) external view;
+    ) external view returns (FlowTransfer calldata flowTransfer);
 
     function flow(
         Evaluable calldata evaluable,
