@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: CAL
 pragma solidity =0.8.18;
 
-import "rain.interface.interpreter/LibContext.sol";
+import "rain.interface.interpreter/deprecated/IInterpreterCallerV1.sol";
 import "rain.interface.interpreter/LibEvaluable.sol";
 
 import "./IFlowV1.sol";

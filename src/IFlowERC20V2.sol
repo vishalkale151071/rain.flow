@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: CAL
 pragma solidity =0.8.18;
 
-import "rain.interface.interpreter/LibContext.sol";
+import "rain.interface.interpreter/IInterpreterCallerV2.sol";
 import "rain.interface.interpreter/LibEvaluable.sol";
 
-import "./IFlowV1.sol";
+import "./IFlowV2.sol";
 
 struct ERC20SupplyChange {
     address account;
@@ -29,7 +29,7 @@ struct FlowERC20Config {
     EvaluableConfig[] flowConfig;
 }
 
-/// @title IFlowERC20V1
+/// @title IFlowERC20V2
 /// @notice Mints itself according to some predefined schedule. The schedule is
 /// expressed as an expression and the `claim` function is world-callable.
 /// Intended behaviour is to avoid sybils infinitely minting by putting the
@@ -42,7 +42,7 @@ struct FlowERC20Config {
 /// claim and then diff it against the current block number.
 /// See `test/Claim/FlowERC20.sol.ts` for examples, including providing
 /// staggered rewards where more tokens are minted for higher tier accounts.
-interface IFlowERC20V1 {
+interface IFlowERC20V2 {
     /// Contract has initialized.
     /// @param sender `msg.sender` initializing the contract (factory).
     /// @param config All initialized config.
@@ -51,12 +51,12 @@ interface IFlowERC20V1 {
     function previewFlow(
         Evaluable calldata evaluable,
         uint256[] calldata callerContext,
-        SignedContext[] calldata signedContexts
+        SignedContextV1[] calldata signedContexts
     ) external view returns (FlowERC20IO calldata);
 
     function flow(
         Evaluable calldata evaluable,
         uint256[] calldata callerContext,
-        SignedContext[] calldata signedContexts
+        SignedContextV1[] calldata signedContexts
     ) external payable returns (FlowERC20IO calldata);
 }
