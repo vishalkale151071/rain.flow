@@ -38,5 +38,5 @@ interface IFlowERC1155V3 {
         Evaluable calldata evaluable,
         uint256[] calldata callerContext,
         SignedContextV1[] calldata signedContexts
-    ) external payable returns (FlowERC1155IOV1 calldata);
+    ) external returns (FlowERC1155IOV1 calldata);
 }

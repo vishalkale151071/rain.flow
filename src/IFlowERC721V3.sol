@@ -47,5 +47,5 @@ interface IFlowERC721V3 {
         Evaluable calldata evaluable,
         uint256[] calldata callerContext,
         SignedContextV1[] calldata signedContexts
-    ) external payable returns (FlowERC721IOV1 calldata);
+    ) external returns (FlowERC721IOV1 calldata);
 }

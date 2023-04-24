@@ -51,5 +51,5 @@ interface IFlowV3 {
         Evaluable calldata evaluable,
         uint256[] calldata callerContext,
         SignedContextV1[] calldata signedContexts
-    ) external payable returns (FlowTransferV1 calldata flowTransfer);
+    ) external returns (FlowTransferV1 calldata flowTransfer);
 }

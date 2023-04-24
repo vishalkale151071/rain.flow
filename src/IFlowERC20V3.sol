@@ -58,5 +58,5 @@ interface IFlowERC20V3 {
         Evaluable calldata evaluable,
         uint256[] calldata callerContext,
         SignedContextV1[] calldata signedContexts
-    ) external payable returns (FlowERC20IOV1 calldata);
+    ) external returns (FlowERC20IOV1 calldata);
 }
