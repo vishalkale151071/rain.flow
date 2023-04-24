@@ -39,6 +39,9 @@ struct ERC1155Transfer {
 }
 
 struct FlowTransfer {
+    /// WARNING: Native transfers were deprecated due to incompatibilities with
+    /// the multicall pattern.
+    /// https://samczsun.com/two-rights-might-make-a-wrong/
     NativeTransfer[] native;
     ERC20Transfer[] erc20;
     ERC721Transfer[] erc721;
