@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: CAL
 pragma solidity ^0.8.18;
 
-import "rain.interface.interpreter/IInterpreterCallerV2.sol";
-import "rain.interface.interpreter/LibEvaluable.sol";
+import "rain.interpreter/interface/deprecated/IInterpreterCallerV1.sol";
+import "rain.interpreter/lib/LibEvaluable.sol";
 
-import "./IFlowV2.sol";
+import "./IFlowV1.sol";
 
 /// Constructor config.
 /// @param Constructor config for the ERC721 token minted according to flow
@@ -30,8 +30,8 @@ struct FlowERC721IO {
     FlowTransfer flow;
 }
 
-/// @title IFlowERC721V2
-interface IFlowERC721V2 {
+/// @title IFlowERC721V1
+interface IFlowERC721V1 {
     /// Contract has initialized.
     /// @param sender `msg.sender` initializing the contract (factory).
     /// @param config All initialized config.
@@ -40,12 +40,12 @@ interface IFlowERC721V2 {
     function previewFlow(
         Evaluable calldata evaluable,
         uint256[] calldata callerContext,
-        SignedContextV1[] calldata signedContexts
+        SignedContext[] calldata signedContexts
     ) external view returns (FlowERC721IO calldata);
 
     function flow(
         Evaluable calldata evaluable,
         uint256[] calldata callerContext,
-        SignedContextV1[] calldata signedContexts
+        SignedContext[] calldata signedContexts
     ) external payable returns (FlowERC721IO calldata);
 }

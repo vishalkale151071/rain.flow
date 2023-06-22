@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: CAL
 pragma solidity ^0.8.18;
 
-import "rain.interface.interpreter/IInterpreterCallerV2.sol";
-import "rain.interface.interpreter/LibEvaluable.sol";
+import "rain.interpreter/interface/IInterpreterCallerV2.sol";
+import "rain.interpreter/lib/LibEvaluable.sol";
 
-import "./IFlowV3.sol";
+import "./IFlowV2.sol";
 
 struct FlowERC1155Config {
     string uri;
@@ -18,25 +18,25 @@ struct ERC1155SupplyChange {
     uint256 amount;
 }
 
-struct FlowERC1155IOV1 {
+struct FlowERC1155IO {
     ERC1155SupplyChange[] mints;
     ERC1155SupplyChange[] burns;
-    FlowTransferV1 flow;
+    FlowTransfer flow;
 }
 
-/// @title IFlowERC1155V3
-interface IFlowERC1155V3 {
+/// @title IFlowERC1155V2
+interface IFlowERC1155V2 {
     event Initialize(address sender, FlowERC1155Config config);
 
     function previewFlow(
         Evaluable calldata evaluable,
         uint256[] calldata callerContext,
         SignedContextV1[] calldata signedContexts
-    ) external view returns (FlowERC1155IOV1 calldata);
+    ) external view returns (FlowERC1155IO calldata);
 
     function flow(
         Evaluable calldata evaluable,
         uint256[] calldata callerContext,
         SignedContextV1[] calldata signedContexts
-    ) external returns (FlowERC1155IOV1 calldata);
+    ) external payable returns (FlowERC1155IO calldata);
 }
