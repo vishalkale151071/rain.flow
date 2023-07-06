@@ -2,7 +2,7 @@
 pragma solidity ^0.8.18;
 
 import "rain.interpreter/interface/deprecated/IInterpreterCallerV1.sol";
-import "rain.interpreter/lib/LibEvaluable.sol";
+import "rain.interpreter/lib/caller/LibEvaluable.sol";
 
 import "./IFlowV1.sol";
 
