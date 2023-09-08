@@ -21,7 +21,7 @@ jobs:
           version: nightly
 
       - name: Foundry shallow install
-        run: foundry install --shallow
+        run: forge install --shallow
 
       - name: Run Forge fmt
         run: forge fmt --check
