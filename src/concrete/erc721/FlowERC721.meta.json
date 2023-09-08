@@ -1,0 +1,121 @@
+{
+  "name": "Flow ERC721",
+  "abiName": "FlowERC721",
+  "desc": "A flow contract that is also an ERC721 token that can be minted by expressions. Transfers can be restricted by an expression.",
+  "alias": "flow-erc721",
+  "source": "https://github.com/rainprotocol/rain-protocol",
+  "methods": [
+    {
+      "name": "initialize",
+      "abiName": "initialize",
+      "desc": "Initialize a FlowERC721 contract.",
+      "inputs": [
+        {
+          "name": "Name",
+          "abiName": "name",
+          "desc": "Name of the ERC721 token that is minted.",
+          "path": "[16].inputs[1].components[0]"
+        },
+        {
+          "name": "Symbol",
+          "abiName": "symbol",
+          "desc": "Symbol for the ERC721 token that is minted.",
+          "path": "[16].inputs[1].components[1]"
+        },
+        {
+          "name": "Base URI",
+          "abiName": "baseURI",
+          "desc": "Base URI for the ERC721 token that is minted.",
+          "path": "[16].inputs[1].components[2]"
+        }
+      ],
+      "expressions": [
+        {
+          "name": "Handle transfer",
+          "abiName": "evaluableConfig",
+          "desc": "Review and restrict transfers of the flow contract's own ERC721 token. Mint and burns must be controlled by the flow expressions instead.",
+          "path": "[16].inputs[1].components[3]",
+          "signedContext": false,
+          "contextColumns": [
+            {
+              "name": "Base",
+              "desc": "Base context column",
+              "alias": "base",
+              "columnIndex": 0,
+              "cells": [
+                {
+                  "name": "Transfer caller",
+                  "desc": "The contract or wallet that called transfer.",
+                  "alias": "transfer-caller",
+                  "cellIndex": 0
+                },
+                {
+                  "name": "Flow contract",
+                  "desc": "The address of the FlowERC721 contract.",
+                  "alias": "flow-contract",
+                  "cellIndex": 1
+                }
+              ]
+            },
+            {
+              "name": "Transfer information",
+              "desc": "Information about the current transfer.",
+              "alias": "transfer-information",
+              "columnIndex": 1,
+              "cells": [
+                {
+                  "name": "Transfer from address",
+                  "desc": "The address the token is being transferred from.",
+                  "alias": "transfer-from-address",
+                  "cellIndex": 0
+                },
+                {
+                  "name": "Transfer to address",
+                  "desc": "The address the token is being transferred to.",
+                  "alias": "transfer-to-address",
+                  "cellIndex": 1
+                },
+                {
+                  "name": "Token ID",
+                  "desc": "The ID of the token being transferred.",
+                  "alias": "transfer-token-id",
+                  "cellIndex": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Flows",
+          "abiName": "flowConfig",
+          "desc": "The available flows.",
+          "path": "[16].inputs[1].components[4]",
+          "signedContext": true,
+          "callerContext": true,
+          "contextColumns": [
+            {
+              "name": "Base",
+              "desc": "Base context column.",
+              "alias": "base",
+              "columnIndex": 0,
+              "cells": [
+                {
+                  "name": "Flow caller",
+                  "desc": "The contract or wallet that called flow.",
+                  "alias": "flow-caller",
+                  "cellIndex": 0
+                },
+                {
+                  "name": "Flow contract",
+                  "desc": "The address of the FlowERC721 contract.",
+                  "alias": "flow-contract",
+                  "cellIndex": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
