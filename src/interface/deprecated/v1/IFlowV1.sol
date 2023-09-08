@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: CAL
 pragma solidity ^0.8.18;
 
-import "rain.interpreter/interface/deprecated/IInterpreterCallerV1.sol";
-import "rain.interpreter/lib/caller/LibEvaluable.sol";
+import "rain.interpreter/src/interface/deprecated/IInterpreterCallerV1.sol";
+import "rain.interpreter/src/lib/caller/LibEvaluable.sol";
 
 struct FlowConfig {
     // https://github.com/ethereum/solidity/issues/13597
