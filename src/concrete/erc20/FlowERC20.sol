@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: CAL
 pragma solidity =0.8.19;
 
-import {ERC20} from "openzeppelin-contracts/contracts/token/ERC20/ERC20.sol";
-import {ReentrancyGuard} from "openzeppelin-contracts/contracts/security/ReentrancyGuard.sol";
+import {ERC20Upgradeable as ERC20} from "openzeppelin-contracts-upgradeable/contracts/token/ERC20/ERC20Upgradeable.sol";
+import {ReentrancyGuardUpgradeable as ReentrancyGuard} from "openzeppelin-contracts-upgradeable/contracts/security/ReentrancyGuardUpgradeable.sol";
 
 import "rain.interpreter/src/interface/IExpressionDeployerV1.sol";
 import "rain.solmem/lib/LibUint256Array.sol";
@@ -42,7 +42,7 @@ contract FlowERC20 is
     using LibUint256Array for uint256;
     using LibUint256Array for uint256[];
     using LibUint256Matrix for uint256[];
-    using LibFixedPointMath for uint256;
+    using LibFixedPointDecimalArithmeticOpenZeppelin for uint256;
 
     bool private evalHandleTransfer;
     Evaluable internal evaluable;

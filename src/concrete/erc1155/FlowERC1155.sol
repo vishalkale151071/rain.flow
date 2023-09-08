@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: CAL
 pragma solidity =0.8.19;
 
-import {ReentrancyGuard} from "openzeppelin-contracts/contracts/security/ReentrancyGuard.sol";
-import {ERC1155} from "openzeppelin-contracts/contracts/token/ERC1155/ERC1155.sol";
-import {ERC1155Receiver} from "openzeppelin-contracts/contracts/token/ERC1155/utils/ERC1155Receiver.sol";
+import {ReentrancyGuardUpgradeable as ReentrancyGuard} from "openzeppelin-contracts-upgradeable/contracts/security/ReentrancyGuardUpgradeable.sol";
+import {ERC1155Upgradeable as ERC1155} from "openzeppelin-contracts-upgradeable/contracts/token/ERC1155/ERC1155Upgradeable.sol";
+import {ERC1155ReceiverUpgradeable as ERC1155Receiver} from "openzeppelin-contracts-upgradeable/contracts/token/ERC1155/utils/ERC1155ReceiverUpgradeable.sol";
 
 import "rain.interpreter/src/lib/caller/LibEncodedDispatch.sol";
 import "rain.factory/src/interface/ICloneableV2.sol";

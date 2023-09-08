@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: CAL
 pragma solidity =0.8.19;
 
-import {ERC721} from "openzeppelin-contracts/contracts/token/ERC721/ERC721.sol";
-import {ReentrancyGuard} from "openzeppelin-contracts/contracts/security/ReentrancyGuard.sol";
-import {ERC1155Receiver} from "openzeppelin-contracts/contracts/token/ERC1155/utils/ERC1155Receiver.sol";
+import {ERC721Upgradeable as ERC721} from "openzeppelin-contracts-upgradeable/contracts/token/ERC721/ERC721Upgradeable.sol";
+import {ReentrancyGuardUpgradeable as ReentrancyGuard} from "openzeppelin-contracts-upgradeable/contracts/security/ReentrancyGuardUpgradeable.sol";
+import {ERC1155ReceiverUpgradeable as ERC1155Receiver} from "openzeppelin-contracts-upgradeable/contracts/token/ERC1155/utils/ERC1155ReceiverUpgradeable.sol";
 
 import "rain.interpreter/src/interface/IExpressionDeployerV1.sol";
 import "rain.solmem/lib/LibUint256Array.sol";
@@ -48,7 +48,7 @@ contract FlowERC721 is
     using LibUint256Array for uint256;
     using LibUint256Array for uint256[];
     using LibUint256Matrix for uint256[];
-    using LibFixedPointMath for uint256;
+    using LibFixedPointDecimalArithmeticOpenZeppelin for uint256;
     using LibStackSentinel for Pointer;
 
     bool private evalHandleTransfer;

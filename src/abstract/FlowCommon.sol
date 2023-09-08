@@ -12,8 +12,8 @@ import "rain.interpreter/src/lib/caller/LibEvaluable.sol";
 
 import "openzeppelin-contracts/contracts/proxy/utils/Initializable.sol";
 import {MulticallUpgradeable as Multicall} from "openzeppelin-contracts-upgradeable/contracts/utils/MulticallUpgradeable.sol";
-import {ERC721Holder} from "openzeppelin-contracts/contracts/token/ERC721/utils/ERC721Holder.sol";
-import {ERC1155Holder} from "openzeppelin-contracts/contracts/token/ERC1155/utils/ERC1155Holder.sol";
+import {ERC721HolderUpgradeable as ERC721Holder} from "openzeppelin-contracts-upgradeable/contracts/token/ERC721/utils/ERC721HolderUpgradeable.sol";
+import {ERC1155HolderUpgradeable as ERC1155Holder} from "openzeppelin-contracts-upgradeable/contracts/token/ERC1155/utils/ERC1155HolderUpgradeable.sol";
 
 /// Thrown when the flow being evaluated is unregistered.
 /// @param unregisteredHash Hash of the unregistered flow.
