@@ -10,7 +10,6 @@ import "rain.interpreter/src/lib/caller/LibContext.sol";
 import "rain.interpreter/src/abstract/DeployerDiscoverableMetaV2.sol";
 import "rain.interpreter/src/lib/caller/LibEvaluable.sol";
 
-import "openzeppelin-contracts/contracts/proxy/utils/Initializable.sol";
 import {MulticallUpgradeable as Multicall} from "openzeppelin-contracts-upgradeable/contracts/utils/MulticallUpgradeable.sol";
 import {ERC721HolderUpgradeable as ERC721Holder} from "openzeppelin-contracts-upgradeable/contracts/token/ERC721/utils/ERC721HolderUpgradeable.sol";
 import {ERC1155HolderUpgradeable as ERC1155Holder} from "openzeppelin-contracts-upgradeable/contracts/token/ERC1155/utils/ERC1155HolderUpgradeable.sol";
@@ -33,7 +32,6 @@ SourceIndex constant FLOW_ENTRYPOINT = SourceIndex.wrap(0);
 uint16 constant FLOW_MAX_OUTPUTS = type(uint16).max;
 
 contract FlowCommon is
-    Initializable,
     ERC721Holder,
     ERC1155Holder,
     Multicall,
@@ -59,31 +57,33 @@ contract FlowCommon is
     }
 
     function flowCommonInit(
-        EvaluableConfig[] memory evaluableConfigs_,
-        uint256 flowMinOutputs_
-    ) internal initializer {
-        __ERC721Holder_init();
-        __ERC1155Holder_init();
-        __Multicall_init();
-        if (flowMinOutputs_ < MIN_FLOW_SENTINELS) {
-            revert BadMinStackLength(flowMinOutputs_);
-        }
-        EvaluableConfig memory config_;
-        Evaluable memory evaluable_;
-        for (uint256 i_ = 0; i_ < evaluableConfigs_.length; i_++) {
-            config_ = evaluableConfigs_[i_];
-            (
-                IInterpreterV1 interpreter_,
-                IInterpreterStoreV1 store_,
-                address expression_
-            ) = config_.deployer.deployExpression(
-                    config_.sources,
-                    config_.constants,
-                    LibUint256Array.arrayFrom(flowMinOutputs_)
-                );
-            evaluable_ = Evaluable(interpreter_, store_, expression_);
-            registeredFlows[evaluable_.hash()] = 1;
-            emit FlowInitialized(msg.sender, evaluable_);
+        EvaluableConfigV2[] memory evaluableConfigs,
+        uint256 flowMinOutputs
+    ) internal onlyInitializing {
+        unchecked {
+            __ERC721Holder_init();
+            __ERC1155Holder_init();
+            __Multicall_init();
+            if (flowMinOutputs < MIN_FLOW_SENTINELS) {
+                revert BadMinStackLength(flowMinOutputs);
+            }
+            EvaluableConfigV2 memory config;
+            Evaluable memory evaluable;
+            for (uint256 i = 0; i < evaluableConfigs.length; ++i) {
+                config = evaluableConfigs[i];
+                (
+                    IInterpreterV1 interpreter,
+                    IInterpreterStoreV1 store,
+                    address expression
+                ) = config.deployer.deployExpression(
+                        config.bytecode,
+                        config.constants,
+                        LibUint256Array.arrayFrom(flowMinOutputs)
+                    );
+                evaluable = Evaluable(interpreter, store, expression);
+                registeredFlows[evaluable.hash()] = 1;
+                emit FlowInitialized(msg.sender, evaluable);
+            }
         }
     }
 

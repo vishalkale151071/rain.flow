@@ -11,11 +11,11 @@ import "rain.solmem/lib/LibUint256Matrix.sol";
 import "rain.solmem/lib/LibStackSentinel.sol";
 import "rain.interpreter/src/lib/caller/LibEncodedDispatch.sol";
 import "rain.factory/src/interface/ICloneableV2.sol";
-import "../../interface/IFlowERC721V3.sol";
+import "../../interface/unstable/IFlowERC721V4.sol";
 
 import "../../lib/LibFlow.sol";
 import "rain.math.fixedpoint/lib/LibFixedPointDecimalArithmeticOpenZeppelin.sol";
-import "../../abstract/FlowCommon.sol";
+import {FlowCommon, DeployerDiscoverableMetaV2ConstructionConfig, LibContext, MIN_FLOW_SENTINELS} from "../../abstract/FlowCommon.sol";
 
 /// Thrown when burner of tokens is not the owner of tokens.
 error BurnerNotOwner();
@@ -38,7 +38,7 @@ uint16 constant TOKEN_URI_MAX_OUTPUTS = 1;
 /// @title FlowERC721
 contract FlowERC721 is
     ICloneableV2,
-    IFlowERC721V3,
+    IFlowERC721V4,
     ReentrancyGuard,
     FlowCommon,
     ERC721
@@ -61,42 +61,42 @@ contract FlowERC721 is
     ) FlowCommon(CALLER_META_HASH, config_) {}
 
     /// @inheritdoc ICloneableV2
-    function initialize(bytes calldata data_) external initializer returns (bytes32) {
-        FlowERC721Config memory config_ = abi.decode(data_, (FlowERC721Config));
-        emit Initialize(msg.sender, config_);
+    function initialize(bytes calldata data) external initializer returns (bytes32) {
+        FlowERC721ConfigV2 memory config = abi.decode(data, (FlowERC721ConfigV2));
+        emit Initialize(msg.sender, config);
         __ReentrancyGuard_init();
-        __ERC721_init(config_.name, config_.symbol);
-        baseURI = config_.baseURI;
-        flowCommonInit(config_.flowConfig, MIN_FLOW_SENTINELS + 2);
+        __ERC721_init(config.name, config.symbol);
+        baseURI = config.baseURI;
+        flowCommonInit(config.flowConfig, MIN_FLOW_SENTINELS + 2);
 
-        if (config_.evaluableConfig.sources.length > 0) {
+        if (config.evaluableConfig.sources.length > 0) {
             evalHandleTransfer =
-                config_
+                config
                     .evaluableConfig
                     .sources[SourceIndex.unwrap(HANDLE_TRANSFER_ENTRYPOINT)]
                     .length >
                 0;
             evalTokenURI =
-                config_.evaluableConfig.sources.length > 1 &&
-                config_
+                config.evaluableConfig.sources.length > 1 &&
+                config
                     .evaluableConfig
                     .sources[SourceIndex.unwrap(TOKEN_URI_ENTRYPOINT)]
                     .length >
                 0;
 
             (
-                IInterpreterV1 interpreter_,
-                IInterpreterStoreV1 store_,
-                address expression_
-            ) = config_.evaluableConfig.deployer.deployExpression(
-                    config_.evaluableConfig.sources,
-                    config_.evaluableConfig.constants,
+                IInterpreterV1 interpreter,
+                IInterpreterStoreV1 store,
+                address expression
+            ) = config.evaluableConfig.deployer.deployExpression(
+                    config.evaluableConfig.bytecode,
+                    config.evaluableConfig.constants,
                     LibUint256Array.arrayFrom(
                         HANDLE_TRANSFER_MIN_OUTPUTS,
                         TOKEN_URI_MIN_OUTPUTS
                     )
                 );
-            evaluable = Evaluable(interpreter_, store_, expression_);
+            evaluable = Evaluable(interpreter, store, expression);
         }
 
         return ICLONEABLE_V2_SUCCESS;
