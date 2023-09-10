@@ -4,7 +4,7 @@ pragma solidity ^0.8.18;
 import "rain.interpreter/src/interface/IInterpreterCallerV2.sol";
 import "rain.interpreter/src/lib/caller/LibEvaluable.sol";
 
-import {FlowTransferV1} from "../IFlowV3.sol";
+import {FlowTransferV1, ERC20Transfer, ERC721Transfer, ERC1155Transfer} from "../IFlowV3.sol";
 
 struct FlowConfigV2 {
     // https://github.com/ethereum/solidity/issues/13597

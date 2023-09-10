@@ -2,31 +2,18 @@
 pragma solidity ^0.8.18;
 
 import {SignedContextV1} from "rain.interpreter/src/interface/IInterpreterCallerV2.sol";
-import {EvaluableConfigV2} from "rain.interpreter/src/lib/caller/LibEvaluable.sol";
+import {Evaluable, EvaluableConfigV2} from "rain.interpreter/src/lib/caller/LibEvaluable.sol";
 
-import "./IFlowV3.sol";
+import {FlowERC1155IOV1, ERC1155SupplyChange} from "../IFlowERC1155V3.sol";
 
-struct FlowERC1155Config {
+struct FlowERC1155ConfigV2 {
     string uri;
-    EvaluableConfig evaluableConfig;
-    EvaluableConfig[] flowConfig;
+    EvaluableConfigV2 evaluableConfig;
+    EvaluableConfigV2[] flowConfig;
 }
 
-struct ERC1155SupplyChange {
-    address account;
-    uint256 id;
-    uint256 amount;
-}
-
-struct FlowERC1155IOV1 {
-    ERC1155SupplyChange[] mints;
-    ERC1155SupplyChange[] burns;
-    FlowTransferV1 flow;
-}
-
-/// @title IFlowERC1155V3
-interface IFlowERC1155V3 {
-    event Initialize(address sender, FlowERC1155Config config);
+interface IFlowERC1155V4 {
+    event Initialize(address sender, FlowERC1155ConfigV2 config);
 
     function previewFlow(
         Evaluable calldata evaluable,
