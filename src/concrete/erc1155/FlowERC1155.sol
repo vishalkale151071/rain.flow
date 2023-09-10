@@ -130,26 +130,26 @@ contract FlowERC1155 is ICloneableV2, IFlowERC1155V4, ReentrancyGuard, FlowCommo
         }
     }
 
-    function _previewFlow(Evaluable memory evaluable_, uint256[][] memory context_)
+    function _previewFlow(Evaluable memory evaluable, uint256[][] memory context)
         internal
         view
         returns (FlowERC1155IOV1 memory, uint256[] memory)
     {
-        ERC1155SupplyChange[] memory mints_;
-        ERC1155SupplyChange[] memory burns_;
-        Pointer tuplesPointer_;
-        (Pointer stackBottom_, Pointer stackTop_, uint256[] memory kvs_) = flowStack(evaluable_, context_);
+        ERC1155SupplyChange[] memory mints;
+        ERC1155SupplyChange[] memory burns;
+        Pointer tuplesPointer;
+        (Pointer stackBottom, Pointer stackTop, uint256[] memory kvs) = flowStack(evaluable, context);
         // mints
-        (stackTop_, tuplesPointer_) = stackBottom_.consumeSentinelTuples(stackTop_, RAIN_FLOW_ERC1155_SENTINEL, 3);
+        (stackTop, tuplesPointer) = stackBottom.consumeSentinelTuples(stackTop, RAIN_FLOW_ERC1155_SENTINEL, 3);
         assembly ("memory-safe") {
-            mints_ := tuplesPointer_
+            mints := tuplesPointer
         }
         // burns
-        (stackTop_, tuplesPointer_) = stackBottom_.consumeSentinelTuples(stackTop_, RAIN_FLOW_ERC1155_SENTINEL, 3);
+        (stackTop, tuplesPointer) = stackBottom.consumeSentinelTuples(stackTop, RAIN_FLOW_ERC1155_SENTINEL, 3);
         assembly ("memory-safe") {
-            burns_ := tuplesPointer_
+            burns := tuplesPointer
         }
-        return (FlowERC1155IOV1(mints_, burns_, LibFlow.stackToFlow(stackBottom_, stackTop_)), kvs_);
+        return (FlowERC1155IOV1(mints, burns, LibFlow.stackToFlow(stackBottom, stackTop)), kvs);
     }
 
     function _flow(
