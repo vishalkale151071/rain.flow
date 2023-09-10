@@ -38,7 +38,7 @@ contract FlowERC1155 is ICloneableV2, IFlowERC1155V4, ReentrancyGuard, FlowCommo
     using LibUint256Matrix for uint256[];
 
     bool private evalHandleTransfer;
-    Evaluable internal evaluable;
+    Evaluable internal sEvaluable;
 
     constructor(DeployerDiscoverableMetaV2ConstructionConfig memory config) FlowCommon(CALLER_META_HASH, config) {}
 
@@ -58,7 +58,7 @@ contract FlowERC1155 is ICloneableV2, IFlowERC1155V4, ReentrancyGuard, FlowCommo
                 ) > 0
         ) {
             evalHandleTransfer = true;
-            (IInterpreterV1 interpreter_, IInterpreterStoreV1 store_, address expression_) = flowERC1155Config
+            (IInterpreterV1 interpreter, IInterpreterStoreV1 store, address expression) = flowERC1155Config
                 .evaluableConfig
                 .deployer
                 .deployExpression(
@@ -66,14 +66,14 @@ contract FlowERC1155 is ICloneableV2, IFlowERC1155V4, ReentrancyGuard, FlowCommo
                 flowERC1155Config.evaluableConfig.constants,
                 LibUint256Array.arrayFrom(HANDLE_TRANSFER_MIN_OUTPUTS)
             );
-            evaluable = Evaluable(interpreter_, store_, expression_);
+            sEvaluable = Evaluable(interpreter, store, expression);
         }
 
         return ICLONEABLE_V2_SUCCESS;
     }
 
-    function _dispatchHandleTransfer(address expression_) internal pure returns (EncodedDispatch) {
-        return LibEncodedDispatch.encode(expression_, HANDLE_TRANSFER_ENTRYPOINT, HANDLE_TRANSFER_MAX_OUTPUTS);
+    function _dispatchHandleTransfer(address expression) internal pure returns (EncodedDispatch) {
+        return LibEncodedDispatch.encode(expression, HANDLE_TRANSFER_ENTRYPOINT, HANDLE_TRANSFER_MAX_OUTPUTS);
     }
 
     /// Needed here to fix Open Zeppelin implementing `supportsInterface` on
@@ -90,38 +90,41 @@ contract FlowERC1155 is ICloneableV2, IFlowERC1155V4, ReentrancyGuard, FlowCommo
 
     /// @inheritdoc ERC1155
     function _afterTokenTransfer(
-        address operator_,
-        address from_,
-        address to_,
-        uint256[] memory ids_,
-        uint256[] memory amounts_,
-        bytes memory data_
+        address operator,
+        address from,
+        address to,
+        uint256[] memory ids,
+        uint256[] memory amounts,
+        bytes memory data
     ) internal virtual override {
         unchecked {
-            super._afterTokenTransfer(operator_, from_, to_, ids_, amounts_, data_);
+            super._afterTokenTransfer(operator, from, to, ids, amounts, data);
             // Mint and burn access MUST be handled by flow.
             // HANDLE_TRANSFER will only restrict subsequent transfers.
-            if (evalHandleTransfer && !(from_ == address(0) || to_ == address(0))) {
-                Evaluable memory evaluable_ = evaluable;
-
-                (, uint256[] memory kvs_) = evaluable_.interpreter.eval(
-                    evaluable_.store,
-                    DEFAULT_STATE_NAMESPACE,
-                    _dispatchHandleTransfer(evaluable_.expression),
-                    LibContext.build(
-                        // Transfer params are caller context.
+            if (evalHandleTransfer && !(from == address(0) || to == address(0))) {
+                Evaluable memory evaluable = sEvaluable;
+                uint256[][] memory context;
+                {
+                    context = LibContext.build(
+                        // The transfer params are caller context because the caller
+                        // is triggering the transfer.
                         LibUint256Matrix.matrixFrom(
                             LibUint256Array.arrayFrom(
-                                uint256(uint160(operator_)), uint256(uint160(from_)), uint256(uint160(to_))
+                                uint256(uint160(operator)), uint256(uint160(from)), uint256(uint160(to))
                             ),
-                            ids_,
-                            amounts_
+                            ids,
+                            amounts
                         ),
                         new SignedContextV1[](0)
-                    )
+                    );
+                }
+
+                (uint256[] memory stack, uint256[] memory kvs) = evaluable.interpreter.eval(
+                    evaluable.store, DEFAULT_STATE_NAMESPACE, _dispatchHandleTransfer(evaluable.expression), context
                 );
-                if (kvs_.length > 0) {
-                    evaluable_.store.set(DEFAULT_STATE_NAMESPACE, kvs_);
+                (stack);
+                if (kvs.length > 0) {
+                    evaluable.store.set(DEFAULT_STATE_NAMESPACE, kvs);
                 }
             }
         }
