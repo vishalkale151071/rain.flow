@@ -90,7 +90,7 @@ abstract contract FlowCommon is
     /// else anons can deploy their own evaluable and drain the contract.
     /// `isRegistered` will be set to `FLOW_IS_REGISTERED` for each registered
     /// flow.
-    mapping(bytes32 evaluableHash => uint256 isRegistered) public registeredFlows;
+    mapping(bytes32 evaluableHash => uint256 isRegistered) internal registeredFlows;
 
     /// This event is emitted when a flow is registered at initialization.
     /// @param sender The address that registered the flow.
@@ -144,18 +144,29 @@ abstract contract FlowCommon is
             // otherwise the entire initialization will fail.
             for (uint256 i = 0; i < evaluableConfigs.length; ++i) {
                 config = evaluableConfigs[i];
+                // Well behaved deployers SHOULD NOT be reentrant into the flow
+                // contract. It is up to the EOA that is initializing this
+                // flow contract to select a deployer that is trustworthy.
+                // Reentrancy is just one of many ways that a malicious deployer
+                // can cause problems, and it's probably the least of your
+                // worries if you're using a malicious deployer.
                 (IInterpreterV1 interpreter, IInterpreterStoreV1 store, address expression) = config
                     .deployer
                     .deployExpression(config.bytecode, config.constants, LibUint256Array.arrayFrom(flowMinOutputs));
                 evaluable = Evaluable(interpreter, store, expression);
+                // There's no way to set this mapping before the external
+                // contract call because the output of the external contract
+                // call is used to build the evaluable that we're registering.
+                // Even if we could modify state before making external calls,
+                // it probably wouldn't make sense to be finalisating the
+                // registration of a flow before we know that the flow is
+                // deployable according to the deployer's own integrity checks.
+                //slither-disable-next-line reentrancy-benign
                 registeredFlows[evaluable.hash()] = FLOW_IS_REGISTERED;
                 // There's no way to emit this event before the external contract
                 // call because the output of the external contract call is
                 // the input to the event.
-                // Well behaved deployers SHOULD NOT be reentrant into the flow
-                // contract. It is up to the EOA that is initializing this
-                // flow contract to select a deployer that is trustworthy.
-                //slither-disable-next-line reentrancy-benign
+                //slither-disable-next-line reentrancy-events
                 emit FlowInitialized(msg.sender, evaluable);
             }
         }
