@@ -1,0 +1,96 @@
+[
+  {
+    "inputs": [
+      {
+        "components": [
+          { "internalType": "address", "name": "deployer", "type": "address" },
+          { "internalType": "bytes", "name": "meta", "type": "bytes" }
+        ],
+        "internalType": "struct DeployerDiscoverableMetaV2ConstructionConfig",
+        "name": "config",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  { "inputs": [], "name": "InitializationFailed", "type": "error" },
+  {
+    "inputs": [{ "internalType": "bytes", "name": "unmeta", "type": "bytes" }],
+    "name": "NotRainMetaV1",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      { "internalType": "bytes32", "name": "expectedHash", "type": "bytes32" },
+      { "internalType": "bytes32", "name": "actualHash", "type": "bytes32" }
+    ],
+    "name": "UnexpectedMetaHash",
+    "type": "error"
+  },
+  { "inputs": [], "name": "ZeroImplementationCodeSize", "type": "error" },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "sender",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "subject",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "bytes",
+        "name": "meta",
+        "type": "bytes"
+      }
+    ],
+    "name": "MetaV1",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "sender",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "implementation",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "clone",
+        "type": "address"
+      }
+    ],
+    "name": "NewClone",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "implementation",
+        "type": "address"
+      },
+      { "internalType": "bytes", "name": "data", "type": "bytes" }
+    ],
+    "name": "clone",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]

@@ -1,0 +1,141 @@
+type CloneFactory @entity {
+    # clone factory address
+    id: ID!
+    # clone factory address
+    address: Bytes!
+    # flow contracts deployed by clone factory
+    children: [IFlow!]! @derivedFrom(field: "cloneFactory")
+    # count of flow contracts deployed by clone factory
+    childrenCount: BigInt! 
+    flowImplementation: Bytes!
+    flowERC20Implementation: Bytes!
+    flowERC721Implementation: Bytes!
+    flowERC1155Implementation: Bytes!
+}
+
+type Transaction @entity {
+    # transaction hash
+    id: ID!
+    # transaction hash
+    hash: Bytes!
+    # block number where this transaction was in.
+    blockNumber: BigInt!
+    # time when this transaction was mined.
+    timestamp: BigInt!
+    # sender of the transaction.
+    from: Bytes!
+}
+
+
+interface IFlow {
+    # flow contract address
+    id: ID!
+    # flow contract address
+    address: Bytes!
+    # flow contract implementation
+    implementation: Bytes!
+    # flow contract deployer
+    deployer: Bytes!
+    # flow contract deploy transaction
+    deployTransaction: Transaction!
+    # clone factory that deployed this flow contract
+    cloneFactory: CloneFactory!
+}
+
+interface ERC20 {
+    id: ID!
+    # token contract address
+    address: Bytes!
+    # token contract name
+    name: String!
+    # token contract symbol
+    symbol: String!
+    # token contract decimals
+    decimals: Int!
+}
+
+interface ERC721 {
+    id: ID!
+    # token contract address
+    address: Bytes!
+    # token contract name
+    name: String!
+    # token contract symbol
+    symbol: String!
+}
+
+interface ERC1155 {
+    id: ID!
+    # token contract address
+    address: Bytes!
+}
+
+type Flow implements IFlow @entity {
+    # flow contract address
+    id: ID!
+    # flow contract address
+    address: Bytes!
+    # flow contract implementation
+    implementation: Bytes!
+    # flow contract deployer
+    deployer: Bytes!
+    # flow contract deploy transaction
+    deployTransaction: Transaction!
+    # clone factory that deployed this flow contract
+    cloneFactory: CloneFactory!
+}
+
+type FlowERC20 implements IFlow & ERC20 @entity {
+    # flow contract address
+    id: ID!
+    # flow contract address
+    address: Bytes!
+    # flow contract implementation
+    implementation: Bytes!
+    # flow contract deployer
+    deployer: Bytes!
+    # flow contract deploy transaction
+    deployTransaction: Transaction!
+    # clone factory that deployed this flow contract
+    cloneFactory: CloneFactory!
+    # token contract name
+    name: String!
+    # token contract symbol
+    symbol: String!
+    # token contract decimals
+    decimals: Int!
+}
+
+type FlowERC721 implements IFlow & ERC721 @entity {
+    # flow contract address
+    id: ID!
+    # flow contract address
+    address: Bytes!
+    # flow contract implementation
+    implementation: Bytes!
+    # flow contract deployer
+    deployer: Bytes!
+    # flow contract deploy transaction
+    deployTransaction: Transaction!
+    # clone factory that deployed this flow contract
+    cloneFactory: CloneFactory!
+    # token contract name
+    name: String!
+    # token contract symbol
+    symbol: String!
+}
+
+type FlowERC1155 implements IFlow & ERC1155 @entity {
+    # flow contract address
+    id: ID!
+    # flow contract address
+    address: Bytes!
+    # flow contract implementation
+    implementation: Bytes!
+    # flow contract deployer
+    deployer: Bytes!
+    # flow contract deploy transaction
+    deployTransaction: Transaction!
+    # clone factory that deployed this flow contract
+    cloneFactory: CloneFactory!
+}

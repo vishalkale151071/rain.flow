@@ -1,0 +1,131 @@
+specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: CloneFactory
+    network: mumbai
+    source:
+      address: "0xB77d30571fc6C253e645584D4deEF40c139A7900"
+      abi: CloneFactory
+      startBlock: 0
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - NewClone
+      abis:
+        - name: CloneFactory
+          file: ./abis/CloneFactory.json
+      eventHandlers:
+        - event: MetaV1(address,uint256,bytes)
+          handler: handleMetaV1
+        - event: NewClone(address,address,address)
+          handler: handleNewClone
+      file: ./src/cloneFactory.ts
+templates:
+  - kind: ethereum
+    name: Flow
+    network: mumbai
+    source:
+      abi: Flow
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Flow
+      abis:
+        - name: Flow
+          file: ./abis/Flow.json
+      eventHandlers:
+        - event: Context(address,uint256[][])
+          handler: handleContext
+        - event: FlowInitialized(address,(address,address,address))
+          handler: handleFlowInitialized
+        - event: Initialize(address,((address,bytes,uint256[]),(address,bytes,uint256[])[]))
+          handler: handleInitialize
+        - event: Initialized(uint8)
+          handler: handleInitialized
+        - event: MetaV1(address,uint256,bytes)
+          handler: handleMetaV1
+      file: ./src/flow.ts
+  - kind: ethereum
+    name: FlowERC20
+    network: mumbai
+    source:
+      abi: FlowERC20
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - FlowERC20
+      abis:
+        - name: FlowERC20
+          file: ./abis/FlowERC20.json
+      eventHandlers:
+        - event: Context(address,uint256[][])
+          handler: handleContext
+        - event: FlowInitialized(address,(address,address,address))
+          handler: handleFlowInitialized
+        - event: Initialize(address,(string,string,(address,bytes,uint256[]),(address,bytes,uint256[])[]))
+          handler: handleInitialize
+        - event: Initialized(uint8)
+          handler: handleInitialized
+        - event: MetaV1(address,uint256,bytes)
+          handler: handleMetaV1
+      file: ./src/flowERC20.ts
+  - kind: ethereum
+    name: FlowERC721
+    network: mumbai
+    source:
+      abi: FlowERC721
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - FlowERC721
+      abis:
+        - name: FlowERC721
+          file: ./abis/FlowERC721.json
+      eventHandlers:
+        - event: Context(address,uint256[][])
+          handler: handleContext
+        - event: FlowInitialized(address,(address,address,address))
+          handler: handleFlowInitialized
+        - event: Initialize(address,(string,string,string,(address,bytes,uint256[]),(address,bytes,uint256[])[]))
+          handler: handleInitialize
+        - event: Initialized(uint8)
+          handler: handleInitialized
+        - event: MetaV1(address,uint256,bytes)
+          handler: handleMetaV1
+      file: ./src/flowERC721.ts
+  - kind: ethereum
+    name: FlowERC1155
+    network: mumbai
+    source:
+      abi: FlowERC1155
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscriptc
+      entities:
+        - FlowERC1155
+      abis:
+        - name: FlowERC1155
+          file: ./abis/FlowERC1155.json
+      eventHandlers:
+        - event: Context(address,uint256[][])
+          handler: handleContext
+        - event: FlowInitialized(address,(address,address,address))
+          handler: handleFlowInitialized
+        - event: Initialize(address,(string,(address,bytes,uint256[]),(address,bytes,uint256[])[]))
+          handler: handleInitialize
+        - event: Initialized(uint8)
+          handler: handleInitialized
+        - event: MetaV1(address,uint256,bytes)
+          handler: handleMetaV1
+      file: ./src/flowERC1155.ts
