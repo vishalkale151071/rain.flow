@@ -74,7 +74,13 @@ uint256 constant FLOW_IS_NOT_REGISTERED = 0;
 /// This is a known issue with `Multicall` so in the future, we may refactor
 /// `FlowCommon` to not use `Multicall` and instead implement flow batching
 /// directly in the flow contracts.
-abstract contract FlowCommon is ERC721Holder, ERC1155Holder, Multicall, IInterpreterCallerV2, DeployerDiscoverableMetaV2 {
+abstract contract FlowCommon is
+    ERC721Holder,
+    ERC1155Holder,
+    Multicall,
+    IInterpreterCallerV2,
+    DeployerDiscoverableMetaV2
+{
     using LibUint256Array for uint256[];
     using LibEvaluable for Evaluable;
 
@@ -132,10 +138,10 @@ abstract contract FlowCommon is ERC721Holder, ERC1155Holder, Multicall, IInterpr
                 revert BadMinStackLength(flowMinOutputs);
             }
 
-            // Every evaluable MUST deploy cleanly (e.g. pass integrity checks)
-            // otherwise the entire initialization will fail.
             EvaluableConfigV2 memory config;
             Evaluable memory evaluable;
+            // Every evaluable MUST deploy cleanly (e.g. pass integrity checks)
+            // otherwise the entire initialization will fail.
             for (uint256 i = 0; i < evaluableConfigs.length; ++i) {
                 config = evaluableConfigs[i];
                 (IInterpreterV1 interpreter, IInterpreterStoreV1 store, address expression) = config
@@ -143,32 +149,47 @@ abstract contract FlowCommon is ERC721Holder, ERC1155Holder, Multicall, IInterpr
                     .deployExpression(config.bytecode, config.constants, LibUint256Array.arrayFrom(flowMinOutputs));
                 evaluable = Evaluable(interpreter, store, expression);
                 registeredFlows[evaluable.hash()] = FLOW_IS_REGISTERED;
+                // There's no way to emit this event before the external contract
+                // call because the output of the external contract call is
+                // the input to the event.
+                // Well behaved deployers SHOULD NOT be reentrant into the flow
+                // contract. It is up to the EOA that is initializing this
+                // flow contract to select a deployer that is trustworthy.
+                //slither-disable-next-line reentrancy-benign
                 emit FlowInitialized(msg.sender, evaluable);
             }
         }
     }
 
-    function _flowDispatch(address expression_) internal pure returns (EncodedDispatch) {
-        return LibEncodedDispatch.encode(expression_, FLOW_ENTRYPOINT, FLOW_MAX_OUTPUTS);
-    }
-
-    modifier onlyRegisteredEvaluable(Evaluable memory evaluable_) {
-        bytes32 hash_ = evaluable_.hash();
-        if (registeredFlows[hash_] == FLOW_IS_NOT_REGISTERED) {
-            revert UnregisteredFlow(hash_);
-        }
-        _;
-    }
-
-    function flowStack(Evaluable memory evaluable_, uint256[][] memory context_)
+    /// Standard evaluation logic for flows. This includes critical guards to
+    /// ensure that only registered flows are evaluated. This is the only
+    /// function that inheriting contracts should call to evaluate flows.
+    /// The start and end pointers to the stack are returned so that inheriting
+    /// contracts can easily scan the stack for sentinels, which is the expected
+    /// pattern to determine what token moments are required.
+    /// @param evaluable The evaluable to evaluate.
+    /// @param context The context to evaluate the evaluable with. The inheriting
+    /// contract is expected to provide the correct context for the flow,
+    /// including checking signatures etc.
+    function flowStack(Evaluable memory evaluable, uint256[][] memory context)
         internal
         view
-        onlyRegisteredEvaluable(evaluable_)
         returns (Pointer, Pointer, uint256[] memory)
     {
-        (uint256[] memory stack_, uint256[] memory kvs_) = evaluable_.interpreter.eval(
-            evaluable_.store, DEFAULT_STATE_NAMESPACE, _flowDispatch(evaluable_.expression), context_
+        // Refuse to evaluate unregistered flows.
+        {
+            bytes32 evaluableHash = evaluable.hash();
+            if (registeredFlows[evaluableHash] == FLOW_IS_NOT_REGISTERED) {
+                revert UnregisteredFlow(evaluableHash);
+            }
+        }
+
+        (uint256[] memory stack, uint256[] memory kvs) = evaluable.interpreter.eval(
+            evaluable.store,
+            DEFAULT_STATE_NAMESPACE,
+            LibEncodedDispatch.encode(evaluable.expression, FLOW_ENTRYPOINT, FLOW_MAX_OUTPUTS),
+            context
         );
-        return (stack_.dataPointer(), stack_.endPointer(), kvs_);
+        return (stack.dataPointer(), stack.endPointer(), kvs);
     }
 }
