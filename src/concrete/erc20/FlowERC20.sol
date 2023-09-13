@@ -55,15 +55,16 @@ contract FlowERC20 is ICloneableV2, IFlowERC20V4, FlowCommon, ERC20 {
         emit Initialize(msg.sender, flowERC20Config);
         __ERC20_init(flowERC20Config.name, flowERC20Config.symbol);
 
+        // Set state before external calls here.
+        bool evalHandleTransfer = LibBytecode.sourceCount(flowERC20Config.evaluableConfig.bytecode) > 0
+            && LibBytecode.sourceOpsLength(
+                flowERC20Config.evaluableConfig.bytecode, SourceIndex.unwrap(HANDLE_TRANSFER_ENTRYPOINT)
+            ) > 0;
+        sEvalHandleTransfer = evalHandleTransfer;
+
         flowCommonInit(flowERC20Config.flowConfig, MIN_FLOW_SENTINELS + 2);
 
-        if (
-            LibBytecode.sourceCount(flowERC20Config.evaluableConfig.bytecode) > 0
-                && LibBytecode.sourceOpsLength(
-                    flowERC20Config.evaluableConfig.bytecode, SourceIndex.unwrap(HANDLE_TRANSFER_ENTRYPOINT)
-                ) > 0
-        ) {
-            sEvalHandleTransfer = true;
+        if (evalHandleTransfer) {
             (IInterpreterV1 interpreter, IInterpreterStoreV1 store, address expression) = flowERC20Config
                 .evaluableConfig
                 .deployer
