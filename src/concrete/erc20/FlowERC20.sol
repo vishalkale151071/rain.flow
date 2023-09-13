@@ -98,7 +98,7 @@ contract FlowERC20 is ICloneableV2, IFlowERC20V4, FlowCommon, ERC20 {
             // HANDLE_TRANSFER will only restrict subsequent transfers.
             if (sEvalHandleTransfer && !(from == address(0) || to == address(0))) {
                 Evaluable memory evaluable = sEvaluable;
-                (, uint256[] memory kvs) = evaluable.interpreter.eval(
+                (uint256[] memory stack, uint256[] memory kvs) = evaluable.interpreter.eval(
                     evaluable.store,
                     DEFAULT_STATE_NAMESPACE,
                     _dispatchHandleTransfer(evaluable.expression),
@@ -109,6 +109,7 @@ contract FlowERC20 is ICloneableV2, IFlowERC20V4, FlowCommon, ERC20 {
                         new SignedContextV1[](0)
                     )
                 );
+                (stack);
                 if (kvs.length > 0) {
                     evaluable.store.set(DEFAULT_STATE_NAMESPACE, kvs);
                 }
@@ -127,11 +128,15 @@ contract FlowERC20 is ICloneableV2, IFlowERC20V4, FlowCommon, ERC20 {
         Pointer tuplesPointer;
         (Pointer stackBottom, Pointer stackTop, uint256[] memory kvs) = flowStack(evaluable, context);
         // mints
+        // https://github.com/crytic/slither/issues/2126
+        //slither-disable-next-line unused-return
         (stackTop, tuplesPointer) = stackBottom.consumeSentinelTuples(stackTop, RAIN_FLOW_ERC20_SENTINEL, 2);
         assembly ("memory-safe") {
             mints := tuplesPointer
         }
         // burns
+        // https://github.com/crytic/slither/issues/2126
+        //slither-disable-next-line unused-return
         (stackTop, tuplesPointer) = stackBottom.consumeSentinelTuples(stackTop, RAIN_FLOW_ERC20_SENTINEL, 2);
         assembly ("memory-safe") {
             burns := tuplesPointer
