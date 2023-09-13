@@ -6,19 +6,30 @@ import {Pointer} from "rain.solmem/lib/LibPointer.sol";
 import {IInterpreterCallerV2} from "rain.interpreter/src/interface/IInterpreterCallerV2.sol";
 import {LibEncodedDispatch} from "rain.interpreter/src/lib/caller/LibEncodedDispatch.sol";
 import {LibContext} from "rain.interpreter/src/lib/caller/LibContext.sol";
-import "rain.interpreter/src/abstract/DeployerDiscoverableMetaV2.sol";
-import "rain.interpreter/src/lib/caller/LibEvaluable.sol";
+import {UnregisteredFlow} from "../interface/unstable/IFlowV4.sol";
+import {
+    DeployerDiscoverableMetaV2,
+    DeployerDiscoverableMetaV2ConstructionConfig
+} from "rain.interpreter/src/abstract/DeployerDiscoverableMetaV2.sol";
+import {
+    LibEvaluable,
+    Evaluable,
+    EvaluableConfigV2,
+    DEFAULT_STATE_NAMESPACE
+} from "rain.interpreter/src/lib/caller/LibEvaluable.sol";
+import {SourceIndex, IInterpreterV1} from "rain.interpreter/src/interface/IInterpreterV1.sol";
+import {IInterpreterStoreV1} from "rain.interpreter/src/interface/IInterpreterStoreV1.sol";
 
 import {MulticallUpgradeable as Multicall} from
     "openzeppelin-contracts-upgradeable/contracts/utils/MulticallUpgradeable.sol";
 import {ERC721HolderUpgradeable as ERC721Holder} from
     "openzeppelin-contracts-upgradeable/contracts/token/ERC721/utils/ERC721HolderUpgradeable.sol";
-import {ERC1155HolderUpgradeable as ERC1155Holder} from
-    "openzeppelin-contracts-upgradeable/contracts/token/ERC1155/utils/ERC1155HolderUpgradeable.sol";
-
-/// Thrown when the flow being evaluated is unregistered.
-/// @param unregisteredHash Hash of the unregistered flow.
-error UnregisteredFlow(bytes32 unregisteredHash);
+import {
+    ERC1155HolderUpgradeable as ERC1155Holder,
+    ERC1155ReceiverUpgradeable as ERC1155Receiver
+} from "openzeppelin-contracts-upgradeable/contracts/token/ERC1155/utils/ERC1155HolderUpgradeable.sol";
+import {ReentrancyGuardUpgradeable as ReentrancyGuard} from
+    "openzeppelin-contracts-upgradeable/contracts/security/ReentrancyGuardUpgradeable.sol";
 
 /// Thrown when the min outputs for a flow is fewer than the sentinels.
 /// This is always an implementation bug as the min outputs and sentinel count
@@ -78,6 +89,7 @@ abstract contract FlowCommon is
     ERC721Holder,
     ERC1155Holder,
     Multicall,
+    ReentrancyGuard,
     IInterpreterCallerV2,
     DeployerDiscoverableMetaV2
 {
@@ -130,6 +142,7 @@ abstract contract FlowCommon is
             __ERC721Holder_init();
             __ERC1155Holder_init();
             __Multicall_init();
+            __ReentrancyGuard_init();
 
             // This should never fail because the min outputs should always be
             // at least the number of sentinels, and is compile time constant.

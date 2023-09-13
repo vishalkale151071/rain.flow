@@ -3,28 +3,33 @@ pragma solidity =0.8.19;
 
 import {ERC721Upgradeable as ERC721} from
     "openzeppelin-contracts-upgradeable/contracts/token/ERC721/ERC721Upgradeable.sol";
-import {ReentrancyGuardUpgradeable as ReentrancyGuard} from
-    "openzeppelin-contracts-upgradeable/contracts/security/ReentrancyGuardUpgradeable.sol";
-import {ERC1155ReceiverUpgradeable as ERC1155Receiver} from
-    "openzeppelin-contracts-upgradeable/contracts/token/ERC1155/utils/ERC1155ReceiverUpgradeable.sol";
 
-import "rain.interpreter/src/interface/IExpressionDeployerV1.sol";
-import "rain.solmem/lib/LibUint256Array.sol";
-import "rain.solmem/lib/LibUint256Matrix.sol";
-import "rain.solmem/lib/LibStackSentinel.sol";
-import "rain.interpreter/src/lib/caller/LibEncodedDispatch.sol";
-import "rain.factory/src/interface/ICloneableV2.sol";
-import "../../interface/unstable/IFlowERC721V4.sol";
-import "lib/rain.interpreter/src/lib/bytecode/LibBytecode.sol";
-
-import "../../lib/LibFlow.sol";
-import "rain.math.fixedpoint/lib/LibFixedPointDecimalArithmeticOpenZeppelin.sol";
+import {LibUint256Array} from "rain.solmem/lib/LibUint256Array.sol";
+import {LibUint256Matrix} from "rain.solmem/lib/LibUint256Matrix.sol";
+import {Sentinel, LibStackSentinel} from "rain.solmem/lib/LibStackSentinel.sol";
+import {EncodedDispatch, LibEncodedDispatch} from "rain.interpreter/src/lib/caller/LibEncodedDispatch.sol";
+import {ICloneableV2, ICLONEABLE_V2_SUCCESS} from "rain.factory/src/interface/ICloneableV2.sol";
+import {
+    IFlowERC721V4,
+    FlowERC721IOV1,
+    SignedContextV1,
+    FlowERC721ConfigV2,
+    ERC721SupplyChange
+} from "../../interface/unstable/IFlowERC721V4.sol";
+import {LibBytecode} from "lib/rain.interpreter/src/lib/bytecode/LibBytecode.sol";
+import {SourceIndex} from "rain.interpreter/src/interface/IInterpreterV1.sol";
+import {LibFlow, SENTINEL_HIGH_BITS} from "../../lib/LibFlow.sol";
 import {
     FlowCommon,
     DeployerDiscoverableMetaV2ConstructionConfig,
     LibContext,
-    MIN_FLOW_SENTINELS
+    MIN_FLOW_SENTINELS,
+    ERC1155Receiver
 } from "../../abstract/FlowCommon.sol";
+import {Evaluable, DEFAULT_STATE_NAMESPACE} from "rain.interpreter/src/lib/caller/LibEvaluable.sol";
+import {IInterpreterV1} from "rain.interpreter/src/interface/IInterpreterV1.sol";
+import {IInterpreterStoreV1} from "rain.interpreter/src/interface/IInterpreterStoreV1.sol";
+import {Pointer} from "rain.solmem/lib/LibPointer.sol";
 
 /// Thrown when burner of tokens is not the owner of tokens.
 error BurnerNotOwner();
@@ -42,19 +47,14 @@ uint16 constant HANDLE_TRANSFER_MAX_OUTPUTS = 0;
 uint16 constant TOKEN_URI_MAX_OUTPUTS = 1;
 
 /// @title FlowERC721
-contract FlowERC721 is ICloneableV2, IFlowERC721V4, ReentrancyGuard, FlowCommon, ERC721 {
-    using LibStackPointer for uint256[];
-    using LibStackPointer for Pointer;
-    using LibUint256Array for uint256;
-    using LibUint256Array for uint256[];
+contract FlowERC721 is ICloneableV2, IFlowERC721V4, FlowCommon, ERC721 {
     using LibUint256Matrix for uint256[];
-    using LibFixedPointDecimalArithmeticOpenZeppelin for uint256;
     using LibStackSentinel for Pointer;
 
-    bool private evalHandleTransfer;
-    bool private evalTokenURI;
-    Evaluable internal evaluable;
-    string private baseURI;
+    bool private sEvalHandleTransfer;
+    bool private sEvalTokenURI;
+    Evaluable internal sEvaluable;
+    string private sBaseURI;
 
     constructor(DeployerDiscoverableMetaV2ConstructionConfig memory config) FlowCommon(CALLER_META_HASH, config) {}
 
@@ -62,60 +62,78 @@ contract FlowERC721 is ICloneableV2, IFlowERC721V4, ReentrancyGuard, FlowCommon,
     function initialize(bytes calldata data) external initializer returns (bytes32) {
         FlowERC721ConfigV2 memory flowERC721Config = abi.decode(data, (FlowERC721ConfigV2));
         emit Initialize(msg.sender, flowERC721Config);
-        __ReentrancyGuard_init();
         __ERC721_init(flowERC721Config.name, flowERC721Config.symbol);
-        baseURI = flowERC721Config.baseURI;
-        flowCommonInit(flowERC721Config.flowConfig, MIN_FLOW_SENTINELS + 2);
+        sBaseURI = flowERC721Config.baseURI;
 
+        // Set state before external calls here.
         uint256 sourceCount = LibBytecode.sourceCount(flowERC721Config.evaluableConfig.bytecode);
-        if (sourceCount > 0) {
-            evalHandleTransfer = LibBytecode.sourceOpsLength(
+        bool evalHandleTransfer = sourceCount > 0
+            && LibBytecode.sourceOpsLength(
                 flowERC721Config.evaluableConfig.bytecode, SourceIndex.unwrap(HANDLE_TRANSFER_ENTRYPOINT)
             ) > 0;
-            if (sourceCount > 1) {
-                evalTokenURI = LibBytecode.sourceOpsLength(
-                    flowERC721Config.evaluableConfig.bytecode, SourceIndex.unwrap(TOKEN_URI_ENTRYPOINT)
-                ) > 0;
-            }
+        bool evalTokenURI = sourceCount > 1
+            && LibBytecode.sourceOpsLength(
+                flowERC721Config.evaluableConfig.bytecode, SourceIndex.unwrap(TOKEN_URI_ENTRYPOINT)
+            ) > 0;
+        sEvalHandleTransfer = evalHandleTransfer;
+        sEvalTokenURI = evalTokenURI;
+
+        flowCommonInit(flowERC721Config.flowConfig, MIN_FLOW_SENTINELS + 2);
+
+        if (evalHandleTransfer) {
+            // Include the token URI min outputs if we expect to eval it,
+            // otherwise only include the handle transfer min outputs.
+            uint256[] memory minOutputs = evalTokenURI
+                ? LibUint256Array.arrayFrom(HANDLE_TRANSFER_MIN_OUTPUTS, TOKEN_URI_MIN_OUTPUTS)
+                : LibUint256Array.arrayFrom(HANDLE_TRANSFER_MIN_OUTPUTS);
+
             (IInterpreterV1 interpreter, IInterpreterStoreV1 store, address expression) = flowERC721Config
                 .evaluableConfig
                 .deployer
                 .deployExpression(
-                flowERC721Config.evaluableConfig.bytecode,
-                flowERC721Config.evaluableConfig.constants,
-                LibUint256Array.arrayFrom(HANDLE_TRANSFER_MIN_OUTPUTS, TOKEN_URI_MIN_OUTPUTS)
+                flowERC721Config.evaluableConfig.bytecode, flowERC721Config.evaluableConfig.constants, minOutputs
             );
-            evaluable = Evaluable(interpreter, store, expression);
+            // There's no way to set this before the external call because the
+            // output of the `deployExpression` call is the input to `Evaluable`.
+            // Even if we could set it before the external call, we wouldn't want
+            // to because the evaluable should not be registered before the
+            // integrity checks are complete.
+            // The deployer MUST be a trusted contract anyway.
+            // slither-disable-next-line reentrancy-benign
+            sEvaluable = Evaluable(interpreter, store, expression);
         }
 
         return ICLONEABLE_V2_SUCCESS;
     }
 
     function _baseURI() internal view virtual override returns (string memory) {
-        return baseURI;
+        return sBaseURI;
     }
 
-    function tokenURI(uint256 tokenId_) public view virtual override returns (string memory) {
-        if (evalTokenURI) {
-            Evaluable memory evaluable_ = evaluable;
-            (uint256[] memory stack_,) = evaluable_.interpreter.eval(
-                evaluable_.store,
+    function tokenURI(uint256 tokenId) public view virtual override returns (string memory) {
+        if (sEvalTokenURI) {
+            Evaluable memory evaluable = sEvaluable;
+            (uint256[] memory stack, uint256[] memory kvs) = evaluable.interpreter.eval(
+                evaluable.store,
                 DEFAULT_STATE_NAMESPACE,
-                _dispatchTokenURI(evaluable_.expression),
-                LibContext.build(LibUint256Array.arrayFrom(tokenId_).matrixFrom(), new SignedContextV1[](0))
+                _dispatchTokenURI(evaluable.expression),
+                LibContext.build(LibUint256Array.arrayFrom(tokenId).matrixFrom(), new SignedContextV1[](0))
             );
-            tokenId_ = stack_[0];
+            // @todo it would be nice if we could do something with the kvs here,
+            // but the interface is view.
+            (kvs);
+            tokenId = stack[0];
         }
 
-        return super.tokenURI(tokenId_);
+        return super.tokenURI(tokenId);
     }
 
-    function _dispatchHandleTransfer(address expression_) internal pure returns (EncodedDispatch) {
-        return LibEncodedDispatch.encode(expression_, HANDLE_TRANSFER_ENTRYPOINT, HANDLE_TRANSFER_MAX_OUTPUTS);
+    function _dispatchHandleTransfer(address expression) internal pure returns (EncodedDispatch) {
+        return LibEncodedDispatch.encode(expression, HANDLE_TRANSFER_ENTRYPOINT, HANDLE_TRANSFER_MAX_OUTPUTS);
     }
 
-    function _dispatchTokenURI(address expression_) internal pure returns (EncodedDispatch) {
-        return LibEncodedDispatch.encode(expression_, TOKEN_URI_ENTRYPOINT, TOKEN_URI_MAX_OUTPUTS);
+    function _dispatchTokenURI(address expression) internal pure returns (EncodedDispatch) {
+        return LibEncodedDispatch.encode(expression, TOKEN_URI_ENTRYPOINT, TOKEN_URI_MAX_OUTPUTS);
     }
 
     /// Needed here to fix Open Zeppelin implementing `supportsInterface` on
@@ -131,99 +149,105 @@ contract FlowERC721 is ICloneableV2, IFlowERC721V4, ReentrancyGuard, FlowCommon,
     }
 
     /// @inheritdoc ERC721
-    function _afterTokenTransfer(address from_, address to_, uint256 tokenId_, uint256 batchSize_)
+    function _afterTokenTransfer(address from, address to, uint256 tokenId, uint256 batchSize)
         internal
         virtual
         override
     {
         unchecked {
-            super._afterTokenTransfer(from_, to_, tokenId_, batchSize_);
+            super._afterTokenTransfer(from, to, tokenId, batchSize);
 
             // Mint and burn access MUST be handled by flow.
             // HANDLE_TRANSFER will only restrict subsequent transfers.
-            if (evalHandleTransfer && !(from_ == address(0) || to_ == address(0))) {
-                Evaluable memory evaluable_ = evaluable;
-                (, uint256[] memory kvs_) = evaluable_.interpreter.eval(
-                    evaluable_.store,
+            if (sEvalHandleTransfer && !(from == address(0) || to == address(0))) {
+                Evaluable memory evaluable = sEvaluable;
+                (uint256[] memory stack, uint256[] memory kvs) = evaluable.interpreter.eval(
+                    evaluable.store,
                     DEFAULT_STATE_NAMESPACE,
-                    _dispatchHandleTransfer(evaluable_.expression),
+                    _dispatchHandleTransfer(evaluable.expression),
                     LibContext.build(
                         // Transfer information.
-                        // Does NOT include `batchSize_` because handle
+                        // Does NOT include `batchSize` because handle
                         // transfer is NOT called for mints.
-                        LibUint256Array.arrayFrom(uint256(uint160(from_)), uint256(uint160(to_)), tokenId_).matrixFrom(),
+                        LibUint256Array.arrayFrom(uint256(uint160(from)), uint256(uint160(to)), tokenId).matrixFrom(),
                         new SignedContextV1[](0)
                     )
                 );
-                if (kvs_.length > 0) {
-                    evaluable_.store.set(DEFAULT_STATE_NAMESPACE, kvs_);
+                (stack);
+                if (kvs.length > 0) {
+                    evaluable.store.set(DEFAULT_STATE_NAMESPACE, kvs);
                 }
             }
         }
     }
 
-    function _previewFlow(Evaluable memory evaluable_, uint256[][] memory context_)
+    function _previewFlow(Evaluable memory evaluable, uint256[][] memory context)
         internal
         view
         returns (FlowERC721IOV1 memory, uint256[] memory)
     {
-        ERC721SupplyChange[] memory mints_;
-        ERC721SupplyChange[] memory burns_;
-        Pointer tuplesPointer_;
+        ERC721SupplyChange[] memory mints;
+        ERC721SupplyChange[] memory burns;
+        Pointer tuplesPointer;
 
-        (Pointer stackBottom_, Pointer stackTop_, uint256[] memory kvs_) = flowStack(evaluable_, context_);
+        (Pointer stackBottom, Pointer stackTop, uint256[] memory kvs) = flowStack(evaluable, context);
         // mints
-        (stackTop_, tuplesPointer_) = stackBottom_.consumeSentinelTuples(stackTop_, RAIN_FLOW_ERC721_SENTINEL, 2);
+        // https://github.com/crytic/slither/issues/2126
+        //slither-disable-next-line unused-return
+        (stackTop, tuplesPointer) = stackBottom.consumeSentinelTuples(stackTop, RAIN_FLOW_ERC721_SENTINEL, 2);
         assembly ("memory-safe") {
-            mints_ := tuplesPointer_
+            mints := tuplesPointer
         }
         // burns
-        (stackTop_, tuplesPointer_) = stackBottom_.consumeSentinelTuples(stackTop_, RAIN_FLOW_ERC721_SENTINEL, 2);
+        // https://github.com/crytic/slither/issues/2126
+        //slither-disable-next-line unused-return
+        (stackTop, tuplesPointer) = stackBottom.consumeSentinelTuples(stackTop, RAIN_FLOW_ERC721_SENTINEL, 2);
         assembly ("memory-safe") {
-            burns_ := tuplesPointer_
+            burns := tuplesPointer
         }
-        return (FlowERC721IOV1(mints_, burns_, LibFlow.stackToFlow(stackBottom_, stackTop_)), kvs_);
+        return (FlowERC721IOV1(mints, burns, LibFlow.stackToFlow(stackBottom, stackTop)), kvs);
     }
 
-    function _flow(
-        Evaluable memory evaluable_,
-        uint256[] memory callerContext_,
-        SignedContextV1[] memory signedContexts_
-    ) internal virtual nonReentrant returns (FlowERC721IOV1 memory) {
+    function _flow(Evaluable memory evaluable, uint256[] memory callerContext, SignedContextV1[] memory signedContexts)
+        internal
+        virtual
+        nonReentrant
+        returns (FlowERC721IOV1 memory)
+    {
         unchecked {
-            uint256[][] memory context_ = LibContext.build(callerContext_.matrixFrom(), signedContexts_);
-            emit Context(msg.sender, context_);
-            (FlowERC721IOV1 memory flowIO_, uint256[] memory kvs_) = _previewFlow(evaluable_, context_);
-            for (uint256 i_ = 0; i_ < flowIO_.mints.length; i_++) {
-                _safeMint(flowIO_.mints[i_].account, flowIO_.mints[i_].id);
+            uint256[][] memory context = LibContext.build(callerContext.matrixFrom(), signedContexts);
+            emit Context(msg.sender, context);
+            (FlowERC721IOV1 memory flowIO, uint256[] memory kvs) = _previewFlow(evaluable, context);
+            for (uint256 i = 0; i < flowIO.mints.length; i++) {
+                _safeMint(flowIO.mints[i].account, flowIO.mints[i].id);
             }
-            for (uint256 i_ = 0; i_ < flowIO_.burns.length; i_++) {
-                uint256 burnId_ = flowIO_.burns[i_].id;
-                if (ERC721.ownerOf(burnId_) != flowIO_.burns[i_].account) {
+            for (uint256 i = 0; i < flowIO.burns.length; i++) {
+                uint256 burnId = flowIO.burns[i].id;
+                if (ERC721.ownerOf(burnId) != flowIO.burns[i].account) {
                     revert BurnerNotOwner();
                 }
-                _burn(burnId_);
+                _burn(burnId);
             }
-            LibFlow.flow(flowIO_.flow, evaluable_.store, kvs_);
-            return flowIO_;
+            LibFlow.flow(flowIO.flow, evaluable.store, kvs);
+            return flowIO;
         }
     }
 
     function previewFlow(
-        Evaluable memory evaluable_,
-        uint256[] memory callerContext_,
-        SignedContextV1[] memory signedContexts_
+        Evaluable memory evaluable,
+        uint256[] memory callerContext,
+        SignedContextV1[] memory signedContexts
     ) external view virtual returns (FlowERC721IOV1 memory) {
-        uint256[][] memory context_ = LibContext.build(callerContext_.matrixFrom(), signedContexts_);
-        (FlowERC721IOV1 memory flowERC721IO_,) = _previewFlow(evaluable_, context_);
-        return flowERC721IO_;
+        uint256[][] memory context = LibContext.build(callerContext.matrixFrom(), signedContexts);
+        (FlowERC721IOV1 memory flowERC721IO,) = _previewFlow(evaluable, context);
+        return flowERC721IO;
     }
 
-    function flow(
-        Evaluable memory evaluable_,
-        uint256[] memory callerContext_,
-        SignedContextV1[] memory signedContexts_
-    ) external virtual returns (FlowERC721IOV1 memory) {
-        return _flow(evaluable_, callerContext_, signedContexts_);
+    function flow(Evaluable memory evaluable, uint256[] memory callerContext, SignedContextV1[] memory signedContexts)
+        external
+        virtual
+        returns (FlowERC721IOV1 memory)
+    {
+        return _flow(evaluable, callerContext, signedContexts);
     }
 }
