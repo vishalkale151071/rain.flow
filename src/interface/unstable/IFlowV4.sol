@@ -10,14 +10,8 @@ import {FlowTransferV1, ERC20Transfer, ERC721Transfer, ERC1155Transfer} from "..
 /// @param unregisteredHash Hash of the unregistered flow.
 error UnregisteredFlow(bytes32 unregisteredHash);
 
-struct FlowConfigV2 {
-    // https://github.com/ethereum/solidity/issues/13597
-    EvaluableConfigV2 dummyConfig;
-    EvaluableConfigV2[] config;
-}
-
 interface IFlowV4 {
-    event Initialize(address sender, FlowConfigV2 config);
+    event Initialize(address sender, EvaluableConfigV2[] config);
 
     function previewFlow(
         Evaluable calldata evaluable,

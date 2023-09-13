@@ -18,10 +18,10 @@ contract Flow is ICloneableV2, IFlowV4, ReentrancyGuard, FlowCommon {
 
     /// @inheritdoc ICloneableV2
     function initialize(bytes calldata data) external initializer returns (bytes32) {
-        FlowConfigV2 memory flowConfig = abi.decode(data, (FlowConfigV2));
+        EvaluableConfigV2[] memory flowConfig = abi.decode(data, (EvaluableConfigV2[]));
         emit Initialize(msg.sender, flowConfig);
 
-        flowCommonInit(flowConfig.config, MIN_FLOW_SENTINELS);
+        flowCommonInit(flowConfig, MIN_FLOW_SENTINELS);
         return ICLONEABLE_V2_SUCCESS;
     }
 
