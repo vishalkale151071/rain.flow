@@ -1,22 +1,35 @@
 // SPDX-License-Identifier: CAL
 pragma solidity =0.8.19;
 
-import {ReentrancyGuardUpgradeable as ReentrancyGuard} from
-    "openzeppelin-contracts-upgradeable/contracts/security/ReentrancyGuardUpgradeable.sol";
 import {ERC1155Upgradeable as ERC1155} from
     "openzeppelin-contracts-upgradeable/contracts/token/ERC1155/ERC1155Upgradeable.sol";
-import {ERC1155ReceiverUpgradeable as ERC1155Receiver} from
-    "openzeppelin-contracts-upgradeable/contracts/token/ERC1155/utils/ERC1155ReceiverUpgradeable.sol";
 
-import "rain.interpreter/src/lib/caller/LibEncodedDispatch.sol";
-import "rain.factory/src/interface/ICloneableV2.sol";
-import "rain.solmem/lib/LibUint256Matrix.sol";
-import "../../interface/unstable/IFlowERC1155V4.sol";
-import "lib/rain.interpreter/src/lib/bytecode/LibBytecode.sol";
-
-import "rain.solmem/lib/LibStackPointer.sol";
-import "../../lib/LibFlow.sol";
-import "../../abstract/FlowCommon.sol";
+import {LibEncodedDispatch, EncodedDispatch} from "rain.interpreter/src/lib/caller/LibEncodedDispatch.sol";
+import {Sentinel, LibStackSentinel} from "rain.solmem/lib/LibStackSentinel.sol";
+import {ICloneableV2, ICLONEABLE_V2_SUCCESS} from "rain.factory/src/interface/ICloneableV2.sol";
+import {LibUint256Array} from "rain.solmem/lib/LibUint256Array.sol";
+import {LibUint256Matrix} from "rain.solmem/lib/LibUint256Matrix.sol";
+import {
+    IFlowERC1155V4,
+    FlowERC1155IOV1,
+    SignedContextV1,
+    FlowERC1155ConfigV2,
+    ERC1155SupplyChange
+} from "../../interface/unstable/IFlowERC1155V4.sol";
+import {LibBytecode} from "lib/rain.interpreter/src/lib/bytecode/LibBytecode.sol";
+import {IInterpreterV1} from "rain.interpreter/src/interface/IInterpreterV1.sol";
+import {IInterpreterStoreV1} from "rain.interpreter/src/interface/IInterpreterStoreV1.sol";
+import {Evaluable, DEFAULT_STATE_NAMESPACE} from "rain.interpreter/src/lib/caller/LibEvaluable.sol";
+import {Pointer} from "rain.solmem/lib/LibPointer.sol";
+import {SENTINEL_HIGH_BITS, LibFlow} from "../../lib/LibFlow.sol";
+import {SourceIndex} from "rain.interpreter/src/interface/IInterpreterV1.sol";
+import {
+    MIN_FLOW_SENTINELS,
+    FlowCommon,
+    DeployerDiscoverableMetaV2ConstructionConfig,
+    ERC1155Receiver
+} from "../../abstract/FlowCommon.sol";
+import {LibContext} from "rain.interpreter/src/lib/caller/LibContext.sol";
 
 Sentinel constant RAIN_FLOW_ERC1155_SENTINEL =
     Sentinel.wrap(uint256(keccak256(bytes("RAIN_FLOW_ERC1155_SENTINEL")) | SENTINEL_HIGH_BITS));
@@ -29,15 +42,11 @@ uint16 constant HANDLE_TRANSFER_MAX_OUTPUTS = 0;
 
 uint256 constant FLOW_ERC1155_MIN_OUTPUTS = MIN_FLOW_SENTINELS + 2;
 
-contract FlowERC1155 is ICloneableV2, IFlowERC1155V4, ReentrancyGuard, FlowCommon, ERC1155 {
-    using LibStackPointer for Pointer;
+contract FlowERC1155 is ICloneableV2, IFlowERC1155V4, FlowCommon, ERC1155 {
     using LibStackSentinel for Pointer;
-    using LibStackPointer for uint256[];
-    using LibUint256Array for uint256;
-    using LibUint256Array for uint256[];
     using LibUint256Matrix for uint256[];
 
-    bool private evalHandleTransfer;
+    bool private sEvalHandleTransfer;
     Evaluable internal sEvaluable;
 
     constructor(DeployerDiscoverableMetaV2ConstructionConfig memory config) FlowCommon(CALLER_META_HASH, config) {}
@@ -46,7 +55,6 @@ contract FlowERC1155 is ICloneableV2, IFlowERC1155V4, ReentrancyGuard, FlowCommo
     function initialize(bytes calldata data) external initializer returns (bytes32) {
         FlowERC1155ConfigV2 memory flowERC1155Config = abi.decode(data, (FlowERC1155ConfigV2));
         emit Initialize(msg.sender, flowERC1155Config);
-        __ReentrancyGuard_init();
         __ERC1155_init(flowERC1155Config.uri);
 
         flowCommonInit(flowERC1155Config.flowConfig, FLOW_ERC1155_MIN_OUTPUTS);
@@ -57,7 +65,7 @@ contract FlowERC1155 is ICloneableV2, IFlowERC1155V4, ReentrancyGuard, FlowCommo
                     flowERC1155Config.evaluableConfig.bytecode, SourceIndex.unwrap(HANDLE_TRANSFER_ENTRYPOINT)
                 ) > 0
         ) {
-            evalHandleTransfer = true;
+            sEvalHandleTransfer = true;
             (IInterpreterV1 interpreter, IInterpreterStoreV1 store, address expression) = flowERC1155Config
                 .evaluableConfig
                 .deployer
@@ -101,7 +109,7 @@ contract FlowERC1155 is ICloneableV2, IFlowERC1155V4, ReentrancyGuard, FlowCommo
             super._afterTokenTransfer(operator, from, to, ids, amounts, data);
             // Mint and burn access MUST be handled by flow.
             // HANDLE_TRANSFER will only restrict subsequent transfers.
-            if (evalHandleTransfer && !(from == address(0) || to == address(0))) {
+            if (sEvalHandleTransfer && !(from == address(0) || to == address(0))) {
                 Evaluable memory evaluable = sEvaluable;
                 uint256[][] memory context;
                 {
@@ -152,42 +160,43 @@ contract FlowERC1155 is ICloneableV2, IFlowERC1155V4, ReentrancyGuard, FlowCommo
         return (FlowERC1155IOV1(mints, burns, LibFlow.stackToFlow(stackBottom, stackTop)), kvs);
     }
 
-    function _flow(
-        Evaluable memory evaluable_,
-        uint256[] memory callerContext_,
-        SignedContextV1[] memory signedContexts_
-    ) internal virtual nonReentrant returns (FlowERC1155IOV1 memory) {
+    function _flow(Evaluable memory evaluable, uint256[] memory callerContext, SignedContextV1[] memory signedContexts)
+        internal
+        virtual
+        nonReentrant
+        returns (FlowERC1155IOV1 memory)
+    {
         unchecked {
-            uint256[][] memory context_ = LibContext.build(callerContext_.matrixFrom(), signedContexts_);
-            emit Context(msg.sender, context_);
-            (FlowERC1155IOV1 memory flowIO_, uint256[] memory kvs_) = _previewFlow(evaluable_, context_);
-            for (uint256 i_ = 0; i_ < flowIO_.mints.length; i_++) {
+            uint256[][] memory context = LibContext.build(callerContext.matrixFrom(), signedContexts);
+            emit Context(msg.sender, context);
+            (FlowERC1155IOV1 memory flowIO, uint256[] memory kvs) = _previewFlow(evaluable, context);
+            for (uint256 i = 0; i < flowIO.mints.length; i++) {
                 // @todo support data somehow.
-                _mint(flowIO_.mints[i_].account, flowIO_.mints[i_].id, flowIO_.mints[i_].amount, "");
+                _mint(flowIO.mints[i].account, flowIO.mints[i].id, flowIO.mints[i].amount, "");
             }
-            for (uint256 i_ = 0; i_ < flowIO_.burns.length; i_++) {
-                _burn(flowIO_.burns[i_].account, flowIO_.burns[i_].id, flowIO_.burns[i_].amount);
+            for (uint256 i = 0; i < flowIO.burns.length; i++) {
+                _burn(flowIO.burns[i].account, flowIO.burns[i].id, flowIO.burns[i].amount);
             }
-            LibFlow.flow(flowIO_.flow, evaluable_.store, kvs_);
-            return flowIO_;
+            LibFlow.flow(flowIO.flow, evaluable.store, kvs);
+            return flowIO;
         }
     }
 
     function previewFlow(
-        Evaluable memory evaluable_,
-        uint256[] memory callerContext_,
-        SignedContextV1[] memory signedContexts_
+        Evaluable memory evaluable,
+        uint256[] memory callerContext,
+        SignedContextV1[] memory signedContexts
     ) external view virtual returns (FlowERC1155IOV1 memory) {
-        uint256[][] memory context_ = LibContext.build(callerContext_.matrixFrom(), signedContexts_);
-        (FlowERC1155IOV1 memory flowERC1155IO_,) = _previewFlow(evaluable_, context_);
-        return flowERC1155IO_;
+        uint256[][] memory context = LibContext.build(callerContext.matrixFrom(), signedContexts);
+        (FlowERC1155IOV1 memory flowERC1155IO,) = _previewFlow(evaluable, context);
+        return flowERC1155IO;
     }
 
-    function flow(
-        Evaluable memory evaluable_,
-        uint256[] memory callerContext_,
-        SignedContextV1[] memory signedContexts_
-    ) external virtual returns (FlowERC1155IOV1 memory) {
-        return _flow(evaluable_, callerContext_, signedContexts_);
+    function flow(Evaluable memory evaluable, uint256[] memory callerContext, SignedContextV1[] memory signedContexts)
+        external
+        virtual
+        returns (FlowERC1155IOV1 memory)
+    {
+        return _flow(evaluable, callerContext, signedContexts);
     }
 }
