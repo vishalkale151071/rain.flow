@@ -57,15 +57,16 @@ contract FlowERC1155 is ICloneableV2, IFlowERC1155V4, FlowCommon, ERC1155 {
         emit Initialize(msg.sender, flowERC1155Config);
         __ERC1155_init(flowERC1155Config.uri);
 
+        // Set state before external calls here.
+        bool evalHandleTransfer = LibBytecode.sourceCount(flowERC1155Config.evaluableConfig.bytecode) > 0
+            && LibBytecode.sourceOpsLength(
+                flowERC1155Config.evaluableConfig.bytecode, SourceIndex.unwrap(HANDLE_TRANSFER_ENTRYPOINT)
+            ) > 0;
+        sEvalHandleTransfer = evalHandleTransfer;
+
         flowCommonInit(flowERC1155Config.flowConfig, FLOW_ERC1155_MIN_OUTPUTS);
 
-        if (
-            LibBytecode.sourceCount(flowERC1155Config.evaluableConfig.bytecode) > 0
-                && LibBytecode.sourceOpsLength(
-                    flowERC1155Config.evaluableConfig.bytecode, SourceIndex.unwrap(HANDLE_TRANSFER_ENTRYPOINT)
-                ) > 0
-        ) {
-            sEvalHandleTransfer = true;
+        if (evalHandleTransfer) {
             (IInterpreterV1 interpreter, IInterpreterStoreV1 store, address expression) = flowERC1155Config
                 .evaluableConfig
                 .deployer
