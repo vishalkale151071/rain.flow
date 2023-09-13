@@ -71,12 +71,10 @@ contract FlowERC721 is ICloneableV2, IFlowERC721V4, FlowCommon, ERC721 {
             && LibBytecode.sourceOpsLength(
                 flowERC721Config.evaluableConfig.bytecode, SourceIndex.unwrap(HANDLE_TRANSFER_ENTRYPOINT)
             ) > 0;
-        bool evalTokenURI = false;
-        if (sourceCount > 1) {
-            evalTokenURI = LibBytecode.sourceOpsLength(
+        bool evalTokenURI = sourceCount > 1
+            && LibBytecode.sourceOpsLength(
                 flowERC721Config.evaluableConfig.bytecode, SourceIndex.unwrap(TOKEN_URI_ENTRYPOINT)
             ) > 0;
-        }
         sEvalHandleTransfer = evalHandleTransfer;
         sEvalTokenURI = evalTokenURI;
 
