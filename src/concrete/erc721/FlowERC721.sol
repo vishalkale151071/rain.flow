@@ -64,25 +64,36 @@ contract FlowERC721 is ICloneableV2, IFlowERC721V4, FlowCommon, ERC721 {
         emit Initialize(msg.sender, flowERC721Config);
         __ERC721_init(flowERC721Config.name, flowERC721Config.symbol);
         sBaseURI = flowERC721Config.baseURI;
-        flowCommonInit(flowERC721Config.flowConfig, MIN_FLOW_SENTINELS + 2);
 
+        // Set state before external calls here.
         uint256 sourceCount = LibBytecode.sourceCount(flowERC721Config.evaluableConfig.bytecode);
-        if (sourceCount > 0) {
-            sEvalHandleTransfer = LibBytecode.sourceOpsLength(
+        bool evalHandleTransfer = sourceCount > 0
+            && LibBytecode.sourceOpsLength(
                 flowERC721Config.evaluableConfig.bytecode, SourceIndex.unwrap(HANDLE_TRANSFER_ENTRYPOINT)
             ) > 0;
-            if (sourceCount > 1) {
-                sEvalTokenURI = LibBytecode.sourceOpsLength(
-                    flowERC721Config.evaluableConfig.bytecode, SourceIndex.unwrap(TOKEN_URI_ENTRYPOINT)
-                ) > 0;
-            }
+        bool evalTokenURI = false;
+        if (sourceCount > 1) {
+            evalTokenURI = LibBytecode.sourceOpsLength(
+                flowERC721Config.evaluableConfig.bytecode, SourceIndex.unwrap(TOKEN_URI_ENTRYPOINT)
+            ) > 0;
+        }
+        sEvalHandleTransfer = evalHandleTransfer;
+        sEvalTokenURI = evalTokenURI;
+
+        flowCommonInit(flowERC721Config.flowConfig, MIN_FLOW_SENTINELS + 2);
+
+        if (evalHandleTransfer) {
+            // Include the token URI min outputs if we expect to eval it,
+            // otherwise only include the handle transfer min outputs.
+            uint256[] memory minOutputs = evalTokenURI
+                ? LibUint256Array.arrayFrom(HANDLE_TRANSFER_MIN_OUTPUTS, TOKEN_URI_MIN_OUTPUTS)
+                : LibUint256Array.arrayFrom(HANDLE_TRANSFER_MIN_OUTPUTS);
+
             (IInterpreterV1 interpreter, IInterpreterStoreV1 store, address expression) = flowERC721Config
                 .evaluableConfig
                 .deployer
                 .deployExpression(
-                flowERC721Config.evaluableConfig.bytecode,
-                flowERC721Config.evaluableConfig.constants,
-                LibUint256Array.arrayFrom(HANDLE_TRANSFER_MIN_OUTPUTS, TOKEN_URI_MIN_OUTPUTS)
+                flowERC721Config.evaluableConfig.bytecode, flowERC721Config.evaluableConfig.constants, minOutputs
             );
             // There's no way to set this before the external call because the
             // output of the `deployExpression` call is the input to `Evaluable`.
