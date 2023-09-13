@@ -72,6 +72,13 @@ contract FlowERC20 is ICloneableV2, IFlowERC20V4, FlowCommon, ERC20 {
                 flowERC20Config.evaluableConfig.constants,
                 LibUint256Array.arrayFrom(HANDLE_TRANSFER_MIN_OUTPUTS)
             );
+            // There's no way to set this before the external call because the
+            // output of the `deployExpression` call is the input to `Evaluable`.
+            // Even if we could set it before the external call, we wouldn't want
+            // to because the evaluable should not be registered before the
+            // integrity checks are complete.
+            // The deployer MUST be a trusted contract anyway.
+            // slither-disable-next-line reentrancy-benign
             sEvaluable = Evaluable(interpreter, store, expression);
         }
 
