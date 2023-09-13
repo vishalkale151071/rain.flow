@@ -148,11 +148,15 @@ contract FlowERC1155 is ICloneableV2, IFlowERC1155V4, FlowCommon, ERC1155 {
         Pointer tuplesPointer;
         (Pointer stackBottom, Pointer stackTop, uint256[] memory kvs) = flowStack(evaluable, context);
         // mints
+        // https://github.com/crytic/slither/issues/2126
+        //slither-disable-next-line unused-return
         (stackTop, tuplesPointer) = stackBottom.consumeSentinelTuples(stackTop, RAIN_FLOW_ERC1155_SENTINEL, 3);
         assembly ("memory-safe") {
             mints := tuplesPointer
         }
         // burns
+        // https://github.com/crytic/slither/issues/2126
+        //slither-disable-next-line unused-return
         (stackTop, tuplesPointer) = stackBottom.consumeSentinelTuples(stackTop, RAIN_FLOW_ERC1155_SENTINEL, 3);
         assembly ("memory-safe") {
             burns := tuplesPointer
