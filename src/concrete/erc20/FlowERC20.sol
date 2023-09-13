@@ -6,13 +6,24 @@ import {ERC20Upgradeable as ERC20} from "openzeppelin-contracts-upgradeable/cont
 import {LibUint256Array} from "rain.solmem/lib/LibUint256Array.sol";
 import {LibUint256Matrix} from "rain.solmem/lib/LibUint256Matrix.sol";
 import {ICloneableV2, ICLONEABLE_V2_SUCCESS} from "rain.factory/src/interface/ICloneableV2.sol";
-import {IFlowERC20V4, FlowERC20IOV1, FlowERC20ConfigV2, ERC20SupplyChange, SignedContextV1} from "../../interface/unstable/IFlowERC20V4.sol";
+import {
+    IFlowERC20V4,
+    FlowERC20IOV1,
+    FlowERC20ConfigV2,
+    ERC20SupplyChange,
+    SignedContextV1
+} from "../../interface/unstable/IFlowERC20V4.sol";
 import {LibBytecode} from "lib/rain.interpreter/src/lib/bytecode/LibBytecode.sol";
 import {EncodedDispatch, LibEncodedDispatch} from "rain.interpreter/src/lib/caller/LibEncodedDispatch.sol";
 
 import {Sentinel, LibStackSentinel} from "rain.solmem/lib/LibStackSentinel.sol";
 import {SENTINEL_HIGH_BITS, LibFlow} from "../../lib/LibFlow.sol";
-import {FlowCommon, DeployerDiscoverableMetaV2, DeployerDiscoverableMetaV2ConstructionConfig, MIN_FLOW_SENTINELS} from "../../abstract/FlowCommon.sol";
+import {
+    FlowCommon,
+    DeployerDiscoverableMetaV2,
+    DeployerDiscoverableMetaV2ConstructionConfig,
+    MIN_FLOW_SENTINELS
+} from "../../abstract/FlowCommon.sol";
 import {SourceIndex, IInterpreterV1} from "rain.interpreter/src/interface/IInterpreterV1.sol";
 import {IInterpreterStoreV1} from "rain.interpreter/src/interface/IInterpreterStoreV1.sol";
 import {Pointer} from "rain.solmem/lib/LibPointer.sol";
@@ -42,7 +53,6 @@ contract FlowERC20 is ICloneableV2, IFlowERC20V4, FlowCommon, ERC20 {
     function initialize(bytes calldata data) external initializer returns (bytes32) {
         FlowERC20ConfigV2 memory flowERC20Config = abi.decode(data, (FlowERC20ConfigV2));
         emit Initialize(msg.sender, flowERC20Config);
-        __ReentrancyGuard_init();
         __ERC20_init(flowERC20Config.name, flowERC20Config.symbol);
 
         flowCommonInit(flowERC20Config.flowConfig, MIN_FLOW_SENTINELS + 2);
@@ -123,11 +133,12 @@ contract FlowERC20 is ICloneableV2, IFlowERC20V4, FlowCommon, ERC20 {
         return (FlowERC20IOV1(mints, burns, LibFlow.stackToFlow(stackBottom, stackTop)), kvs);
     }
 
-    function _flow(
-        Evaluable memory evaluable,
-        uint256[] memory callerContext,
-        SignedContextV1[] memory signedContexts
-    ) internal virtual nonReentrant returns (FlowERC20IOV1 memory) {
+    function _flow(Evaluable memory evaluable, uint256[] memory callerContext, SignedContextV1[] memory signedContexts)
+        internal
+        virtual
+        nonReentrant
+        returns (FlowERC20IOV1 memory)
+    {
         unchecked {
             uint256[][] memory context = LibContext.build(callerContext.matrixFrom(), signedContexts);
             emit Context(msg.sender, context);
@@ -153,11 +164,11 @@ contract FlowERC20 is ICloneableV2, IFlowERC20V4, FlowCommon, ERC20 {
         return flowERC20IO;
     }
 
-    function flow(
-        Evaluable memory evaluable,
-        uint256[] memory callerContext,
-        SignedContextV1[] memory signedContexts
-    ) external virtual returns (FlowERC20IOV1 memory) {
+    function flow(Evaluable memory evaluable, uint256[] memory callerContext, SignedContextV1[] memory signedContexts)
+        external
+        virtual
+        returns (FlowERC20IOV1 memory)
+    {
         return _flow(evaluable, callerContext, signedContexts);
     }
 }

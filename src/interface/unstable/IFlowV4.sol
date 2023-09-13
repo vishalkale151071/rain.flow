@@ -10,7 +10,6 @@ import {FlowTransferV1, ERC20Transfer, ERC721Transfer, ERC1155Transfer} from "..
 /// @param unregisteredHash Hash of the unregistered flow.
 error UnregisteredFlow(bytes32 unregisteredHash);
 
-
 /// @title IFlowV4
 /// @notice Interface for a flow contract that does NOT require native minting
 /// or burning of itself as a token. This is the base case that all other flow

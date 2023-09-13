@@ -7,8 +7,16 @@ import {IInterpreterCallerV2} from "rain.interpreter/src/interface/IInterpreterC
 import {LibEncodedDispatch} from "rain.interpreter/src/lib/caller/LibEncodedDispatch.sol";
 import {LibContext} from "rain.interpreter/src/lib/caller/LibContext.sol";
 import {UnregisteredFlow} from "../interface/unstable/IFlowV4.sol";
-import {DeployerDiscoverableMetaV2, DeployerDiscoverableMetaV2ConstructionConfig} from "rain.interpreter/src/abstract/DeployerDiscoverableMetaV2.sol";
-import {LibEvaluable, Evaluable, EvaluableConfigV2, DEFAULT_STATE_NAMESPACE} from "rain.interpreter/src/lib/caller/LibEvaluable.sol";
+import {
+    DeployerDiscoverableMetaV2,
+    DeployerDiscoverableMetaV2ConstructionConfig
+} from "rain.interpreter/src/abstract/DeployerDiscoverableMetaV2.sol";
+import {
+    LibEvaluable,
+    Evaluable,
+    EvaluableConfigV2,
+    DEFAULT_STATE_NAMESPACE
+} from "rain.interpreter/src/lib/caller/LibEvaluable.sol";
 import {SourceIndex, IInterpreterV1} from "rain.interpreter/src/interface/IInterpreterV1.sol";
 import {IInterpreterStoreV1} from "rain.interpreter/src/interface/IInterpreterStoreV1.sol";
 
@@ -16,8 +24,10 @@ import {MulticallUpgradeable as Multicall} from
     "openzeppelin-contracts-upgradeable/contracts/utils/MulticallUpgradeable.sol";
 import {ERC721HolderUpgradeable as ERC721Holder} from
     "openzeppelin-contracts-upgradeable/contracts/token/ERC721/utils/ERC721HolderUpgradeable.sol";
-import {ERC1155HolderUpgradeable as ERC1155Holder} from
-    "openzeppelin-contracts-upgradeable/contracts/token/ERC1155/utils/ERC1155HolderUpgradeable.sol";
+import {
+    ERC1155HolderUpgradeable as ERC1155Holder,
+    ERC1155ReceiverUpgradeable as ERC1155Receiver
+} from "openzeppelin-contracts-upgradeable/contracts/token/ERC1155/utils/ERC1155HolderUpgradeable.sol";
 import {ReentrancyGuardUpgradeable as ReentrancyGuard} from
     "openzeppelin-contracts-upgradeable/contracts/security/ReentrancyGuardUpgradeable.sol";
 

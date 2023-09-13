@@ -2,7 +2,12 @@
 pragma solidity =0.8.19;
 
 import {ICloneableV2, ICLONEABLE_V2_SUCCESS} from "rain.factory/src/interface/ICloneableV2.sol";
-import {FlowCommon, DeployerDiscoverableMetaV2ConstructionConfig, LibContext, MIN_FLOW_SENTINELS} from "../../abstract/FlowCommon.sol";
+import {
+    FlowCommon,
+    DeployerDiscoverableMetaV2ConstructionConfig,
+    LibContext,
+    MIN_FLOW_SENTINELS
+} from "../../abstract/FlowCommon.sol";
 import {IFlowV4, Evaluable, FlowTransferV1, SignedContextV1, EvaluableConfigV2, LibFlow} from "../../lib/LibFlow.sol";
 import {LibUint256Matrix} from "rain.solmem/lib/LibUint256Matrix.sol";
 import {Pointer} from "rain.solmem/lib/LibPointer.sol";
@@ -42,11 +47,12 @@ contract Flow is ICloneableV2, IFlowV4, FlowCommon {
         return flowTransfer;
     }
 
-    function flow(
-        Evaluable memory evaluable,
-        uint256[] memory callerContext,
-        SignedContextV1[] memory signedContexts
-    ) external virtual nonReentrant returns (FlowTransferV1 memory) {
+    function flow(Evaluable memory evaluable, uint256[] memory callerContext, SignedContextV1[] memory signedContexts)
+        external
+        virtual
+        nonReentrant
+        returns (FlowTransferV1 memory)
+    {
         uint256[][] memory context = LibContext.build(callerContext.matrixFrom(), signedContexts);
         emit Context(msg.sender, context);
         (FlowTransferV1 memory flowTransfer, uint256[] memory kvs) = _previewFlow(evaluable, context);
