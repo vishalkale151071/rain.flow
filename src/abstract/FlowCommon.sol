@@ -6,6 +6,7 @@ import {Pointer} from "rain.solmem/lib/LibPointer.sol";
 import {IInterpreterCallerV2} from "rain.interpreter/src/interface/IInterpreterCallerV2.sol";
 import {LibEncodedDispatch} from "rain.interpreter/src/lib/caller/LibEncodedDispatch.sol";
 import {LibContext} from "rain.interpreter/src/lib/caller/LibContext.sol";
+import {UnregisteredFlow} from "../interface/unstable/IFlowV4.sol";
 import "rain.interpreter/src/abstract/DeployerDiscoverableMetaV2.sol";
 import "rain.interpreter/src/lib/caller/LibEvaluable.sol";
 
@@ -15,10 +16,6 @@ import {ERC721HolderUpgradeable as ERC721Holder} from
     "openzeppelin-contracts-upgradeable/contracts/token/ERC721/utils/ERC721HolderUpgradeable.sol";
 import {ERC1155HolderUpgradeable as ERC1155Holder} from
     "openzeppelin-contracts-upgradeable/contracts/token/ERC1155/utils/ERC1155HolderUpgradeable.sol";
-
-/// Thrown when the flow being evaluated is unregistered.
-/// @param unregisteredHash Hash of the unregistered flow.
-error UnregisteredFlow(bytes32 unregisteredHash);
 
 /// Thrown when the min outputs for a flow is fewer than the sentinels.
 /// This is always an implementation bug as the min outputs and sentinel count

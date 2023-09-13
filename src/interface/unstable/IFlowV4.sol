@@ -6,6 +6,10 @@ import "rain.interpreter/src/lib/caller/LibEvaluable.sol";
 
 import {FlowTransferV1, ERC20Transfer, ERC721Transfer, ERC1155Transfer} from "../IFlowV3.sol";
 
+/// Thrown when the flow being evaluated is unregistered.
+/// @param unregisteredHash Hash of the unregistered flow.
+error UnregisteredFlow(bytes32 unregisteredHash);
+
 struct FlowConfigV2 {
     // https://github.com/ethereum/solidity/issues/13597
     EvaluableConfigV2 dummyConfig;
