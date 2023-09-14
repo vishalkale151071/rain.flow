@@ -16,8 +16,6 @@ jobs:
         uses: foundry-rs/foundry-toolchain@v1
         with:
           version: nightly
-      - name: Report public key to make it easy to send funds for deployments
-        run: cast wallet address "${DEPLOYMENT_KEY}"
       # - name: Install rain
       #   run: nix profile install github:rainprotocol/rain.cli
       # - run: rain --version
