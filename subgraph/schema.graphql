@@ -83,6 +83,7 @@ type Flow implements IFlow @entity {
     deployTransaction: Transaction!
     # clone factory that deployed this flow contract
     cloneFactory: CloneFactory!
+    evaluable: Evaluable! @derivedFrom(field: "contract")
 }
 
 type FlowERC20 implements IFlow & ERC20 @entity {
@@ -138,4 +139,17 @@ type FlowERC1155 implements IFlow & ERC1155 @entity {
     deployTransaction: Transaction!
     # clone factory that deployed this flow contract
     cloneFactory: CloneFactory!
+}
+
+type Evaluable @entity {
+    # flow contract address
+    id: ID!
+    # flow contract address
+    contract: IFlow!
+    # interpreter address
+    interpreter: Bytes!
+    # expression address
+    expression: Bytes!
+    # store address
+    store: Bytes!
 }

@@ -1,6 +1,6 @@
 import { dataSource } from "@graphprotocol/graph-ts";
-import { Initialize } from "../generated/templates/Flow/Flow";
-import { Flow } from "../generated/schema";
+import { Initialize, Context, FlowInitialized } from "../generated/templates/Flow/Flow";
+import { Evaluable, Flow } from "../generated/schema";
 import { createTransaction } from "./utils/utils";
 
 export function handleInitialize(event: Initialize): void {
@@ -13,4 +13,17 @@ export function handleInitialize(event: Initialize): void {
   flow.deployer = event.params.sender;
   flow.deployTransaction = createTransaction(event.transaction, event.block).id;
   flow.save();
+}
+
+export function handleContext(event: Context): void {
+  let flow = Flow.load(event.address.toHexString());
+}
+
+export function handleFlowInitialized(event: FlowInitialized): void {
+  let evaluable = new Evaluable(event.address.toHexString());
+  evaluable.interpreter = event.params.evaluable.interpreter;
+  evaluable.expression = event.params.evaluable.expression;
+  evaluable.store = event.params.evaluable.store;
+  evaluable.contract = event.address.toHexString();
+  evaluable.save();
 }
