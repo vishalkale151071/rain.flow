@@ -14,14 +14,15 @@ import {
     FlowERC1155IOV1,
     SignedContextV1,
     FlowERC1155ConfigV2,
-    ERC1155SupplyChange
+    ERC1155SupplyChange,
+    RAIN_FLOW_ERC1155_SENTINEL
 } from "../../interface/unstable/IFlowERC1155V4.sol";
 import {LibBytecode} from "lib/rain.interpreter/src/lib/bytecode/LibBytecode.sol";
 import {IInterpreterV1} from "rain.interpreter/src/interface/IInterpreterV1.sol";
 import {IInterpreterStoreV1} from "rain.interpreter/src/interface/IInterpreterStoreV1.sol";
 import {Evaluable, DEFAULT_STATE_NAMESPACE} from "rain.interpreter/src/lib/caller/LibEvaluable.sol";
 import {Pointer} from "rain.solmem/lib/LibPointer.sol";
-import {SENTINEL_HIGH_BITS, LibFlow} from "../../lib/LibFlow.sol";
+import {LibFlow} from "../../lib/LibFlow.sol";
 import {SourceIndex} from "rain.interpreter/src/interface/IInterpreterV1.sol";
 import {
     MIN_FLOW_SENTINELS,
@@ -30,9 +31,6 @@ import {
     ERC1155Receiver
 } from "../../abstract/FlowCommon.sol";
 import {LibContext} from "rain.interpreter/src/lib/caller/LibContext.sol";
-
-Sentinel constant RAIN_FLOW_ERC1155_SENTINEL =
-    Sentinel.wrap(uint256(keccak256(bytes("RAIN_FLOW_ERC1155_SENTINEL")) | SENTINEL_HIGH_BITS));
 
 bytes32 constant CALLER_META_HASH = bytes32(0x7ea70f837234357ec1bb5b777e04453ebaf3ca778a98805c4bb20a738d559a21);
 
@@ -50,6 +48,12 @@ contract FlowERC1155 is ICloneableV2, IFlowERC1155V4, FlowCommon, ERC1155 {
     Evaluable internal sEvaluable;
 
     constructor(DeployerDiscoverableMetaV2ConstructionConfig memory config) FlowCommon(CALLER_META_HASH, config) {}
+
+    /// Overloaded typed initialize function MUST revert with this error.
+    /// As per `ICloneableV2` interface.
+    function initialize(FlowERC1155ConfigV2 memory) external pure {
+        revert InitializeSignatureFn();
+    }
 
     /// @inheritdoc ICloneableV2
     function initialize(bytes calldata data) external initializer returns (bytes32) {
