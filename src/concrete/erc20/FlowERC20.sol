@@ -15,9 +15,9 @@ import {
 } from "../../interface/unstable/IFlowERC20V4.sol";
 import {LibBytecode} from "lib/rain.interpreter/src/lib/bytecode/LibBytecode.sol";
 import {EncodedDispatch, LibEncodedDispatch} from "rain.interpreter/src/lib/caller/LibEncodedDispatch.sol";
-
+import {RAIN_FLOW_ERC20_SENTINEL} from "../../interface/unstable/IFlowERC20V4.sol";
 import {Sentinel, LibStackSentinel} from "rain.solmem/lib/LibStackSentinel.sol";
-import {SENTINEL_HIGH_BITS, LibFlow} from "../../lib/LibFlow.sol";
+import {LibFlow} from "../../lib/LibFlow.sol";
 import {
     FlowCommon,
     DeployerDiscoverableMetaV2,
@@ -32,22 +32,33 @@ import {LibContext} from "rain.interpreter/src/lib/caller/LibContext.sol";
 
 bytes32 constant CALLER_META_HASH = bytes32(0xff0499e4ee7171a54d176cfe13165a7ea512d146dbd99d42b3d3ec9963025acf);
 
-Sentinel constant RAIN_FLOW_ERC20_SENTINEL =
-    Sentinel.wrap(uint256(keccak256(bytes("RAIN_FLOW_ERC20_SENTINEL")) | SENTINEL_HIGH_BITS));
-
 SourceIndex constant HANDLE_TRANSFER_ENTRYPOINT = SourceIndex.wrap(0);
 uint256 constant HANDLE_TRANSFER_MIN_OUTPUTS = 0;
 uint16 constant HANDLE_TRANSFER_MAX_OUTPUTS = 0;
 
 /// @title FlowERC20
+/// See `IFlowERC20V4` for documentation.
 contract FlowERC20 is ICloneableV2, IFlowERC20V4, FlowCommon, ERC20 {
     using LibStackSentinel for Pointer;
     using LibUint256Matrix for uint256[];
 
+    /// @dev True if we need to eval `handleTransfer` on every transfer. For many
+    /// tokens this will be false, so we don't want to invoke the external
+    /// interpreter call just to cause a noop.
     bool private sEvalHandleTransfer;
+
+    /// @dev The evaluable that will be used to evaluate `handleTransfer` on
+    /// every transfer. This is only set if `sEvalHandleTransfer` is true.
     Evaluable internal sEvaluable;
 
+    /// Forwards the `FlowCommon` constructor arguments to the `FlowCommon`
     constructor(DeployerDiscoverableMetaV2ConstructionConfig memory config) FlowCommon(CALLER_META_HASH, config) {}
+
+    /// Overloaded typed initialize function MUST revert with this error.
+    /// As per `ICloneableV2` interface.
+    function initialize(FlowERC20ConfigV2 memory) external pure {
+        revert InitializeSignatureFn();
+    }
 
     /// @inheritdoc ICloneableV2
     function initialize(bytes calldata data) external initializer returns (bytes32) {

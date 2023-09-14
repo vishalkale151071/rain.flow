@@ -18,7 +18,7 @@ import {
 } from "../../interface/unstable/IFlowERC721V4.sol";
 import {LibBytecode} from "lib/rain.interpreter/src/lib/bytecode/LibBytecode.sol";
 import {SourceIndex} from "rain.interpreter/src/interface/IInterpreterV1.sol";
-import {LibFlow, SENTINEL_HIGH_BITS} from "../../lib/LibFlow.sol";
+import {LibFlow} from "../../lib/LibFlow.sol";
 import {
     FlowCommon,
     DeployerDiscoverableMetaV2ConstructionConfig,
@@ -30,12 +30,10 @@ import {Evaluable, DEFAULT_STATE_NAMESPACE} from "rain.interpreter/src/lib/calle
 import {IInterpreterV1} from "rain.interpreter/src/interface/IInterpreterV1.sol";
 import {IInterpreterStoreV1} from "rain.interpreter/src/interface/IInterpreterStoreV1.sol";
 import {Pointer} from "rain.solmem/lib/LibPointer.sol";
+import {RAIN_FLOW_ERC721_SENTINEL} from "../../interface/unstable/IFlowERC721V4.sol";
 
 /// Thrown when burner of tokens is not the owner of tokens.
 error BurnerNotOwner();
-
-Sentinel constant RAIN_FLOW_ERC721_SENTINEL =
-    Sentinel.wrap(uint256(keccak256(bytes("RAIN_FLOW_ERC721_SENTINEL")) | SENTINEL_HIGH_BITS));
 
 bytes32 constant CALLER_META_HASH = bytes32(0x7f7944a4b89741668c06a27ffde94e19be970cd0506786de91aee01c2893d4ef);
 
@@ -57,6 +55,12 @@ contract FlowERC721 is ICloneableV2, IFlowERC721V4, FlowCommon, ERC721 {
     string private sBaseURI;
 
     constructor(DeployerDiscoverableMetaV2ConstructionConfig memory config) FlowCommon(CALLER_META_HASH, config) {}
+
+    /// Overloaded typed initialize function MUST revert with this error.
+    /// As per `ICloneableV2` interface.
+    function initialize(FlowERC721ConfigV2 memory) external pure {
+        revert InitializeSignatureFn();
+    }
 
     /// @inheritdoc ICloneableV2
     function initialize(bytes calldata data) external initializer returns (bytes32) {

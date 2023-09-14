@@ -8,6 +8,9 @@ import {FlowERC721IOV1, ERC721SupplyChange} from "../IFlowERC721V3.sol";
 
 import "./IFlowV4.sol";
 
+Sentinel constant RAIN_FLOW_ERC721_SENTINEL =
+    Sentinel.wrap(uint256(keccak256(bytes("RAIN_FLOW_ERC721_SENTINEL")) | SENTINEL_HIGH_BITS));
+
 /// Constructor config.
 /// @param name As per Open Zeppelin `ERC721Upgradeable`.
 /// @param symbol As per Open Zeppelin `ERC721Upgradeable`.
