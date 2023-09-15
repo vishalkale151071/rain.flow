@@ -1,0 +1,2222 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title></title>
+        <meta name="robots" content="noindex" />
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="book.css">
+
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = null;
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item "><a href="index.html">Home</a></li><li class="chapter-item affix "><li class="part-title">src</li><li class="chapter-item "><a href="src/abstract/index.html">❱ abstract</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="src/abstract/FlowCommon.sol/error.BadMinStackLength.html">BadMinStackLength</a></li><li class="chapter-item "><a href="src/abstract/FlowCommon.sol/abstract.FlowCommon.html">FlowCommon</a></li><li class="chapter-item "><a href="src/abstract/FlowCommon.sol/constants.FlowCommon.html">FlowCommon constants</a></li></ol></li><li class="chapter-item "><a href="src/concrete/index.html">❱ concrete</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="src/concrete/basic/index.html">❱ basic</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="src/concrete/basic/Flow.sol/contract.Flow.html">Flow</a></li><li class="chapter-item "><a href="src/concrete/basic/Flow.sol/constants.Flow.html">Flow constants</a></li></ol></li><li class="chapter-item "><a href="src/concrete/erc1155/index.html">❱ erc1155</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="src/concrete/erc1155/FlowERC1155.sol/contract.FlowERC1155.html">FlowERC1155</a></li><li class="chapter-item "><a href="src/concrete/erc1155/FlowERC1155.sol/constants.FlowERC1155.html">FlowERC1155 constants</a></li></ol></li><li class="chapter-item "><a href="src/concrete/erc20/index.html">❱ erc20</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="src/concrete/erc20/FlowERC20.sol/contract.FlowERC20.html">FlowERC20</a></li><li class="chapter-item "><a href="src/concrete/erc20/FlowERC20.sol/constants.FlowERC20.html">FlowERC20 constants</a></li></ol></li><li class="chapter-item "><a href="src/concrete/erc721/index.html">❱ erc721</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="src/concrete/erc721/FlowERC721.sol/contract.FlowERC721.html">FlowERC721</a></li><li class="chapter-item "><a href="src/concrete/erc721/FlowERC721.sol/constants.FlowERC721.html">FlowERC721 constants</a></li></ol></li></ol></li><li class="chapter-item "><a href="src/interface/index.html">❱ interface</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="src/interface/deprecated/index.html">❱ deprecated</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="src/interface/deprecated/v1/index.html">❱ v1</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="src/interface/deprecated/v1/IFlowERC1155V1.sol/struct.FlowERC1155Config.html">FlowERC1155Config</a></li><li class="chapter-item "><a href="src/interface/deprecated/v1/IFlowERC1155V1.sol/struct.ERC1155SupplyChange.html">ERC1155SupplyChange</a></li><li class="chapter-item "><a href="src/interface/deprecated/v1/IFlowERC1155V1.sol/struct.FlowERC1155IO.html">FlowERC1155IO</a></li><li class="chapter-item "><a href="src/interface/deprecated/v1/IFlowERC1155V1.sol/interface.IFlowERC1155V1.html">IFlowERC1155V1</a></li><li class="chapter-item "><a href="src/interface/deprecated/v1/IFlowERC20V1.sol/struct.ERC20SupplyChange.html">ERC20SupplyChange</a></li><li class="chapter-item "><a href="src/interface/deprecated/v1/IFlowERC20V1.sol/struct.FlowERC20IO.html">FlowERC20IO</a></li><li class="chapter-item "><a href="src/interface/deprecated/v1/IFlowERC20V1.sol/struct.FlowERC20Config.html">FlowERC20Config</a></li><li class="chapter-item "><a href="src/interface/deprecated/v1/IFlowERC20V1.sol/interface.IFlowERC20V1.html">IFlowERC20V1</a></li><li class="chapter-item "><a href="src/interface/deprecated/v1/IFlowERC721V1.sol/struct.FlowERC721Config.html">FlowERC721Config</a></li><li class="chapter-item "><a href="src/interface/deprecated/v1/IFlowERC721V1.sol/struct.ERC721SupplyChange.html">ERC721SupplyChange</a></li><li class="chapter-item "><a href="src/interface/deprecated/v1/IFlowERC721V1.sol/struct.FlowERC721IO.html">FlowERC721IO</a></li><li class="chapter-item "><a href="src/interface/deprecated/v1/IFlowERC721V1.sol/interface.IFlowERC721V1.html">IFlowERC721V1</a></li><li class="chapter-item "><a href="src/interface/deprecated/v1/IFlowV1.sol/struct.FlowConfig.html">FlowConfig</a></li><li class="chapter-item "><a href="src/interface/deprecated/v1/IFlowV1.sol/struct.NativeTransfer.html">NativeTransfer</a></li><li class="chapter-item "><a href="src/interface/deprecated/v1/IFlowV1.sol/struct.ERC20Transfer.html">ERC20Transfer</a></li><li class="chapter-item "><a href="src/interface/deprecated/v1/IFlowV1.sol/struct.ERC721Transfer.html">ERC721Transfer</a></li><li class="chapter-item "><a href="src/interface/deprecated/v1/IFlowV1.sol/struct.ERC1155Transfer.html">ERC1155Transfer</a></li><li class="chapter-item "><a href="src/interface/deprecated/v1/IFlowV1.sol/struct.FlowTransfer.html">FlowTransfer</a></li><li class="chapter-item "><a href="src/interface/deprecated/v1/IFlowV1.sol/interface.IFlowV1.html">IFlowV1</a></li></ol></li><li class="chapter-item "><a href="src/interface/deprecated/v2/index.html">❱ v2</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="src/interface/deprecated/v2/IFlowERC1155V2.sol/struct.FlowERC1155Config.html">FlowERC1155Config</a></li><li class="chapter-item "><a href="src/interface/deprecated/v2/IFlowERC1155V2.sol/struct.ERC1155SupplyChange.html">ERC1155SupplyChange</a></li><li class="chapter-item "><a href="src/interface/deprecated/v2/IFlowERC1155V2.sol/struct.FlowERC1155IO.html">FlowERC1155IO</a></li><li class="chapter-item "><a href="src/interface/deprecated/v2/IFlowERC1155V2.sol/interface.IFlowERC1155V2.html">IFlowERC1155V2</a></li><li class="chapter-item "><a href="src/interface/deprecated/v2/IFlowERC20V2.sol/struct.ERC20SupplyChange.html">ERC20SupplyChange</a></li><li class="chapter-item "><a href="src/interface/deprecated/v2/IFlowERC20V2.sol/struct.FlowERC20IO.html">FlowERC20IO</a></li><li class="chapter-item "><a href="src/interface/deprecated/v2/IFlowERC20V2.sol/struct.FlowERC20Config.html">FlowERC20Config</a></li><li class="chapter-item "><a href="src/interface/deprecated/v2/IFlowERC20V2.sol/interface.IFlowERC20V2.html">IFlowERC20V2</a></li><li class="chapter-item "><a href="src/interface/deprecated/v2/IFlowERC721V2.sol/struct.FlowERC721Config.html">FlowERC721Config</a></li><li class="chapter-item "><a href="src/interface/deprecated/v2/IFlowERC721V2.sol/struct.ERC721SupplyChange.html">ERC721SupplyChange</a></li><li class="chapter-item "><a href="src/interface/deprecated/v2/IFlowERC721V2.sol/struct.FlowERC721IO.html">FlowERC721IO</a></li><li class="chapter-item "><a href="src/interface/deprecated/v2/IFlowERC721V2.sol/interface.IFlowERC721V2.html">IFlowERC721V2</a></li><li class="chapter-item "><a href="src/interface/deprecated/v2/IFlowV2.sol/struct.FlowConfig.html">FlowConfig</a></li><li class="chapter-item "><a href="src/interface/deprecated/v2/IFlowV2.sol/struct.NativeTransfer.html">NativeTransfer</a></li><li class="chapter-item "><a href="src/interface/deprecated/v2/IFlowV2.sol/struct.ERC20Transfer.html">ERC20Transfer</a></li><li class="chapter-item "><a href="src/interface/deprecated/v2/IFlowV2.sol/struct.ERC721Transfer.html">ERC721Transfer</a></li><li class="chapter-item "><a href="src/interface/deprecated/v2/IFlowV2.sol/struct.ERC1155Transfer.html">ERC1155Transfer</a></li><li class="chapter-item "><a href="src/interface/deprecated/v2/IFlowV2.sol/struct.FlowTransfer.html">FlowTransfer</a></li><li class="chapter-item "><a href="src/interface/deprecated/v2/IFlowV2.sol/interface.IFlowV2.html">IFlowV2</a></li></ol></li></ol></li><li class="chapter-item "><a href="src/interface/unstable/index.html">❱ unstable</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="src/interface/unstable/IFlowERC1155V4.sol/struct.FlowERC1155ConfigV2.html">FlowERC1155ConfigV2</a></li><li class="chapter-item "><a href="src/interface/unstable/IFlowERC1155V4.sol/interface.IFlowERC1155V4.html">IFlowERC1155V4</a></li><li class="chapter-item "><a href="src/interface/unstable/IFlowERC20V4.sol/struct.FlowERC20ConfigV2.html">FlowERC20ConfigV2</a></li><li class="chapter-item "><a href="src/interface/unstable/IFlowERC20V4.sol/interface.IFlowERC20V4.html">IFlowERC20V4</a></li><li class="chapter-item "><a href="src/interface/unstable/IFlowERC721V4.sol/error.BurnerNotOwner.html">BurnerNotOwner</a></li><li class="chapter-item "><a href="src/interface/unstable/IFlowERC721V4.sol/struct.FlowERC721ConfigV2.html">FlowERC721ConfigV2</a></li><li class="chapter-item "><a href="src/interface/unstable/IFlowERC721V4.sol/interface.IFlowERC721V4.html">IFlowERC721V4</a></li><li class="chapter-item "><a href="src/interface/unstable/IFlowV4.sol/interface.IFlowV4.html">IFlowV4</a></li></ol></li><li class="chapter-item "><a href="src/interface/IFlowERC1155V3.sol/struct.FlowERC1155Config.html">FlowERC1155Config</a></li><li class="chapter-item "><a href="src/interface/IFlowERC1155V3.sol/struct.ERC1155SupplyChange.html">ERC1155SupplyChange</a></li><li class="chapter-item "><a href="src/interface/IFlowERC1155V3.sol/struct.FlowERC1155IOV1.html">FlowERC1155IOV1</a></li><li class="chapter-item "><a href="src/interface/IFlowERC1155V3.sol/interface.IFlowERC1155V3.html">IFlowERC1155V3</a></li><li class="chapter-item "><a href="src/interface/IFlowERC1155V3.sol/constants.IFlowERC1155V3.html">IFlowERC1155V3 constants</a></li><li class="chapter-item "><a href="src/interface/IFlowERC20V3.sol/struct.ERC20SupplyChange.html">ERC20SupplyChange</a></li><li class="chapter-item "><a href="src/interface/IFlowERC20V3.sol/struct.FlowERC20IOV1.html">FlowERC20IOV1</a></li><li class="chapter-item "><a href="src/interface/IFlowERC20V3.sol/struct.FlowERC20Config.html">FlowERC20Config</a></li><li class="chapter-item "><a href="src/interface/IFlowERC20V3.sol/interface.IFlowERC20V3.html">IFlowERC20V3</a></li><li class="chapter-item "><a href="src/interface/IFlowERC20V3.sol/constants.IFlowERC20V3.html">IFlowERC20V3 constants</a></li><li class="chapter-item "><a href="src/interface/IFlowERC721V3.sol/struct.FlowERC721Config.html">FlowERC721Config</a></li><li class="chapter-item "><a href="src/interface/IFlowERC721V3.sol/struct.ERC721SupplyChange.html">ERC721SupplyChange</a></li><li class="chapter-item "><a href="src/interface/IFlowERC721V3.sol/struct.FlowERC721IOV1.html">FlowERC721IOV1</a></li><li class="chapter-item "><a href="src/interface/IFlowERC721V3.sol/interface.IFlowERC721V3.html">IFlowERC721V3</a></li><li class="chapter-item "><a href="src/interface/IFlowERC721V3.sol/constants.IFlowERC721V3.html">IFlowERC721V3 constants</a></li><li class="chapter-item "><a href="src/interface/IFlowV3.sol/error.UnregisteredFlow.html">UnregisteredFlow</a></li><li class="chapter-item "><a href="src/interface/IFlowV3.sol/error.UnsupportedNativeFlow.html">UnsupportedNativeFlow</a></li><li class="chapter-item "><a href="src/interface/IFlowV3.sol/error.UnsupportedERC20Flow.html">UnsupportedERC20Flow</a></li><li class="chapter-item "><a href="src/interface/IFlowV3.sol/error.UnsupportedERC721Flow.html">UnsupportedERC721Flow</a></li><li class="chapter-item "><a href="src/interface/IFlowV3.sol/error.UnsupportedERC1155Flow.html">UnsupportedERC1155Flow</a></li><li class="chapter-item "><a href="src/interface/IFlowV3.sol/struct.FlowConfig.html">FlowConfig</a></li><li class="chapter-item "><a href="src/interface/IFlowV3.sol/struct.ERC20Transfer.html">ERC20Transfer</a></li><li class="chapter-item "><a href="src/interface/IFlowV3.sol/struct.ERC721Transfer.html">ERC721Transfer</a></li><li class="chapter-item "><a href="src/interface/IFlowV3.sol/struct.ERC1155Transfer.html">ERC1155Transfer</a></li><li class="chapter-item "><a href="src/interface/IFlowV3.sol/struct.FlowTransferV1.html">FlowTransferV1</a></li><li class="chapter-item "><a href="src/interface/IFlowV3.sol/interface.IFlowV3.html">IFlowV3</a></li><li class="chapter-item "><a href="src/interface/IFlowV3.sol/constants.IFlowV3.html">IFlowV3 constants</a></li></ol></li><li class="chapter-item "><a href="src/lib/index.html">❱ lib</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="src/lib/LibFlow.sol/library.LibFlow.html">LibFlow</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title"></h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/rainprotocol/rain.flow" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="rainflow"><a class="header" href="#rainflow">rain.flow</a></h1>
+<p>Docs at https://rainprotocol.github.io/rain.flow</p>
+<h1 id="deprecated-versions"><a class="header" href="#deprecated-versions">Deprecated versions</a></h1>
+<h2 id="v2"><a class="header" href="#v2">V2</a></h2>
+<p>V2 was deprecated to remove native flows entirely from the V3+ interface.</p>
+<p>This is because flow implementations are likely to want to implement <code>Multicall</code>
+like functionality, such as that provided by Open Zeppelin.</p>
+<p><code>Multicall</code> based on delegate call preserves the <code>msg.sender</code> which is great for
+allowing EOA wallets like Metamask to flow under their own identity, but is a
+critical security issue when reading <code>msg.value</code> (e.g. to allow native flows).</p>
+<p>https://samczsun.com/two-rights-might-make-a-wrong/</p>
+<h2 id="v1"><a class="header" href="#v1">V1</a></h2>
+<p>V1 was deprecated because the <code>SignedContext</code> struct that it relies on was
+deprecated upstream. <code>SignedContext</code> was replaced with <code>SignedContextV1</code> which
+was a minor change, reordering fields only for more efficient processing.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="contents"><a class="header" href="#contents">Contents</a></h1>
+<ul>
+<li><a href="src/abstract/FlowCommon.sol/error.BadMinStackLength.html">BadMinStackLength</a></li>
+<li><a href="src/abstract/FlowCommon.sol/abstract.FlowCommon.html">FlowCommon</a></li>
+<li><a href="src/abstract/FlowCommon.sol/constants.FlowCommon.html">FlowCommon constants</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="badminstacklength"><a class="header" href="#badminstacklength">BadMinStackLength</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/abstract/FlowCommon.sol">Git Source</a></p>
+<p>Thrown when the min outputs for a flow is fewer than the sentinels.
+This is always an implementation bug as the min outputs and sentinel count
+should both be compile time constants.</p>
+<pre><code class="language-solidity">error BadMinStackLength(uint256 flowMinOutputs);
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="flowcommon"><a class="header" href="#flowcommon">FlowCommon</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/abstract/FlowCommon.sol">Git Source</a></p>
+<p><strong>Inherits:</strong>
+ERC721Holder, ERC1155Holder, Multicall, ReentrancyGuard, IInterpreterCallerV2, DeployerDiscoverableMetaV2</p>
+<p>Common functionality for flows. Largely handles the evaluable
+registration and dispatch. Also implementes the necessary interfaces for
+a smart contract to receive ERC721 and ERC1155 tokens.
+Flow contracts are expected to be deployed via. a proxy/factory as clones
+of an implementation contract. This makes flows cheap to deploy and every
+flow contract can be initialized with a different set of flows. This gives
+strong guarantees that the flow contract is only capable of evaluating
+registered flows, and that individual flow contracts cannot collide state
+with each other, given a correctly implemented interpreter store. Combining
+proxies with rainlang gives us a very powerful and flexible system for
+composing flows without significant gas overhead. Typically a flow contract
+deployment will cost well under 1M gas, which is very cheap for bespoke
+logic, without significant runtime overheads. This allows for new UX patterns
+where users can cheaply create many different tools such as NFT mints,
+auctions, escrows, etc. and aim to horizontally scale rather than design
+monolithic protocols.
+This does NOT implement the preview and flow logic directly because each
+flow implementation has different requirements for the mint and burn logic
+of the flow tokens. In the future, this may be refactored so that a single
+flow contract can handle all flows.
+<code>FlowCommon</code> is <code>Multicall</code> so it is NOT compatible with receiving ETH. This
+is because <code>Multicall</code> uses <code>delegatecall</code> in a loop which reuses <code>msg.value</code>
+for each loop iteration, effectively &quot;double spending&quot; the ETH it receives.
+This is a known issue with <code>Multicall</code> so in the future, we may refactor
+<code>FlowCommon</code> to not use <code>Multicall</code> and instead implement flow batching
+directly in the flow contracts.</p>
+<h2 id="state-variables"><a class="header" href="#state-variables">State Variables</a></h2>
+<h3 id="registeredflows"><a class="header" href="#registeredflows">registeredFlows</a></h3>
+<p><em>This mapping tracks all flows that are registered at initialization.
+This is used to ensure that only registered flows are evaluated.
+Inheriting contracts MUST check this mapping before evaluating a flow,
+else anons can deploy their own evaluable and drain the contract.
+<code>isRegistered</code> will be set to <code>FLOW_IS_REGISTERED</code> for each registered
+flow.</em></p>
+<pre><code class="language-solidity">mapping(bytes32 evaluableHash =&gt; uint256 isRegistered) internal registeredFlows;
+</code></pre>
+<h2 id="functions"><a class="header" href="#functions">Functions</a></h2>
+<h3 id="constructor"><a class="header" href="#constructor">constructor</a></h3>
+<p>Forwards config to <code>DeployerDiscoverableMetaV2</code> and disables
+initializers. The initializers are disabled because inheriting contracts
+are expected to implement some kind of initialization logic that is
+compatible with cloning via. proxy/factory. Disabling initializers
+in the implementation contract forces that the only way to initialize
+the contract is via. a proxy, which should also strongly encourage
+patterns that <em>atomically</em> clone and initialize via. some factory.</p>
+<pre><code class="language-solidity">constructor(bytes32 metaHash, DeployerDiscoverableMetaV2ConstructionConfig memory config)
+    DeployerDiscoverableMetaV2(metaHash, config);
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>metaHash</code></td><td><code>bytes32</code></td><td>As per <code>DeployerDiscoverableMetaV2</code>.</td></tr>
+<tr><td><code>config</code></td><td><code>DeployerDiscoverableMetaV2ConstructionConfig</code></td><td>As per <code>DeployerDiscoverableMetaV2</code>.</td></tr>
+</tbody></table>
+</div>
+<h3 id="flowcommoninit"><a class="header" href="#flowcommoninit">flowCommonInit</a></h3>
+<p>Common initialization logic for inheriting contracts. This MUST be
+called by inheriting contracts in their initialization logic (and only).</p>
+<pre><code class="language-solidity">function flowCommonInit(EvaluableConfigV2[] memory evaluableConfigs, uint256 flowMinOutputs)
+    internal
+    onlyInitializing;
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>evaluableConfigs</code></td><td><code>EvaluableConfigV2[]</code></td><td>The evaluable configs to register at initialization. Each of these represents a flow that defines valid token movements at runtime for the inheriting contract.</td></tr>
+<tr><td><code>flowMinOutputs</code></td><td><code>uint256</code></td><td>The minimum number of outputs for each flow. All flows share the same minimum number of outputs for simplicity.</td></tr>
+</tbody></table>
+</div>
+<h3 id="_flowstack"><a class="header" href="#_flowstack">_flowStack</a></h3>
+<p>Standard evaluation logic for flows. This includes critical guards to
+ensure that only registered flows are evaluated. This is the only
+function that inheriting contracts should call to evaluate flows.
+The start and end pointers to the stack are returned so that inheriting
+contracts can easily scan the stack for sentinels, which is the expected
+pattern to determine what token moments are required.</p>
+<pre><code class="language-solidity">function _flowStack(Evaluable memory evaluable, uint256[][] memory context)
+    internal
+    view
+    returns (Pointer, Pointer, uint256[] memory);
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>evaluable</code></td><td><code>Evaluable</code></td><td>The evaluable to evaluate.</td></tr>
+<tr><td><code>context</code></td><td><code>uint256[][]</code></td><td>The context to evaluate the evaluable with. The inheriting contract is expected to provide the correct context for the flow, including checking signatures etc.</td></tr>
+</tbody></table>
+</div>
+<h3 id="_flowstack-1"><a class="header" href="#_flowstack-1">_flowStack</a></h3>
+<p>TODO merge both flowStack functions into one.</p>
+<pre><code class="language-solidity">function _flowStack(Evaluable memory evaluable, uint256[] memory callerContext, SignedContextV1[] memory signedContexts)
+    internal
+    returns (Pointer, Pointer, uint256[] memory);
+</code></pre>
+<h2 id="events"><a class="header" href="#events">Events</a></h2>
+<h3 id="flowinitialized"><a class="header" href="#flowinitialized">FlowInitialized</a></h3>
+<p>This event is emitted when a flow is registered at initialization.</p>
+<pre><code class="language-solidity">event FlowInitialized(address sender, Evaluable evaluable);
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="constants"><a class="header" href="#constants">Constants</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/abstract/FlowCommon.sol">Git Source</a></p>
+<h3 id="flow_entrypoint"><a class="header" href="#flow_entrypoint">FLOW_ENTRYPOINT</a></h3>
+<p><em>The entrypoint for a flow is always <code>0</code> because each flow has its own
+evaluable with its own entrypoint. Running multiple flows involves evaluating
+several expressions in sequence.</em></p>
+<pre><code class="language-solidity">SourceIndex constant FLOW_ENTRYPOINT = SourceIndex.wrap(0);
+</code></pre>
+<h3 id="flow_max_outputs"><a class="header" href="#flow_max_outputs">FLOW_MAX_OUTPUTS</a></h3>
+<p><em>There is no maximum number of outputs for a flow. Pragmatically gas will
+limit the number of outputs well before this limit is reached.</em></p>
+<pre><code class="language-solidity">uint16 constant FLOW_MAX_OUTPUTS = type(uint16).max;
+</code></pre>
+<h3 id="flow_is_registered"><a class="header" href="#flow_is_registered">FLOW_IS_REGISTERED</a></h3>
+<p><em>Any non-zero value indicates that the flow is registered.</em></p>
+<pre><code class="language-solidity">uint256 constant FLOW_IS_REGISTERED = 1;
+</code></pre>
+<h3 id="flow_is_not_registered"><a class="header" href="#flow_is_not_registered">FLOW_IS_NOT_REGISTERED</a></h3>
+<p><em>Zero indicates that the flow is not registered.</em></p>
+<pre><code class="language-solidity">uint256 constant FLOW_IS_NOT_REGISTERED = 0;
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="contents-1"><a class="header" href="#contents-1">Contents</a></h1>
+<ul>
+<li><a href="src/concrete//src/concrete/basic">basic</a></li>
+<li><a href="src/concrete//src/concrete/erc1155">erc1155</a></li>
+<li><a href="src/concrete//src/concrete/erc20">erc20</a></li>
+<li><a href="src/concrete//src/concrete/erc721">erc721</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="contents-2"><a class="header" href="#contents-2">Contents</a></h1>
+<ul>
+<li><a href="src/concrete/basic/Flow.sol/contract.Flow.html">Flow</a></li>
+<li><a href="src/concrete/basic/Flow.sol/constants.Flow.html">Flow constants</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="flow"><a class="header" href="#flow">Flow</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/concrete/basic/Flow.sol">Git Source</a></p>
+<p><strong>Inherits:</strong>
+ICloneableV2, <a href="src/concrete/basic/Flow.sol//src/interface/unstable/IFlowV4.sol/interface.IFlowV4.html">IFlowV4</a>, <a href="src/concrete/basic/Flow.sol//src/abstract/FlowCommon.sol/abstract.FlowCommon.html">FlowCommon</a></p>
+<h2 id="functions-1"><a class="header" href="#functions-1">Functions</a></h2>
+<h3 id="constructor-1"><a class="header" href="#constructor-1">constructor</a></h3>
+<p>Forwards to <code>FlowCommon</code> constructor.</p>
+<pre><code class="language-solidity">constructor(DeployerDiscoverableMetaV2ConstructionConfig memory config) FlowCommon(CALLER_META_HASH, config);
+</code></pre>
+<h3 id="initialize"><a class="header" href="#initialize">initialize</a></h3>
+<p>Overloaded typed initialize function MUST revert with this error.
+As per <code>ICloneableV2</code> interface.</p>
+<pre><code class="language-solidity">function initialize(EvaluableConfigV2[] memory) external pure;
+</code></pre>
+<h3 id="initialize-1"><a class="header" href="#initialize-1">initialize</a></h3>
+<pre><code class="language-solidity">function initialize(bytes calldata data) external initializer returns (bytes32);
+</code></pre>
+<h3 id="stacktoflow"><a class="header" href="#stacktoflow">stackToFlow</a></h3>
+<p>Given a stack of values, convert it to a flow transfer. MUST NOT modify
+state but MAY revert if the stack is malformed. The intended workflow is
+that the interpreter contract is called to produce a stack then the stack
+is converted to a flow transfer struct, to allow the caller to preview
+a flow before actually executing it. By accepting a stack as input, the
+caller can preview any possible flow, not just ones that have been
+registered with the flow contract, and can preview flows that may not
+even be possible to execute due to the state of the tokens, or access
+gating that would exclude the caller, etc.</p>
+<pre><code class="language-solidity">function stackToFlow(uint256[] memory stack) external pure virtual override returns (FlowTransferV1 memory);
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>stack</code></td><td><code>uint256[]</code></td><td>The stack of values to convert to a flow transfer.</td></tr>
+</tbody></table>
+</div>
+<p><strong>Returns</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>&lt;none&gt;</code></td><td><code>FlowTransferV1</code></td><td>flowTransfer The resulting flow transfer.</td></tr>
+</tbody></table>
+</div>
+<h3 id="flow-1"><a class="header" href="#flow-1">flow</a></h3>
+<p>Given an evaluable, caller context, and signed contexts, evaluate the
+evaluable and return the resulting flow transfer. MUST process the
+flow transfer atomically, either all of it succeeds or none of it
+succeeds. MUST revert if the evaluable is not registered with the flow
+contract. MUST revert if the evaluable reverts. MUST revert if the
+evaluable returns a stack that is malformed. MUST revert if the evaluable
+returns a stack that contains a token transfer that is not allowed by
+the flow contract (e.g. if a token is being moved from an address that
+is not the caller or the flow contract).</p>
+<pre><code class="language-solidity">function flow(Evaluable memory evaluable, uint256[] memory callerContext, SignedContextV1[] memory signedContexts)
+    external
+    virtual
+    nonReentrant
+    returns (FlowTransferV1 memory);
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>evaluable</code></td><td><code>Evaluable</code></td><td>The evaluable to evaluate.</td></tr>
+<tr><td><code>callerContext</code></td><td><code>uint256[]</code></td><td>The caller context to pass to the evaluable.</td></tr>
+<tr><td><code>signedContexts</code></td><td><code>SignedContextV1[]</code></td><td>The signed contexts to pass to the evaluable.</td></tr>
+</tbody></table>
+</div>
+<p><strong>Returns</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>&lt;none&gt;</code></td><td><code>FlowTransferV1</code></td><td>flowTransfer The resulting flow transfer.</td></tr>
+</tbody></table>
+</div><div style="break-before: page; page-break-before: always;"></div><h1 id="constants-1"><a class="header" href="#constants-1">Constants</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/concrete/basic/Flow.sol">Git Source</a></p>
+<h3 id="caller_meta_hash"><a class="header" href="#caller_meta_hash">CALLER_META_HASH</a></h3>
+<p><em>The hash of the meta data expected to be passed to <code>FlowCommon</code>'s
+constructor.</em></p>
+<pre><code class="language-solidity">bytes32 constant CALLER_META_HASH = bytes32(0x95de68a447a477b8fab10701f1265b3e85a98b24710b3e40e6a96aa6d76263bc);
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="contents-3"><a class="header" href="#contents-3">Contents</a></h1>
+<ul>
+<li><a href="src/concrete/erc1155/FlowERC1155.sol/contract.FlowERC1155.html">FlowERC1155</a></li>
+<li><a href="src/concrete/erc1155/FlowERC1155.sol/constants.FlowERC1155.html">FlowERC1155 constants</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="flowerc1155"><a class="header" href="#flowerc1155">FlowERC1155</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/concrete/erc1155/FlowERC1155.sol">Git Source</a></p>
+<p><strong>Inherits:</strong>
+ICloneableV2, <a href="src/concrete/erc1155/FlowERC1155.sol//src/interface/unstable/IFlowERC1155V4.sol/interface.IFlowERC1155V4.html">IFlowERC1155V4</a>, <a href="src/concrete/erc1155/FlowERC1155.sol//src/abstract/FlowCommon.sol/abstract.FlowCommon.html">FlowCommon</a>, ERC1155</p>
+<h2 id="state-variables-1"><a class="header" href="#state-variables-1">State Variables</a></h2>
+<h3 id="sevalhandletransfer"><a class="header" href="#sevalhandletransfer">sEvalHandleTransfer</a></h3>
+<p>True if the evaluable needs to be called on every transfer.</p>
+<pre><code class="language-solidity">bool private sEvalHandleTransfer;
+</code></pre>
+<h3 id="sevaluable"><a class="header" href="#sevaluable">sEvaluable</a></h3>
+<p>The <code>Evaluable</code> that handles transfers.</p>
+<pre><code class="language-solidity">Evaluable internal sEvaluable;
+</code></pre>
+<h2 id="functions-2"><a class="header" href="#functions-2">Functions</a></h2>
+<h3 id="constructor-2"><a class="header" href="#constructor-2">constructor</a></h3>
+<p>Forwards the <code>FlowCommon</code> constructor.</p>
+<pre><code class="language-solidity">constructor(DeployerDiscoverableMetaV2ConstructionConfig memory config) FlowCommon(CALLER_META_HASH, config);
+</code></pre>
+<h3 id="initialize-2"><a class="header" href="#initialize-2">initialize</a></h3>
+<p>Overloaded typed initialize function MUST revert with this error.
+As per <code>ICloneableV2</code> interface.</p>
+<pre><code class="language-solidity">function initialize(FlowERC1155ConfigV2 memory) external pure;
+</code></pre>
+<h3 id="initialize-3"><a class="header" href="#initialize-3">initialize</a></h3>
+<pre><code class="language-solidity">function initialize(bytes calldata data) external initializer returns (bytes32);
+</code></pre>
+<h3 id="supportsinterface"><a class="header" href="#supportsinterface">supportsInterface</a></h3>
+<p>Needed here to fix Open Zeppelin implementing <code>supportsInterface</code> on
+multiple base contracts.</p>
+<pre><code class="language-solidity">function supportsInterface(bytes4 interfaceId) public view virtual override(ERC1155, ERC1155Receiver) returns (bool);
+</code></pre>
+<h3 id="_aftertokentransfer"><a class="header" href="#_aftertokentransfer">_afterTokenTransfer</a></h3>
+<pre><code class="language-solidity">function _afterTokenTransfer(
+    address operator,
+    address from,
+    address to,
+    uint256[] memory ids,
+    uint256[] memory amounts,
+    bytes memory data
+) internal virtual override;
+</code></pre>
+<h3 id="stacktoflow-1"><a class="header" href="#stacktoflow-1">stackToFlow</a></h3>
+<p>As per <code>IFlowV4</code> but returns a <code>FlowERC1155IOV1</code> instead of a
+<code>FlowTransferV1</code>.</p>
+<pre><code class="language-solidity">function stackToFlow(uint256[] memory stack) external pure override returns (FlowERC1155IOV1 memory flowERC1155IO);
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>stack</code></td><td><code>uint256[]</code></td><td>The stack to convert to a <code>FlowERC1155IOV1</code>.</td></tr>
+</tbody></table>
+</div>
+<p><strong>Returns</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>flowERC1155IO</code></td><td><code>FlowERC1155IOV1</code></td><td>The <code>FlowERC1155IOV1</code> representation of the stack.</td></tr>
+</tbody></table>
+</div>
+<h3 id="flow-2"><a class="header" href="#flow-2">flow</a></h3>
+<p>As per <code>IFlowV4</code> but returns a <code>FlowERC1155IOV1</code> instead of a
+<code>FlowTransferV1</code> and mints/burns itself as an ERC1155 accordingly.</p>
+<pre><code class="language-solidity">function flow(Evaluable memory evaluable, uint256[] memory callerContext, SignedContextV1[] memory signedContexts)
+    external
+    virtual
+    returns (FlowERC1155IOV1 memory);
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>evaluable</code></td><td><code>Evaluable</code></td><td>The <code>Evaluable</code> to use to evaluate the flow.</td></tr>
+<tr><td><code>callerContext</code></td><td><code>uint256[]</code></td><td>The caller context to use to evaluate the flow.</td></tr>
+<tr><td><code>signedContexts</code></td><td><code>SignedContextV1[]</code></td><td>The signed contexts to use to evaluate the flow.</td></tr>
+</tbody></table>
+</div>
+<p><strong>Returns</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>&lt;none&gt;</code></td><td><code>FlowERC1155IOV1</code></td><td>flowERC1155IO The <code>FlowERC1155IOV1</code> representing all token mint/burns and transfers that occurred during the flow.</td></tr>
+</tbody></table>
+</div>
+<h3 id="_stacktoflow"><a class="header" href="#_stacktoflow">_stackToFlow</a></h3>
+<p>Wraps the standard <code>LibFlow.stackToFlow</code> function with the addition of
+consuming the mint/burn sentinels from the stack and returning them in
+the <code>FlowERC1155IOV1</code>.</p>
+<pre><code class="language-solidity">function _stackToFlow(Pointer stackBottom, Pointer stackTop) internal pure returns (FlowERC1155IOV1 memory);
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>stackBottom</code></td><td><code>Pointer</code></td><td>The bottom of the stack.</td></tr>
+<tr><td><code>stackTop</code></td><td><code>Pointer</code></td><td>The top of the stack.</td></tr>
+</tbody></table>
+</div>
+<p><strong>Returns</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>&lt;none&gt;</code></td><td><code>FlowERC1155IOV1</code></td><td>flowERC1155IO The <code>FlowERC1155IOV1</code> representation of the stack.</td></tr>
+</tbody></table>
+</div>
+<h3 id="_flow"><a class="header" href="#_flow">_flow</a></h3>
+<p>Wraps the standard <code>LibFlow.flow</code> function to handle minting and burning
+of the flow contract itself. This involves consuming the mint/burn
+sentinels from the stack and minting/burning the tokens accordingly, then
+calling <code>LibFlow.flow</code> to handle the rest of the flow.</p>
+<pre><code class="language-solidity">function _flow(Evaluable memory evaluable, uint256[] memory callerContext, SignedContextV1[] memory signedContexts)
+    internal
+    virtual
+    nonReentrant
+    returns (FlowERC1155IOV1 memory);
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="constants-2"><a class="header" href="#constants-2">Constants</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/concrete/erc1155/FlowERC1155.sol">Git Source</a></p>
+<h3 id="caller_meta_hash-1"><a class="header" href="#caller_meta_hash-1">CALLER_META_HASH</a></h3>
+<p><em>The hash of the meta data expected by the <code>FlowCommon</code> constructor.</em></p>
+<pre><code class="language-solidity">bytes32 constant CALLER_META_HASH = bytes32(0x7ea70f837234357ec1bb5b777e04453ebaf3ca778a98805c4bb20a738d559a21);
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="contents-4"><a class="header" href="#contents-4">Contents</a></h1>
+<ul>
+<li><a href="src/concrete/erc20/FlowERC20.sol/contract.FlowERC20.html">FlowERC20</a></li>
+<li><a href="src/concrete/erc20/FlowERC20.sol/constants.FlowERC20.html">FlowERC20 constants</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="flowerc20"><a class="header" href="#flowerc20">FlowERC20</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/concrete/erc20/FlowERC20.sol">Git Source</a></p>
+<p><strong>Inherits:</strong>
+ICloneableV2, <a href="src/concrete/erc20/FlowERC20.sol//src/interface/unstable/IFlowERC20V4.sol/interface.IFlowERC20V4.html">IFlowERC20V4</a>, <a href="src/concrete/erc20/FlowERC20.sol//src/abstract/FlowCommon.sol/abstract.FlowCommon.html">FlowCommon</a>, ERC20</p>
+<h2 id="state-variables-2"><a class="header" href="#state-variables-2">State Variables</a></h2>
+<h3 id="sevalhandletransfer-1"><a class="header" href="#sevalhandletransfer-1">sEvalHandleTransfer</a></h3>
+<p><em>True if we need to eval <code>handleTransfer</code> on every transfer. For many
+tokens this will be false, so we don't want to invoke the external
+interpreter call just to cause a noop.</em></p>
+<pre><code class="language-solidity">bool private sEvalHandleTransfer;
+</code></pre>
+<h3 id="sevaluable-1"><a class="header" href="#sevaluable-1">sEvaluable</a></h3>
+<p><em>The evaluable that will be used to evaluate <code>handleTransfer</code> on
+every transfer. This is only set if <code>sEvalHandleTransfer</code> is true.</em></p>
+<pre><code class="language-solidity">Evaluable internal sEvaluable;
+</code></pre>
+<h2 id="functions-3"><a class="header" href="#functions-3">Functions</a></h2>
+<h3 id="constructor-3"><a class="header" href="#constructor-3">constructor</a></h3>
+<p>Forwards the <code>FlowCommon</code> constructor arguments to the <code>FlowCommon</code>.</p>
+<pre><code class="language-solidity">constructor(DeployerDiscoverableMetaV2ConstructionConfig memory config) FlowCommon(CALLER_META_HASH, config);
+</code></pre>
+<h3 id="initialize-4"><a class="header" href="#initialize-4">initialize</a></h3>
+<p>Overloaded typed initialize function MUST revert with this error.
+As per <code>ICloneableV2</code> interface.</p>
+<pre><code class="language-solidity">function initialize(FlowERC20ConfigV2 memory) external pure;
+</code></pre>
+<h3 id="initialize-5"><a class="header" href="#initialize-5">initialize</a></h3>
+<pre><code class="language-solidity">function initialize(bytes calldata data) external initializer returns (bytes32);
+</code></pre>
+<h3 id="stacktoflow-2"><a class="header" href="#stacktoflow-2">stackToFlow</a></h3>
+<p>As per <code>IFlowV4</code> but returns a <code>FlowERC20IOV1</code> instead of a
+<code>FlowTransferV1</code>.</p>
+<pre><code class="language-solidity">function stackToFlow(uint256[] memory stack) external pure virtual override returns (FlowERC20IOV1 memory);
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>stack</code></td><td><code>uint256[]</code></td><td>The stack to convert to a <code>FlowERC20IOV1</code>.</td></tr>
+</tbody></table>
+</div>
+<p><strong>Returns</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>&lt;none&gt;</code></td><td><code>FlowERC20IOV1</code></td><td>flowERC20IO The <code>FlowERC20IOV1</code> representation of the stack.</td></tr>
+</tbody></table>
+</div>
+<h3 id="flow-3"><a class="header" href="#flow-3">flow</a></h3>
+<p>As per <code>IFlowV4</code> but returns a <code>FlowERC20IOV1</code> instead of a
+<code>FlowTransferV1</code> and mints/burns itself as an ERC20 accordingly.</p>
+<pre><code class="language-solidity">function flow(Evaluable memory evaluable, uint256[] memory callerContext, SignedContextV1[] memory signedContexts)
+    external
+    virtual
+    returns (FlowERC20IOV1 memory);
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>evaluable</code></td><td><code>Evaluable</code></td><td>The <code>Evaluable</code> to use to evaluate the flow.</td></tr>
+<tr><td><code>callerContext</code></td><td><code>uint256[]</code></td><td>The caller context to use to evaluate the flow.</td></tr>
+<tr><td><code>signedContexts</code></td><td><code>SignedContextV1[]</code></td><td>The signed contexts to use to evaluate the flow.</td></tr>
+</tbody></table>
+</div>
+<p><strong>Returns</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>&lt;none&gt;</code></td><td><code>FlowERC20IOV1</code></td><td>flowERC20IO The <code>FlowERC20IOV1</code> representing all token mint/burns and transfers that occurred during the flow.</td></tr>
+</tbody></table>
+</div>
+<h3 id="_aftertokentransfer-1"><a class="header" href="#_aftertokentransfer-1">_afterTokenTransfer</a></h3>
+<p>Exposes the Open Zeppelin <code>_afterTokenTransfer</code> hook as an evaluable
+entrypoint so that the deployer of the token can use it to implement
+custom transfer logic. The stack is ignored, so if the expression author
+wants to prevent some kind of transfer, they can just revert within the
+expression evaluation.</p>
+<pre><code class="language-solidity">function _afterTokenTransfer(address from, address to, uint256 amount) internal virtual override;
+</code></pre>
+<h3 id="_stacktoflow-1"><a class="header" href="#_stacktoflow-1">_stackToFlow</a></h3>
+<p>Wraps the standard <code>LibFlow.stackToFlow</code> with the additional logic to
+convert the stack to a <code>FlowERC20IOV1</code> struct. This involves consuming
+the mints and burns from the stack as additional sentinel separated
+tuples. The mints are consumed first, then the burns, then the remaining
+stack is converted to a flow as normal.</p>
+<pre><code class="language-solidity">function _stackToFlow(Pointer stackBottom, Pointer stackTop) internal pure virtual returns (FlowERC20IOV1 memory);
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>stackBottom</code></td><td><code>Pointer</code></td><td>The bottom of the stack.</td></tr>
+<tr><td><code>stackTop</code></td><td><code>Pointer</code></td><td>The top of the stack.</td></tr>
+</tbody></table>
+</div>
+<p><strong>Returns</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>&lt;none&gt;</code></td><td><code>FlowERC20IOV1</code></td><td>flowERC20IO The resulting <code>FlowERC20IOV1</code> struct.</td></tr>
+</tbody></table>
+</div>
+<h3 id="_flow-1"><a class="header" href="#_flow-1">_flow</a></h3>
+<p>Wraps the standard <code>LibFlow.flow</code> with the additional logic to handle
+the mints and burns from the <code>FlowERC20IOV1</code> struct. The mints are
+processed first, then the burns, then the remaining flow is processed
+as normal.</p>
+<pre><code class="language-solidity">function _flow(Evaluable memory evaluable, uint256[] memory callerContext, SignedContextV1[] memory signedContexts)
+    internal
+    virtual
+    nonReentrant
+    returns (FlowERC20IOV1 memory);
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="constants-3"><a class="header" href="#constants-3">Constants</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/concrete/erc20/FlowERC20.sol">Git Source</a></p>
+<h3 id="caller_meta_hash-2"><a class="header" href="#caller_meta_hash-2">CALLER_META_HASH</a></h3>
+<p><em>The hash of the meta data expected to be passed to <code>FlowCommon</code>'s
+constructor.</em></p>
+<pre><code class="language-solidity">bytes32 constant CALLER_META_HASH = bytes32(0xff0499e4ee7171a54d176cfe13165a7ea512d146dbd99d42b3d3ec9963025acf);
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="contents-5"><a class="header" href="#contents-5">Contents</a></h1>
+<ul>
+<li><a href="src/concrete/erc721/FlowERC721.sol/contract.FlowERC721.html">FlowERC721</a></li>
+<li><a href="src/concrete/erc721/FlowERC721.sol/constants.FlowERC721.html">FlowERC721 constants</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="flowerc721"><a class="header" href="#flowerc721">FlowERC721</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/concrete/erc721/FlowERC721.sol">Git Source</a></p>
+<p><strong>Inherits:</strong>
+ICloneableV2, <a href="src/concrete/erc721/FlowERC721.sol//src/interface/unstable/IFlowERC721V4.sol/interface.IFlowERC721V4.html">IFlowERC721V4</a>, <a href="src/concrete/erc721/FlowERC721.sol//src/abstract/FlowCommon.sol/abstract.FlowCommon.html">FlowCommon</a>, ERC721</p>
+<h2 id="state-variables-3"><a class="header" href="#state-variables-3">State Variables</a></h2>
+<h3 id="sevalhandletransfer-2"><a class="header" href="#sevalhandletransfer-2">sEvalHandleTransfer</a></h3>
+<p><em>True if we need to eval <code>handleTransfer</code> on every transfer. For many
+tokens this will be false, so we don't want to invoke the external
+interpreter call just to cause a noop.</em></p>
+<pre><code class="language-solidity">bool private sEvalHandleTransfer;
+</code></pre>
+<h3 id="sevaltokenuri"><a class="header" href="#sevaltokenuri">sEvalTokenURI</a></h3>
+<p><em>True if we need to eval <code>tokenURI</code> to build the token URI. For many
+tokens this will be false, so we don't want to invoke the external
+interpreter call just to cause a noop.</em></p>
+<pre><code class="language-solidity">bool private sEvalTokenURI;
+</code></pre>
+<h3 id="sevaluable-2"><a class="header" href="#sevaluable-2">sEvaluable</a></h3>
+<p><em>The evaluable that contains the entrypoints for <code>handleTransfer</code> and
+<code>tokenURI</code>. This is only set if <code>sEvalHandleTransfer</code> or <code>sEvalTokenURI</code>
+is true.</em></p>
+<pre><code class="language-solidity">Evaluable internal sEvaluable;
+</code></pre>
+<h3 id="sbaseuri"><a class="header" href="#sbaseuri">sBaseURI</a></h3>
+<p><em>The base URI for all token URIs. This is set during initialization
+and cannot be changed. The token URI evaluable can be used for dynamic
+token URIs from the base URI.</em></p>
+<pre><code class="language-solidity">string private sBaseURI;
+</code></pre>
+<h2 id="functions-4"><a class="header" href="#functions-4">Functions</a></h2>
+<h3 id="constructor-4"><a class="header" href="#constructor-4">constructor</a></h3>
+<p>Forwards the <code>FlowCommon</code> constructor arguments to the <code>FlowCommon</code>.</p>
+<pre><code class="language-solidity">constructor(DeployerDiscoverableMetaV2ConstructionConfig memory config) FlowCommon(CALLER_META_HASH, config);
+</code></pre>
+<h3 id="supportsinterface-1"><a class="header" href="#supportsinterface-1">supportsInterface</a></h3>
+<p>Needed here to fix Open Zeppelin implementing <code>supportsInterface</code> on
+multiple base contracts.</p>
+<pre><code class="language-solidity">function supportsInterface(bytes4 interfaceId) public view virtual override(ERC721, ERC1155Receiver) returns (bool);
+</code></pre>
+<h3 id="initialize-6"><a class="header" href="#initialize-6">initialize</a></h3>
+<p>Overloaded typed initialize function MUST revert with this error.
+As per <code>ICloneableV2</code> interface.</p>
+<pre><code class="language-solidity">function initialize(FlowERC721ConfigV2 memory) external pure;
+</code></pre>
+<h3 id="initialize-7"><a class="header" href="#initialize-7">initialize</a></h3>
+<pre><code class="language-solidity">function initialize(bytes calldata data) external initializer returns (bytes32);
+</code></pre>
+<h3 id="_baseuri"><a class="header" href="#_baseuri">_baseURI</a></h3>
+<p>Overrides the Open Zeppelin <code>_baseURI</code> hook to return the base URI set
+during initialization.</p>
+<pre><code class="language-solidity">function _baseURI() internal view virtual override returns (string memory);
+</code></pre>
+<h3 id="tokenuri"><a class="header" href="#tokenuri">tokenURI</a></h3>
+<p>Overrides the Open Zeppelin <code>tokenURI</code> function to return the token URI
+calculated by the token URI evaluable. Currently the token URI evaluable
+can only return a single token ID value, and the token URI is built from
+that according to default Open Zeppelin logic. If the token URI evaluable
+is not set, then the default Open Zeppelin logic is used with the token
+ID passed in.</p>
+<pre><code class="language-solidity">function tokenURI(uint256 tokenId) public view virtual override returns (string memory);
+</code></pre>
+<h3 id="stacktoflow-3"><a class="header" href="#stacktoflow-3">stackToFlow</a></h3>
+<p>As per <code>IFlowV4</code> but returns a <code>FlowERC721IOV1</code> instead of a
+<code>FlowTransferV1</code>.</p>
+<pre><code class="language-solidity">function stackToFlow(uint256[] memory stack) external pure virtual override returns (FlowERC721IOV1 memory);
+</code></pre>
+<h3 id="flow-4"><a class="header" href="#flow-4">flow</a></h3>
+<p>As per <code>IFlowV4</code> but returns a <code>FlowERC721IOV1</code> instead of a
+<code>FlowTransferV1</code> and mints/burns itself as an ERC721 accordingly.</p>
+<pre><code class="language-solidity">function flow(Evaluable memory evaluable, uint256[] memory callerContext, SignedContextV1[] memory signedContexts)
+    external
+    virtual
+    returns (FlowERC721IOV1 memory);
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>evaluable</code></td><td><code>Evaluable</code></td><td>The <code>Evaluable</code> to use to evaluate the flow.</td></tr>
+<tr><td><code>callerContext</code></td><td><code>uint256[]</code></td><td>The caller context to use to evaluate the flow.</td></tr>
+<tr><td><code>signedContexts</code></td><td><code>SignedContextV1[]</code></td><td>The signed contexts to use to evaluate the flow.</td></tr>
+</tbody></table>
+</div>
+<p><strong>Returns</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>&lt;none&gt;</code></td><td><code>FlowERC721IOV1</code></td><td>flowERC721IO The <code>FlowERC721IOV1</code> representing all token mint/burns and transfers that occurred during the flow.</td></tr>
+</tbody></table>
+</div>
+<h3 id="_aftertokentransfer-2"><a class="header" href="#_aftertokentransfer-2">_afterTokenTransfer</a></h3>
+<p>Exposes the Open Zeppelin <code>_afterTokenTransfer</code> hook as an evaluable
+entrypoint so that the deployer of the token can use it to implement
+custom transfer logic. The stack is ignored, so if the expression author
+wants to prevent some kind of transfer, they can just revert within the
+expression evaluation.</p>
+<pre><code class="language-solidity">function _afterTokenTransfer(address from, address to, uint256 tokenId, uint256 batchSize) internal virtual override;
+</code></pre>
+<h3 id="_stacktoflow-2"><a class="header" href="#_stacktoflow-2">_stackToFlow</a></h3>
+<p>Wraps the standard <code>LibFlow.stackToFlow</code> with the additional logic to
+convert the stack to a <code>FlowERC721IOV1</code> struct. This involves consuming
+the mints and burns from the stack as additional sentinel separated
+tuples. The mints are consumed first, then the burns, then the remaining
+stack is converted to a flow as normal.</p>
+<pre><code class="language-solidity">function _stackToFlow(Pointer stackBottom, Pointer stackTop) internal pure returns (FlowERC721IOV1 memory);
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>stackBottom</code></td><td><code>Pointer</code></td><td>The bottom of the stack.</td></tr>
+<tr><td><code>stackTop</code></td><td><code>Pointer</code></td><td>The top of the stack.</td></tr>
+</tbody></table>
+</div>
+<p><strong>Returns</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>&lt;none&gt;</code></td><td><code>FlowERC721IOV1</code></td><td>flowERC721IO The <code>FlowERC721IOV1</code> representation of the stack.</td></tr>
+</tbody></table>
+</div>
+<h3 id="_flow-2"><a class="header" href="#_flow-2">_flow</a></h3>
+<p>Wraps the standard <code>LibFlow.flow</code> with the additional logic to handle
+self minting and burning. This involves consuming the mints and burns
+from the stack as additional sentinel separated tuples. The mints are
+consumed first, then the burns, then the remaining stack is converted to
+a flow as normal.</p>
+<pre><code class="language-solidity">function _flow(Evaluable memory evaluable, uint256[] memory callerContext, SignedContextV1[] memory signedContexts)
+    internal
+    virtual
+    nonReentrant
+    returns (FlowERC721IOV1 memory);
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="constants-4"><a class="header" href="#constants-4">Constants</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/concrete/erc721/FlowERC721.sol">Git Source</a></p>
+<h3 id="caller_meta_hash-3"><a class="header" href="#caller_meta_hash-3">CALLER_META_HASH</a></h3>
+<p><em>The hash of the meta data expected to be passed to <code>FlowCommon</code>'s
+constructor.</em></p>
+<pre><code class="language-solidity">bytes32 constant CALLER_META_HASH = bytes32(0x7f7944a4b89741668c06a27ffde94e19be970cd0506786de91aee01c2893d4ef);
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="contents-6"><a class="header" href="#contents-6">Contents</a></h1>
+<ul>
+<li><a href="src/interface//src/interface/deprecated">deprecated</a></li>
+<li><a href="src/interface//src/interface/unstable">unstable</a></li>
+<li><a href="src/interface/IFlowERC1155V3.sol/struct.FlowERC1155Config.html">FlowERC1155Config</a></li>
+<li><a href="src/interface/IFlowERC1155V3.sol/struct.ERC1155SupplyChange.html">ERC1155SupplyChange</a></li>
+<li><a href="src/interface/IFlowERC1155V3.sol/struct.FlowERC1155IOV1.html">FlowERC1155IOV1</a></li>
+<li><a href="src/interface/IFlowERC1155V3.sol/interface.IFlowERC1155V3.html">IFlowERC1155V3</a></li>
+<li><a href="src/interface/IFlowERC1155V3.sol/constants.IFlowERC1155V3.html">IFlowERC1155V3 constants</a></li>
+<li><a href="src/interface/IFlowERC20V3.sol/struct.ERC20SupplyChange.html">ERC20SupplyChange</a></li>
+<li><a href="src/interface/IFlowERC20V3.sol/struct.FlowERC20IOV1.html">FlowERC20IOV1</a></li>
+<li><a href="src/interface/IFlowERC20V3.sol/struct.FlowERC20Config.html">FlowERC20Config</a></li>
+<li><a href="src/interface/IFlowERC20V3.sol/interface.IFlowERC20V3.html">IFlowERC20V3</a></li>
+<li><a href="src/interface/IFlowERC20V3.sol/constants.IFlowERC20V3.html">IFlowERC20V3 constants</a></li>
+<li><a href="src/interface/IFlowERC721V3.sol/struct.FlowERC721Config.html">FlowERC721Config</a></li>
+<li><a href="src/interface/IFlowERC721V3.sol/struct.ERC721SupplyChange.html">ERC721SupplyChange</a></li>
+<li><a href="src/interface/IFlowERC721V3.sol/struct.FlowERC721IOV1.html">FlowERC721IOV1</a></li>
+<li><a href="src/interface/IFlowERC721V3.sol/interface.IFlowERC721V3.html">IFlowERC721V3</a></li>
+<li><a href="src/interface/IFlowERC721V3.sol/constants.IFlowERC721V3.html">IFlowERC721V3 constants</a></li>
+<li><a href="src/interface/IFlowV3.sol/error.UnregisteredFlow.html">UnregisteredFlow</a></li>
+<li><a href="src/interface/IFlowV3.sol/error.UnsupportedNativeFlow.html">UnsupportedNativeFlow</a></li>
+<li><a href="src/interface/IFlowV3.sol/error.UnsupportedERC20Flow.html">UnsupportedERC20Flow</a></li>
+<li><a href="src/interface/IFlowV3.sol/error.UnsupportedERC721Flow.html">UnsupportedERC721Flow</a></li>
+<li><a href="src/interface/IFlowV3.sol/error.UnsupportedERC1155Flow.html">UnsupportedERC1155Flow</a></li>
+<li><a href="src/interface/IFlowV3.sol/struct.FlowConfig.html">FlowConfig</a></li>
+<li><a href="src/interface/IFlowV3.sol/struct.ERC20Transfer.html">ERC20Transfer</a></li>
+<li><a href="src/interface/IFlowV3.sol/struct.ERC721Transfer.html">ERC721Transfer</a></li>
+<li><a href="src/interface/IFlowV3.sol/struct.ERC1155Transfer.html">ERC1155Transfer</a></li>
+<li><a href="src/interface/IFlowV3.sol/struct.FlowTransferV1.html">FlowTransferV1</a></li>
+<li><a href="src/interface/IFlowV3.sol/interface.IFlowV3.html">IFlowV3</a></li>
+<li><a href="src/interface/IFlowV3.sol/constants.IFlowV3.html">IFlowV3 constants</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="contents-7"><a class="header" href="#contents-7">Contents</a></h1>
+<ul>
+<li><a href="src/interface/deprecated//src/interface/deprecated/v1">v1</a></li>
+<li><a href="src/interface/deprecated//src/interface/deprecated/v2">v2</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="contents-8"><a class="header" href="#contents-8">Contents</a></h1>
+<ul>
+<li><a href="src/interface/deprecated/v1/IFlowERC1155V1.sol/struct.FlowERC1155Config.html">FlowERC1155Config</a></li>
+<li><a href="src/interface/deprecated/v1/IFlowERC1155V1.sol/struct.ERC1155SupplyChange.html">ERC1155SupplyChange</a></li>
+<li><a href="src/interface/deprecated/v1/IFlowERC1155V1.sol/struct.FlowERC1155IO.html">FlowERC1155IO</a></li>
+<li><a href="src/interface/deprecated/v1/IFlowERC1155V1.sol/interface.IFlowERC1155V1.html">IFlowERC1155V1</a></li>
+<li><a href="src/interface/deprecated/v1/IFlowERC20V1.sol/struct.ERC20SupplyChange.html">ERC20SupplyChange</a></li>
+<li><a href="src/interface/deprecated/v1/IFlowERC20V1.sol/struct.FlowERC20IO.html">FlowERC20IO</a></li>
+<li><a href="src/interface/deprecated/v1/IFlowERC20V1.sol/struct.FlowERC20Config.html">FlowERC20Config</a></li>
+<li><a href="src/interface/deprecated/v1/IFlowERC20V1.sol/interface.IFlowERC20V1.html">IFlowERC20V1</a></li>
+<li><a href="src/interface/deprecated/v1/IFlowERC721V1.sol/struct.FlowERC721Config.html">FlowERC721Config</a></li>
+<li><a href="src/interface/deprecated/v1/IFlowERC721V1.sol/struct.ERC721SupplyChange.html">ERC721SupplyChange</a></li>
+<li><a href="src/interface/deprecated/v1/IFlowERC721V1.sol/struct.FlowERC721IO.html">FlowERC721IO</a></li>
+<li><a href="src/interface/deprecated/v1/IFlowERC721V1.sol/interface.IFlowERC721V1.html">IFlowERC721V1</a></li>
+<li><a href="src/interface/deprecated/v1/IFlowV1.sol/struct.FlowConfig.html">FlowConfig</a></li>
+<li><a href="src/interface/deprecated/v1/IFlowV1.sol/struct.NativeTransfer.html">NativeTransfer</a></li>
+<li><a href="src/interface/deprecated/v1/IFlowV1.sol/struct.ERC20Transfer.html">ERC20Transfer</a></li>
+<li><a href="src/interface/deprecated/v1/IFlowV1.sol/struct.ERC721Transfer.html">ERC721Transfer</a></li>
+<li><a href="src/interface/deprecated/v1/IFlowV1.sol/struct.ERC1155Transfer.html">ERC1155Transfer</a></li>
+<li><a href="src/interface/deprecated/v1/IFlowV1.sol/struct.FlowTransfer.html">FlowTransfer</a></li>
+<li><a href="src/interface/deprecated/v1/IFlowV1.sol/interface.IFlowV1.html">IFlowV1</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="flowerc1155config"><a class="header" href="#flowerc1155config">FlowERC1155Config</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/deprecated/v1/IFlowERC1155V1.sol">Git Source</a></p>
+<pre><code class="language-solidity">struct FlowERC1155Config {
+    string uri;
+    EvaluableConfig evaluableConfig;
+    EvaluableConfig[] flowConfig;
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="erc1155supplychange"><a class="header" href="#erc1155supplychange">ERC1155SupplyChange</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/deprecated/v1/IFlowERC1155V1.sol">Git Source</a></p>
+<pre><code class="language-solidity">struct ERC1155SupplyChange {
+    address account;
+    uint256 id;
+    uint256 amount;
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="flowerc1155io"><a class="header" href="#flowerc1155io">FlowERC1155IO</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/deprecated/v1/IFlowERC1155V1.sol">Git Source</a></p>
+<pre><code class="language-solidity">struct FlowERC1155IO {
+    ERC1155SupplyChange[] mints;
+    ERC1155SupplyChange[] burns;
+    FlowTransfer flow;
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="iflowerc1155v1"><a class="header" href="#iflowerc1155v1">IFlowERC1155V1</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/deprecated/v1/IFlowERC1155V1.sol">Git Source</a></p>
+<h2 id="functions-5"><a class="header" href="#functions-5">Functions</a></h2>
+<h3 id="previewflow"><a class="header" href="#previewflow">previewFlow</a></h3>
+<pre><code class="language-solidity">function previewFlow(
+    Evaluable calldata evaluable,
+    uint256[] calldata callerContext,
+    SignedContext[] calldata signedContexts
+) external view returns (FlowERC1155IO calldata);
+</code></pre>
+<h3 id="flow-5"><a class="header" href="#flow-5">flow</a></h3>
+<pre><code class="language-solidity">function flow(Evaluable calldata evaluable, uint256[] calldata callerContext, SignedContext[] calldata signedContexts)
+    external
+    payable
+    returns (FlowERC1155IO calldata);
+</code></pre>
+<h2 id="events-1"><a class="header" href="#events-1">Events</a></h2>
+<h3 id="initialize-8"><a class="header" href="#initialize-8">Initialize</a></h3>
+<pre><code class="language-solidity">event Initialize(address sender, FlowERC1155Config config);
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="erc20supplychange"><a class="header" href="#erc20supplychange">ERC20SupplyChange</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/deprecated/v1/IFlowERC20V1.sol">Git Source</a></p>
+<pre><code class="language-solidity">struct ERC20SupplyChange {
+    address account;
+    uint256 amount;
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="flowerc20io"><a class="header" href="#flowerc20io">FlowERC20IO</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/deprecated/v1/IFlowERC20V1.sol">Git Source</a></p>
+<pre><code class="language-solidity">struct FlowERC20IO {
+    ERC20SupplyChange[] mints;
+    ERC20SupplyChange[] burns;
+    FlowTransfer flow;
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="flowerc20config"><a class="header" href="#flowerc20config">FlowERC20Config</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/deprecated/v1/IFlowERC20V1.sol">Git Source</a></p>
+<p>Constructor config.</p>
+<pre><code class="language-solidity">struct FlowERC20Config {
+    string name;
+    string symbol;
+    EvaluableConfig evaluableConfig;
+    EvaluableConfig[] flowConfig;
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="iflowerc20v1"><a class="header" href="#iflowerc20v1">IFlowERC20V1</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/deprecated/v1/IFlowERC20V1.sol">Git Source</a></p>
+<p>Mints itself according to some predefined schedule. The schedule is
+expressed as an expression and the <code>claim</code> function is world-callable.
+Intended behaviour is to avoid sybils infinitely minting by putting the
+claim functionality behind a <code>TierV2</code> contract. The flow contract
+itself implements <code>ReadOnlyTier</code> and every time a claim is processed it
+logs the block number of the claim against every tier claimed. So the block
+numbers in the tier report for <code>FlowERC20</code> are the last time that tier
+was claimed against this contract. The simplest way to make use of this
+information is to take the max block for the underlying tier and the last
+claim and then diff it against the current block number.
+See <code>test/Claim/FlowERC20.sol.ts</code> for examples, including providing
+staggered rewards where more tokens are minted for higher tier accounts.</p>
+<h2 id="functions-6"><a class="header" href="#functions-6">Functions</a></h2>
+<h3 id="previewflow-1"><a class="header" href="#previewflow-1">previewFlow</a></h3>
+<pre><code class="language-solidity">function previewFlow(
+    Evaluable calldata evaluable,
+    uint256[] calldata callerContext,
+    SignedContext[] calldata signedContexts
+) external view returns (FlowERC20IO calldata);
+</code></pre>
+<h3 id="flow-6"><a class="header" href="#flow-6">flow</a></h3>
+<pre><code class="language-solidity">function flow(Evaluable calldata evaluable, uint256[] calldata callerContext, SignedContext[] calldata signedContexts)
+    external
+    payable
+    returns (FlowERC20IO calldata);
+</code></pre>
+<h2 id="events-2"><a class="header" href="#events-2">Events</a></h2>
+<h3 id="initialize-9"><a class="header" href="#initialize-9">Initialize</a></h3>
+<p>Contract has initialized.</p>
+<pre><code class="language-solidity">event Initialize(address sender, FlowERC20Config config);
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="flowerc721config"><a class="header" href="#flowerc721config">FlowERC721Config</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/deprecated/v1/IFlowERC721V1.sol">Git Source</a></p>
+<p>Constructor config.</p>
+<pre><code class="language-solidity">struct FlowERC721Config {
+    string name;
+    string symbol;
+    string baseURI;
+    EvaluableConfig evaluableConfig;
+    EvaluableConfig[] flowConfig;
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="erc721supplychange"><a class="header" href="#erc721supplychange">ERC721SupplyChange</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/deprecated/v1/IFlowERC721V1.sol">Git Source</a></p>
+<pre><code class="language-solidity">struct ERC721SupplyChange {
+    address account;
+    uint256 id;
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="flowerc721io"><a class="header" href="#flowerc721io">FlowERC721IO</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/deprecated/v1/IFlowERC721V1.sol">Git Source</a></p>
+<pre><code class="language-solidity">struct FlowERC721IO {
+    ERC721SupplyChange[] mints;
+    ERC721SupplyChange[] burns;
+    FlowTransfer flow;
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="iflowerc721v1"><a class="header" href="#iflowerc721v1">IFlowERC721V1</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/deprecated/v1/IFlowERC721V1.sol">Git Source</a></p>
+<h2 id="functions-7"><a class="header" href="#functions-7">Functions</a></h2>
+<h3 id="previewflow-2"><a class="header" href="#previewflow-2">previewFlow</a></h3>
+<pre><code class="language-solidity">function previewFlow(
+    Evaluable calldata evaluable,
+    uint256[] calldata callerContext,
+    SignedContext[] calldata signedContexts
+) external view returns (FlowERC721IO calldata);
+</code></pre>
+<h3 id="flow-7"><a class="header" href="#flow-7">flow</a></h3>
+<pre><code class="language-solidity">function flow(Evaluable calldata evaluable, uint256[] calldata callerContext, SignedContext[] calldata signedContexts)
+    external
+    payable
+    returns (FlowERC721IO calldata);
+</code></pre>
+<h2 id="events-3"><a class="header" href="#events-3">Events</a></h2>
+<h3 id="initialize-10"><a class="header" href="#initialize-10">Initialize</a></h3>
+<p>Contract has initialized.</p>
+<pre><code class="language-solidity">event Initialize(address sender, FlowERC721Config config);
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="flowconfig"><a class="header" href="#flowconfig">FlowConfig</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/deprecated/v1/IFlowV1.sol">Git Source</a></p>
+<pre><code class="language-solidity">struct FlowConfig {
+    EvaluableConfig dummyConfig;
+    EvaluableConfig[] config;
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="nativetransfer"><a class="header" href="#nativetransfer">NativeTransfer</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/deprecated/v1/IFlowV1.sol">Git Source</a></p>
+<pre><code class="language-solidity">struct NativeTransfer {
+    address from;
+    address to;
+    uint256 amount;
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="erc20transfer"><a class="header" href="#erc20transfer">ERC20Transfer</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/deprecated/v1/IFlowV1.sol">Git Source</a></p>
+<pre><code class="language-solidity">struct ERC20Transfer {
+    address token;
+    address from;
+    address to;
+    uint256 amount;
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="erc721transfer"><a class="header" href="#erc721transfer">ERC721Transfer</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/deprecated/v1/IFlowV1.sol">Git Source</a></p>
+<pre><code class="language-solidity">struct ERC721Transfer {
+    address token;
+    address from;
+    address to;
+    uint256 id;
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="erc1155transfer"><a class="header" href="#erc1155transfer">ERC1155Transfer</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/deprecated/v1/IFlowV1.sol">Git Source</a></p>
+<pre><code class="language-solidity">struct ERC1155Transfer {
+    address token;
+    address from;
+    address to;
+    uint256 id;
+    uint256 amount;
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="flowtransfer"><a class="header" href="#flowtransfer">FlowTransfer</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/deprecated/v1/IFlowV1.sol">Git Source</a></p>
+<pre><code class="language-solidity">struct FlowTransfer {
+    NativeTransfer[] native;
+    ERC20Transfer[] erc20;
+    ERC721Transfer[] erc721;
+    ERC1155Transfer[] erc1155;
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="iflowv1"><a class="header" href="#iflowv1">IFlowV1</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/deprecated/v1/IFlowV1.sol">Git Source</a></p>
+<h2 id="functions-8"><a class="header" href="#functions-8">Functions</a></h2>
+<h3 id="previewflow-3"><a class="header" href="#previewflow-3">previewFlow</a></h3>
+<pre><code class="language-solidity">function previewFlow(
+    Evaluable calldata evaluable,
+    uint256[] calldata callerContext,
+    SignedContext[] calldata signedContexts
+) external view returns (FlowTransfer calldata flowTransfer);
+</code></pre>
+<h3 id="flow-8"><a class="header" href="#flow-8">flow</a></h3>
+<pre><code class="language-solidity">function flow(Evaluable calldata evaluable, uint256[] calldata callerContext, SignedContext[] calldata signedContexts)
+    external
+    payable
+    returns (FlowTransfer calldata flowTransfer);
+</code></pre>
+<h2 id="events-4"><a class="header" href="#events-4">Events</a></h2>
+<h3 id="initialize-11"><a class="header" href="#initialize-11">Initialize</a></h3>
+<pre><code class="language-solidity">event Initialize(address sender, FlowConfig config);
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="contents-9"><a class="header" href="#contents-9">Contents</a></h1>
+<ul>
+<li><a href="src/interface/deprecated/v2/IFlowERC1155V2.sol/struct.FlowERC1155Config.html">FlowERC1155Config</a></li>
+<li><a href="src/interface/deprecated/v2/IFlowERC1155V2.sol/struct.ERC1155SupplyChange.html">ERC1155SupplyChange</a></li>
+<li><a href="src/interface/deprecated/v2/IFlowERC1155V2.sol/struct.FlowERC1155IO.html">FlowERC1155IO</a></li>
+<li><a href="src/interface/deprecated/v2/IFlowERC1155V2.sol/interface.IFlowERC1155V2.html">IFlowERC1155V2</a></li>
+<li><a href="src/interface/deprecated/v2/IFlowERC20V2.sol/struct.ERC20SupplyChange.html">ERC20SupplyChange</a></li>
+<li><a href="src/interface/deprecated/v2/IFlowERC20V2.sol/struct.FlowERC20IO.html">FlowERC20IO</a></li>
+<li><a href="src/interface/deprecated/v2/IFlowERC20V2.sol/struct.FlowERC20Config.html">FlowERC20Config</a></li>
+<li><a href="src/interface/deprecated/v2/IFlowERC20V2.sol/interface.IFlowERC20V2.html">IFlowERC20V2</a></li>
+<li><a href="src/interface/deprecated/v2/IFlowERC721V2.sol/struct.FlowERC721Config.html">FlowERC721Config</a></li>
+<li><a href="src/interface/deprecated/v2/IFlowERC721V2.sol/struct.ERC721SupplyChange.html">ERC721SupplyChange</a></li>
+<li><a href="src/interface/deprecated/v2/IFlowERC721V2.sol/struct.FlowERC721IO.html">FlowERC721IO</a></li>
+<li><a href="src/interface/deprecated/v2/IFlowERC721V2.sol/interface.IFlowERC721V2.html">IFlowERC721V2</a></li>
+<li><a href="src/interface/deprecated/v2/IFlowV2.sol/struct.FlowConfig.html">FlowConfig</a></li>
+<li><a href="src/interface/deprecated/v2/IFlowV2.sol/struct.NativeTransfer.html">NativeTransfer</a></li>
+<li><a href="src/interface/deprecated/v2/IFlowV2.sol/struct.ERC20Transfer.html">ERC20Transfer</a></li>
+<li><a href="src/interface/deprecated/v2/IFlowV2.sol/struct.ERC721Transfer.html">ERC721Transfer</a></li>
+<li><a href="src/interface/deprecated/v2/IFlowV2.sol/struct.ERC1155Transfer.html">ERC1155Transfer</a></li>
+<li><a href="src/interface/deprecated/v2/IFlowV2.sol/struct.FlowTransfer.html">FlowTransfer</a></li>
+<li><a href="src/interface/deprecated/v2/IFlowV2.sol/interface.IFlowV2.html">IFlowV2</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="flowerc1155config-1"><a class="header" href="#flowerc1155config-1">FlowERC1155Config</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/deprecated/v2/IFlowERC1155V2.sol">Git Source</a></p>
+<pre><code class="language-solidity">struct FlowERC1155Config {
+    string uri;
+    EvaluableConfig evaluableConfig;
+    EvaluableConfig[] flowConfig;
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="erc1155supplychange-1"><a class="header" href="#erc1155supplychange-1">ERC1155SupplyChange</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/deprecated/v2/IFlowERC1155V2.sol">Git Source</a></p>
+<pre><code class="language-solidity">struct ERC1155SupplyChange {
+    address account;
+    uint256 id;
+    uint256 amount;
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="flowerc1155io-1"><a class="header" href="#flowerc1155io-1">FlowERC1155IO</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/deprecated/v2/IFlowERC1155V2.sol">Git Source</a></p>
+<pre><code class="language-solidity">struct FlowERC1155IO {
+    ERC1155SupplyChange[] mints;
+    ERC1155SupplyChange[] burns;
+    FlowTransfer flow;
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="iflowerc1155v2"><a class="header" href="#iflowerc1155v2">IFlowERC1155V2</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/deprecated/v2/IFlowERC1155V2.sol">Git Source</a></p>
+<h2 id="functions-9"><a class="header" href="#functions-9">Functions</a></h2>
+<h3 id="previewflow-4"><a class="header" href="#previewflow-4">previewFlow</a></h3>
+<pre><code class="language-solidity">function previewFlow(
+    Evaluable calldata evaluable,
+    uint256[] calldata callerContext,
+    SignedContextV1[] calldata signedContexts
+) external view returns (FlowERC1155IO calldata);
+</code></pre>
+<h3 id="flow-9"><a class="header" href="#flow-9">flow</a></h3>
+<pre><code class="language-solidity">function flow(Evaluable calldata evaluable, uint256[] calldata callerContext, SignedContextV1[] calldata signedContexts)
+    external
+    payable
+    returns (FlowERC1155IO calldata);
+</code></pre>
+<h2 id="events-5"><a class="header" href="#events-5">Events</a></h2>
+<h3 id="initialize-12"><a class="header" href="#initialize-12">Initialize</a></h3>
+<pre><code class="language-solidity">event Initialize(address sender, FlowERC1155Config config);
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="erc20supplychange-1"><a class="header" href="#erc20supplychange-1">ERC20SupplyChange</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/deprecated/v2/IFlowERC20V2.sol">Git Source</a></p>
+<pre><code class="language-solidity">struct ERC20SupplyChange {
+    address account;
+    uint256 amount;
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="flowerc20io-1"><a class="header" href="#flowerc20io-1">FlowERC20IO</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/deprecated/v2/IFlowERC20V2.sol">Git Source</a></p>
+<pre><code class="language-solidity">struct FlowERC20IO {
+    ERC20SupplyChange[] mints;
+    ERC20SupplyChange[] burns;
+    FlowTransfer flow;
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="flowerc20config-1"><a class="header" href="#flowerc20config-1">FlowERC20Config</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/deprecated/v2/IFlowERC20V2.sol">Git Source</a></p>
+<p>Constructor config.</p>
+<pre><code class="language-solidity">struct FlowERC20Config {
+    string name;
+    string symbol;
+    EvaluableConfig evaluableConfig;
+    EvaluableConfig[] flowConfig;
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="iflowerc20v2"><a class="header" href="#iflowerc20v2">IFlowERC20V2</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/deprecated/v2/IFlowERC20V2.sol">Git Source</a></p>
+<p>Mints itself according to some predefined schedule. The schedule is
+expressed as an expression and the <code>claim</code> function is world-callable.
+Intended behaviour is to avoid sybils infinitely minting by putting the
+claim functionality behind a <code>TierV2</code> contract. The flow contract
+itself implements <code>ReadOnlyTier</code> and every time a claim is processed it
+logs the block number of the claim against every tier claimed. So the block
+numbers in the tier report for <code>FlowERC20</code> are the last time that tier
+was claimed against this contract. The simplest way to make use of this
+information is to take the max block for the underlying tier and the last
+claim and then diff it against the current block number.
+See <code>test/Claim/FlowERC20.sol.ts</code> for examples, including providing
+staggered rewards where more tokens are minted for higher tier accounts.</p>
+<h2 id="functions-10"><a class="header" href="#functions-10">Functions</a></h2>
+<h3 id="previewflow-5"><a class="header" href="#previewflow-5">previewFlow</a></h3>
+<pre><code class="language-solidity">function previewFlow(
+    Evaluable calldata evaluable,
+    uint256[] calldata callerContext,
+    SignedContextV1[] calldata signedContexts
+) external view returns (FlowERC20IO calldata);
+</code></pre>
+<h3 id="flow-10"><a class="header" href="#flow-10">flow</a></h3>
+<pre><code class="language-solidity">function flow(Evaluable calldata evaluable, uint256[] calldata callerContext, SignedContextV1[] calldata signedContexts)
+    external
+    payable
+    returns (FlowERC20IO calldata);
+</code></pre>
+<h2 id="events-6"><a class="header" href="#events-6">Events</a></h2>
+<h3 id="initialize-13"><a class="header" href="#initialize-13">Initialize</a></h3>
+<p>Contract has initialized.</p>
+<pre><code class="language-solidity">event Initialize(address sender, FlowERC20Config config);
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="flowerc721config-1"><a class="header" href="#flowerc721config-1">FlowERC721Config</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/deprecated/v2/IFlowERC721V2.sol">Git Source</a></p>
+<p>Constructor config.</p>
+<pre><code class="language-solidity">struct FlowERC721Config {
+    string name;
+    string symbol;
+    string baseURI;
+    EvaluableConfig evaluableConfig;
+    EvaluableConfig[] flowConfig;
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="erc721supplychange-1"><a class="header" href="#erc721supplychange-1">ERC721SupplyChange</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/deprecated/v2/IFlowERC721V2.sol">Git Source</a></p>
+<pre><code class="language-solidity">struct ERC721SupplyChange {
+    address account;
+    uint256 id;
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="flowerc721io-1"><a class="header" href="#flowerc721io-1">FlowERC721IO</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/deprecated/v2/IFlowERC721V2.sol">Git Source</a></p>
+<pre><code class="language-solidity">struct FlowERC721IO {
+    ERC721SupplyChange[] mints;
+    ERC721SupplyChange[] burns;
+    FlowTransfer flow;
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="iflowerc721v2"><a class="header" href="#iflowerc721v2">IFlowERC721V2</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/deprecated/v2/IFlowERC721V2.sol">Git Source</a></p>
+<h2 id="functions-11"><a class="header" href="#functions-11">Functions</a></h2>
+<h3 id="previewflow-6"><a class="header" href="#previewflow-6">previewFlow</a></h3>
+<pre><code class="language-solidity">function previewFlow(
+    Evaluable calldata evaluable,
+    uint256[] calldata callerContext,
+    SignedContextV1[] calldata signedContexts
+) external view returns (FlowERC721IO calldata);
+</code></pre>
+<h3 id="flow-11"><a class="header" href="#flow-11">flow</a></h3>
+<pre><code class="language-solidity">function flow(Evaluable calldata evaluable, uint256[] calldata callerContext, SignedContextV1[] calldata signedContexts)
+    external
+    payable
+    returns (FlowERC721IO calldata);
+</code></pre>
+<h2 id="events-7"><a class="header" href="#events-7">Events</a></h2>
+<h3 id="initialize-14"><a class="header" href="#initialize-14">Initialize</a></h3>
+<p>Contract has initialized.</p>
+<pre><code class="language-solidity">event Initialize(address sender, FlowERC721Config config);
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="flowconfig-1"><a class="header" href="#flowconfig-1">FlowConfig</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/deprecated/v2/IFlowV2.sol">Git Source</a></p>
+<pre><code class="language-solidity">struct FlowConfig {
+    EvaluableConfig dummyConfig;
+    EvaluableConfig[] config;
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="nativetransfer-1"><a class="header" href="#nativetransfer-1">NativeTransfer</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/deprecated/v2/IFlowV2.sol">Git Source</a></p>
+<pre><code class="language-solidity">struct NativeTransfer {
+    address from;
+    address to;
+    uint256 amount;
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="erc20transfer-1"><a class="header" href="#erc20transfer-1">ERC20Transfer</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/deprecated/v2/IFlowV2.sol">Git Source</a></p>
+<pre><code class="language-solidity">struct ERC20Transfer {
+    address token;
+    address from;
+    address to;
+    uint256 amount;
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="erc721transfer-1"><a class="header" href="#erc721transfer-1">ERC721Transfer</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/deprecated/v2/IFlowV2.sol">Git Source</a></p>
+<pre><code class="language-solidity">struct ERC721Transfer {
+    address token;
+    address from;
+    address to;
+    uint256 id;
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="erc1155transfer-1"><a class="header" href="#erc1155transfer-1">ERC1155Transfer</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/deprecated/v2/IFlowV2.sol">Git Source</a></p>
+<pre><code class="language-solidity">struct ERC1155Transfer {
+    address token;
+    address from;
+    address to;
+    uint256 id;
+    uint256 amount;
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="flowtransfer-1"><a class="header" href="#flowtransfer-1">FlowTransfer</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/deprecated/v2/IFlowV2.sol">Git Source</a></p>
+<pre><code class="language-solidity">struct FlowTransfer {
+    NativeTransfer[] native;
+    ERC20Transfer[] erc20;
+    ERC721Transfer[] erc721;
+    ERC1155Transfer[] erc1155;
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="iflowv2"><a class="header" href="#iflowv2">IFlowV2</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/deprecated/v2/IFlowV2.sol">Git Source</a></p>
+<h2 id="functions-12"><a class="header" href="#functions-12">Functions</a></h2>
+<h3 id="previewflow-7"><a class="header" href="#previewflow-7">previewFlow</a></h3>
+<pre><code class="language-solidity">function previewFlow(
+    Evaluable calldata evaluable,
+    uint256[] calldata callerContext,
+    SignedContextV1[] calldata signedContexts
+) external view returns (FlowTransfer calldata flowTransfer);
+</code></pre>
+<h3 id="flow-12"><a class="header" href="#flow-12">flow</a></h3>
+<pre><code class="language-solidity">function flow(Evaluable calldata evaluable, uint256[] calldata callerContext, SignedContextV1[] calldata signedContexts)
+    external
+    payable
+    returns (FlowTransfer calldata flowTransfer);
+</code></pre>
+<h2 id="events-8"><a class="header" href="#events-8">Events</a></h2>
+<h3 id="initialize-15"><a class="header" href="#initialize-15">Initialize</a></h3>
+<pre><code class="language-solidity">event Initialize(address sender, FlowConfig config);
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="contents-10"><a class="header" href="#contents-10">Contents</a></h1>
+<ul>
+<li><a href="src/interface/unstable/IFlowERC1155V4.sol/struct.FlowERC1155ConfigV2.html">FlowERC1155ConfigV2</a></li>
+<li><a href="src/interface/unstable/IFlowERC1155V4.sol/interface.IFlowERC1155V4.html">IFlowERC1155V4</a></li>
+<li><a href="src/interface/unstable/IFlowERC20V4.sol/struct.FlowERC20ConfigV2.html">FlowERC20ConfigV2</a></li>
+<li><a href="src/interface/unstable/IFlowERC20V4.sol/interface.IFlowERC20V4.html">IFlowERC20V4</a></li>
+<li><a href="src/interface/unstable/IFlowERC721V4.sol/error.BurnerNotOwner.html">BurnerNotOwner</a></li>
+<li><a href="src/interface/unstable/IFlowERC721V4.sol/struct.FlowERC721ConfigV2.html">FlowERC721ConfigV2</a></li>
+<li><a href="src/interface/unstable/IFlowERC721V4.sol/interface.IFlowERC721V4.html">IFlowERC721V4</a></li>
+<li><a href="src/interface/unstable/IFlowV4.sol/interface.IFlowV4.html">IFlowV4</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="flowerc1155configv2"><a class="header" href="#flowerc1155configv2">FlowERC1155ConfigV2</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/unstable/IFlowERC1155V4.sol">Git Source</a></p>
+<p>Constructor config.</p>
+<pre><code class="language-solidity">struct FlowERC1155ConfigV2 {
+    string uri;
+    EvaluableConfigV2 evaluableConfig;
+    EvaluableConfigV2[] flowConfig;
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="iflowerc1155v4"><a class="header" href="#iflowerc1155v4">IFlowERC1155V4</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/unstable/IFlowERC1155V4.sol">Git Source</a></p>
+<h2 id="functions-13"><a class="header" href="#functions-13">Functions</a></h2>
+<h3 id="stacktoflow-4"><a class="header" href="#stacktoflow-4">stackToFlow</a></h3>
+<p>As per <code>IFlowV4</code> but returns a <code>FlowERC1155IOV1</code> instead of a
+<code>FlowTransferV1</code>.</p>
+<pre><code class="language-solidity">function stackToFlow(uint256[] memory stack) external pure returns (FlowERC1155IOV1 memory flowERC1155IO);
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>stack</code></td><td><code>uint256[]</code></td><td>The stack to convert to a <code>FlowERC1155IOV1</code>.</td></tr>
+</tbody></table>
+</div>
+<p><strong>Returns</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>flowERC1155IO</code></td><td><code>FlowERC1155IOV1</code></td><td>The <code>FlowERC1155IOV1</code> representation of the stack.</td></tr>
+</tbody></table>
+</div>
+<h3 id="flow-13"><a class="header" href="#flow-13">flow</a></h3>
+<p>As per <code>IFlowV4</code> but returns a <code>FlowERC1155IOV1</code> instead of a
+<code>FlowTransferV1</code> and mints/burns itself as an ERC1155 accordingly.</p>
+<pre><code class="language-solidity">function flow(Evaluable calldata evaluable, uint256[] calldata callerContext, SignedContextV1[] calldata signedContexts)
+    external
+    returns (FlowERC1155IOV1 calldata);
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>evaluable</code></td><td><code>Evaluable</code></td><td>The <code>Evaluable</code> to use to evaluate the flow.</td></tr>
+<tr><td><code>callerContext</code></td><td><code>uint256[]</code></td><td>The caller context to use to evaluate the flow.</td></tr>
+<tr><td><code>signedContexts</code></td><td><code>SignedContextV1[]</code></td><td>The signed contexts to use to evaluate the flow.</td></tr>
+</tbody></table>
+</div>
+<p><strong>Returns</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>&lt;none&gt;</code></td><td><code>FlowERC1155IOV1</code></td><td>flowERC1155IO The <code>FlowERC1155IOV1</code> representing all token mint/burns and transfers that occurred during the flow.</td></tr>
+</tbody></table>
+</div>
+<h2 id="events-9"><a class="header" href="#events-9">Events</a></h2>
+<h3 id="initialize-16"><a class="header" href="#initialize-16">Initialize</a></h3>
+<p>Contract has initialized.</p>
+<pre><code class="language-solidity">event Initialize(address sender, FlowERC1155ConfigV2 config);
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="flowerc20configv2"><a class="header" href="#flowerc20configv2">FlowERC20ConfigV2</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/unstable/IFlowERC20V4.sol">Git Source</a></p>
+<p>Constructor config.</p>
+<pre><code class="language-solidity">struct FlowERC20ConfigV2 {
+    string name;
+    string symbol;
+    EvaluableConfigV2 evaluableConfig;
+    EvaluableConfigV2[] flowConfig;
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="iflowerc20v4"><a class="header" href="#iflowerc20v4">IFlowERC20V4</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/unstable/IFlowERC20V4.sol">Git Source</a></p>
+<h2 id="functions-14"><a class="header" href="#functions-14">Functions</a></h2>
+<h3 id="stacktoflow-5"><a class="header" href="#stacktoflow-5">stackToFlow</a></h3>
+<p>As per <code>IFlowV4</code> but returns a <code>FlowERC20IOV1</code> instead of a
+<code>FlowTransferV1</code>.</p>
+<pre><code class="language-solidity">function stackToFlow(uint256[] memory stack) external pure returns (FlowERC20IOV1 memory flowERC20IO);
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>stack</code></td><td><code>uint256[]</code></td><td>The stack to convert to a <code>FlowERC20IOV1</code>.</td></tr>
+</tbody></table>
+</div>
+<p><strong>Returns</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>flowERC20IO</code></td><td><code>FlowERC20IOV1</code></td><td>The <code>FlowERC20IOV1</code> representation of the stack.</td></tr>
+</tbody></table>
+</div>
+<h3 id="flow-14"><a class="header" href="#flow-14">flow</a></h3>
+<p>As per <code>IFlowV4</code> but returns a <code>FlowERC20IOV1</code> instead of a
+<code>FlowTransferV1</code> and mints/burns itself as an ERC20 accordingly.</p>
+<pre><code class="language-solidity">function flow(Evaluable calldata evaluable, uint256[] calldata callerContext, SignedContextV1[] calldata signedContexts)
+    external
+    returns (FlowERC20IOV1 calldata flowERC20IO);
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>evaluable</code></td><td><code>Evaluable</code></td><td>The <code>Evaluable</code> to use to evaluate the flow.</td></tr>
+<tr><td><code>callerContext</code></td><td><code>uint256[]</code></td><td>The caller context to use to evaluate the flow.</td></tr>
+<tr><td><code>signedContexts</code></td><td><code>SignedContextV1[]</code></td><td>The signed contexts to use to evaluate the flow.</td></tr>
+</tbody></table>
+</div>
+<p><strong>Returns</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>flowERC20IO</code></td><td><code>FlowERC20IOV1</code></td><td>The <code>FlowERC20IOV1</code> representing all token mint/burns and transfers that occurred during the flow.</td></tr>
+</tbody></table>
+</div>
+<h2 id="events-10"><a class="header" href="#events-10">Events</a></h2>
+<h3 id="initialize-17"><a class="header" href="#initialize-17">Initialize</a></h3>
+<p>Contract has initialized.</p>
+<pre><code class="language-solidity">event Initialize(address sender, FlowERC20ConfigV2 config);
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="burnernotowner"><a class="header" href="#burnernotowner">BurnerNotOwner</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/unstable/IFlowERC721V4.sol">Git Source</a></p>
+<p>Thrown when burner of tokens is not the owner of tokens.</p>
+<pre><code class="language-solidity">error BurnerNotOwner();
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="flowerc721configv2"><a class="header" href="#flowerc721configv2">FlowERC721ConfigV2</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/unstable/IFlowERC721V4.sol">Git Source</a></p>
+<p>Constructor config.</p>
+<pre><code class="language-solidity">struct FlowERC721ConfigV2 {
+    string name;
+    string symbol;
+    string baseURI;
+    EvaluableConfigV2 evaluableConfig;
+    EvaluableConfigV2[] flowConfig;
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="iflowerc721v4"><a class="header" href="#iflowerc721v4">IFlowERC721V4</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/unstable/IFlowERC721V4.sol">Git Source</a></p>
+<h2 id="functions-15"><a class="header" href="#functions-15">Functions</a></h2>
+<h3 id="stacktoflow-6"><a class="header" href="#stacktoflow-6">stackToFlow</a></h3>
+<p>As per <code>IFlowV4</code> but returns a <code>FlowERC721IOV1</code> instead of a
+<code>FlowTransferV1</code>.</p>
+<pre><code class="language-solidity">function stackToFlow(uint256[] memory stack) external pure returns (FlowERC721IOV1 memory flowERC721IO);
+</code></pre>
+<h3 id="flow-15"><a class="header" href="#flow-15">flow</a></h3>
+<p>As per <code>IFlowV4</code> but returns a <code>FlowERC721IOV1</code> instead of a
+<code>FlowTransferV1</code> and mints/burns itself as an ERC721 accordingly.</p>
+<pre><code class="language-solidity">function flow(Evaluable calldata evaluable, uint256[] calldata callerContext, SignedContextV1[] calldata signedContexts)
+    external
+    returns (FlowERC721IOV1 calldata flowERC721IO);
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>evaluable</code></td><td><code>Evaluable</code></td><td>The <code>Evaluable</code> to use to evaluate the flow.</td></tr>
+<tr><td><code>callerContext</code></td><td><code>uint256[]</code></td><td>The caller context to use to evaluate the flow.</td></tr>
+<tr><td><code>signedContexts</code></td><td><code>SignedContextV1[]</code></td><td>The signed contexts to use to evaluate the flow.</td></tr>
+</tbody></table>
+</div>
+<p><strong>Returns</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>flowERC721IO</code></td><td><code>FlowERC721IOV1</code></td><td>The <code>FlowERC721IOV1</code> representing all token mint/burns and transfers that occurred during the flow.</td></tr>
+</tbody></table>
+</div>
+<h2 id="events-11"><a class="header" href="#events-11">Events</a></h2>
+<h3 id="initialize-18"><a class="header" href="#initialize-18">Initialize</a></h3>
+<p>Contract has initialized.</p>
+<pre><code class="language-solidity">event Initialize(address sender, FlowERC721ConfigV2 config);
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="iflowv4"><a class="header" href="#iflowv4">IFlowV4</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/unstable/IFlowV4.sol">Git Source</a></p>
+<p>Interface for a flow contract that does NOT require native minting
+or burning of itself as a token. This is the base case that all other flow
+interfaces model themselves after, with the addition of token minting and
+burning.
+Current functionality only allows for moving third party tokens between
+accounts. Token standards ERC20, ERC721, and ERC1155 are supported.
+The basic lifecycle of a flow is:</p>
+<ul>
+<li><code>Flow</code> is deployed as a reference implementation to be cloned, with its
+initializers disabled on construction.</li>
+<li><code>Flow</code> is cloned and initialized with an abi encoded list of evaluable
+configs that define every possible movement of tokens that can occur due
+to the clone. The EOA that deployed the clone DOES NOT have any special
+privileges over the clone, although they could grant themselves privileges
+by flowing tokens to themselves or similar within the evaluables. Ideally
+the EOA doesn't introduce &quot;admin&quot; features as it would be a security risk
+to themselves and others. In the case that they do, all priviledges will
+be visible in the rainlang code of the evaluable, there's no hidden
+functionality that can be introduced to the clone bytecode.</li>
+<li>Anyone can call <code>flow</code> on the clone, passing in one of the evaluables set
+during initialization. If the evaluable passed by the caller does not
+match an initialized evaluable, the flow MUST revert with
+<code>UnregisteredFlow</code>. The entirety of the resulting stack from the evaluation
+defines all the token movements that MUST occur as a result of the flow.
+ANY failures during the flow MUST revert the entire flow, leaving the
+state of the tokens unchanged.
+The structure of the stack can be thought of as a simple list of transfers.
+All the erc20 tokens are moved first, then the erc721 tokens, then the
+erc1155 tokens. Each token type is separated in the stack by a sentinel
+value. The sentinel is a constant, <code>RAIN_FLOW_SENTINEL</code>, that is guaranteed
+to not collide with any token amounts or addresses. The sentinel is also
+guaranteed to not collide with any other sentinels from other contexts, to
+the extent that we can guarantee that with raw cryptographic collision
+resistance. This sentinel can be thought of as similar to the null terminator
+in a c string, it's a value that is guaranteed to not be a valid value for
+the type of data it's separating. The main benefit in this context, for
+rainlang authors, is that they can always use the same constant value in
+all their rainlang code to separate the different token types, rather than
+needing to manually calculate the length of the tuples they're wanting to
+flow over in each token type (which would be very error prone).
+Currently every token transfer type MUST be present in every flow stack,
+which is awkward as it means that if you want to flow erc20 tokens, you
+MUST also flow erc721 and erc1155 tokens, even if you don't want to. This
+is a limitation of the current implementation, and will be fixed in a future
+version.
+Each individual token transfer is simply a list of values, where the values
+are specific to the token type.</li>
+<li>erc20 transfers are a list of 4 values:</li>
+<li>address of the token contract</li>
+<li>address of the token sender</li>
+<li>address of the token recipient</li>
+<li>amount of tokens to transfer</li>
+<li>erc721 transfers are a list of 4 values:</li>
+<li>address of the token contract</li>
+<li>address of the token sender</li>
+<li>address of the token recipient</li>
+<li>token id to transfer</li>
+<li>erc1155 transfers are a list of 5 values:</li>
+<li>address of the token contract</li>
+<li>address of the token sender</li>
+<li>address of the token recipient</li>
+<li>token id to transfer</li>
+<li>amount of tokens to transfer
+The final stack is processed from the bottom up, so the first token transfer
+in the stack is the last one to be processed.
+For example, a rainlang expression that transfers 1e18 erc20 token 0xf00baa
+from the flow contract to the address 0xdeadbeef, and 1 erc721 token address
+0x1234 and id 5678 from the address 0xdeadbeef to the flow contract, would
+result in the following rainlang/stack:</li>
+</ul>
+<pre><code>* sentinel is always the same. */
+sentinel: 0xfea74d0c9bf4a3c28f0dd0674db22a3d7f8bf259c56af19f4ac1e735b156974f,
+* erc1155 transfers are first, just a sentinel as there's nothing to do */
+_: sentinel,
+* erc721 transfers are next, with the token id as the last value */
+_: 0x1234 0xdeadbeef context&lt;0 1&gt;() 5678,
+* erc20 transfers are last, with the amount as the last value */
+_: 0xf00baa context&lt;0 1&gt;() 0xdeadbeef 1e18;
+</code></pre>
+<p>Note that for all token transfers the sender of the tokens MUST be either
+the flow contract itself, or the caller of the flow contract. This is to
+prevent the flow contract from being able to transfer tokens from arbitrary
+addresses without their consent. Even if some address has approved the flow
+contract to transfer tokens on their behalf, the flow contract MUST NOT
+transfer tokens from that address unless the caller of the flow contract
+is that address.
+Note that native gas movements are not supported in this version of the
+flow contract. This is because the current reference implementation uses
+<code>Multicall</code> to batch together multiple calls to the flow contract, and
+this involves a loop over a delegate call, which is not safe to do with
+native gas movements. This will be fixed in a future version of the interface
+where batching is handled by the flow contract itself, rather than relying
+on <code>Multicall</code>.</p>
+<h2 id="functions-16"><a class="header" href="#functions-16">Functions</a></h2>
+<h3 id="stacktoflow-7"><a class="header" href="#stacktoflow-7">stackToFlow</a></h3>
+<p>Given a stack of values, convert it to a flow transfer. MUST NOT modify
+state but MAY revert if the stack is malformed. The intended workflow is
+that the interpreter contract is called to produce a stack then the stack
+is converted to a flow transfer struct, to allow the caller to preview
+a flow before actually executing it. By accepting a stack as input, the
+caller can preview any possible flow, not just ones that have been
+registered with the flow contract, and can preview flows that may not
+even be possible to execute due to the state of the tokens, or access
+gating that would exclude the caller, etc.</p>
+<pre><code class="language-solidity">function stackToFlow(uint256[] memory stack) external pure returns (FlowTransferV1 calldata flowTransfer);
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>stack</code></td><td><code>uint256[]</code></td><td>The stack of values to convert to a flow transfer.</td></tr>
+</tbody></table>
+</div>
+<p><strong>Returns</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>flowTransfer</code></td><td><code>FlowTransferV1</code></td><td>The resulting flow transfer.</td></tr>
+</tbody></table>
+</div>
+<h3 id="flow-16"><a class="header" href="#flow-16">flow</a></h3>
+<p>Given an evaluable, caller context, and signed contexts, evaluate the
+evaluable and return the resulting flow transfer. MUST process the
+flow transfer atomically, either all of it succeeds or none of it
+succeeds. MUST revert if the evaluable is not registered with the flow
+contract. MUST revert if the evaluable reverts. MUST revert if the
+evaluable returns a stack that is malformed. MUST revert if the evaluable
+returns a stack that contains a token transfer that is not allowed by
+the flow contract (e.g. if a token is being moved from an address that
+is not the caller or the flow contract).</p>
+<pre><code class="language-solidity">function flow(Evaluable calldata evaluable, uint256[] calldata callerContext, SignedContextV1[] calldata signedContexts)
+    external
+    returns (FlowTransferV1 calldata flowTransfer);
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>evaluable</code></td><td><code>Evaluable</code></td><td>The evaluable to evaluate.</td></tr>
+<tr><td><code>callerContext</code></td><td><code>uint256[]</code></td><td>The caller context to pass to the evaluable.</td></tr>
+<tr><td><code>signedContexts</code></td><td><code>SignedContextV1[]</code></td><td>The signed contexts to pass to the evaluable.</td></tr>
+</tbody></table>
+</div>
+<p><strong>Returns</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>flowTransfer</code></td><td><code>FlowTransferV1</code></td><td>The resulting flow transfer.</td></tr>
+</tbody></table>
+</div>
+<h2 id="events-12"><a class="header" href="#events-12">Events</a></h2>
+<h3 id="initialize-19"><a class="header" href="#initialize-19">Initialize</a></h3>
+<p>MUST be emitted when the flow contract is initialized.</p>
+<pre><code class="language-solidity">event Initialize(address sender, EvaluableConfigV2[] config);
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="flowerc1155config-2"><a class="header" href="#flowerc1155config-2">FlowERC1155Config</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/IFlowERC1155V3.sol">Git Source</a></p>
+<p>Initializer config.</p>
+<pre><code class="language-solidity">struct FlowERC1155Config {
+    string uri;
+    EvaluableConfig evaluableConfig;
+    EvaluableConfig[] flowConfig;
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="erc1155supplychange-2"><a class="header" href="#erc1155supplychange-2">ERC1155SupplyChange</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/IFlowERC1155V3.sol">Git Source</a></p>
+<p>Represents a single mint or burn of a single ERC1155 token. Whether this is
+a mint or burn must be implied by the context.</p>
+<pre><code class="language-solidity">struct ERC1155SupplyChange {
+    address account;
+    uint256 id;
+    uint256 amount;
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="flowerc1155iov1"><a class="header" href="#flowerc1155iov1">FlowERC1155IOV1</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/IFlowERC1155V3.sol">Git Source</a></p>
+<p>Represents a set of ERC1155 transfers, including self mints/burns.</p>
+<pre><code class="language-solidity">struct FlowERC1155IOV1 {
+    ERC1155SupplyChange[] mints;
+    ERC1155SupplyChange[] burns;
+    FlowTransferV1 flow;
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="iflowerc1155v3"><a class="header" href="#iflowerc1155v3">IFlowERC1155V3</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/IFlowERC1155V3.sol">Git Source</a></p>
+<h2 id="functions-17"><a class="header" href="#functions-17">Functions</a></h2>
+<h3 id="previewflow-8"><a class="header" href="#previewflow-8">previewFlow</a></h3>
+<p>As per <code>IFlowV3</code> but returns a <code>FlowERC1155IOV1</code> instead of a
+<code>FlowTransferV1</code>.</p>
+<pre><code class="language-solidity">function previewFlow(
+    Evaluable calldata evaluable,
+    uint256[] calldata callerContext,
+    SignedContextV1[] calldata signedContexts
+) external view returns (FlowERC1155IOV1 calldata flowERC1155IO);
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>evaluable</code></td><td><code>Evaluable</code></td><td>The <code>Evaluable</code> that is flowing.</td></tr>
+<tr><td><code>callerContext</code></td><td><code>uint256[]</code></td><td>The context of the caller.</td></tr>
+<tr><td><code>signedContexts</code></td><td><code>SignedContextV1[]</code></td><td>The signed contexts of the caller.</td></tr>
+</tbody></table>
+</div>
+<p><strong>Returns</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>flowERC1155IO</code></td><td><code>FlowERC1155IOV1</code></td><td>The <code>FlowERC1155IOV1</code> that occurred.</td></tr>
+</tbody></table>
+</div>
+<h3 id="flow-17"><a class="header" href="#flow-17">flow</a></h3>
+<p>As per <code>IFlowV3</code> but returns a <code>FlowERC1155IOV1</code> instead of a
+<code>FlowTransferV1</code> and mints/burns itself as an ERC1155 accordingly.</p>
+<pre><code class="language-solidity">function flow(Evaluable calldata evaluable, uint256[] calldata callerContext, SignedContextV1[] calldata signedContexts)
+    external
+    returns (FlowERC1155IOV1 calldata flowERC1155IO);
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>evaluable</code></td><td><code>Evaluable</code></td><td>The <code>Evaluable</code> that is flowing.</td></tr>
+<tr><td><code>callerContext</code></td><td><code>uint256[]</code></td><td>The context of the caller.</td></tr>
+<tr><td><code>signedContexts</code></td><td><code>SignedContextV1[]</code></td><td>The signed contexts of the caller.</td></tr>
+</tbody></table>
+</div>
+<p><strong>Returns</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>flowERC1155IO</code></td><td><code>FlowERC1155IOV1</code></td><td>The <code>FlowERC1155IOV1</code> that occurred.</td></tr>
+</tbody></table>
+</div>
+<h2 id="events-13"><a class="header" href="#events-13">Events</a></h2>
+<h3 id="initialize-20"><a class="header" href="#initialize-20">Initialize</a></h3>
+<p>Contract has initialized.</p>
+<pre><code class="language-solidity">event Initialize(address sender, FlowERC1155Config config);
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="constants-5"><a class="header" href="#constants-5">Constants</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/IFlowERC1155V3.sol">Git Source</a></p>
+<h3 id="flow_erc1155_handle_transfer_entrypoint"><a class="header" href="#flow_erc1155_handle_transfer_entrypoint">FLOW_ERC1155_HANDLE_TRANSFER_ENTRYPOINT</a></h3>
+<p><em>Entrypont of the <code>handleTransfer</code> evaluation.</em></p>
+<pre><code class="language-solidity">SourceIndex constant FLOW_ERC1155_HANDLE_TRANSFER_ENTRYPOINT = SourceIndex.wrap(0);
+</code></pre>
+<h3 id="flow_erc1155_handle_transfer_min_outputs"><a class="header" href="#flow_erc1155_handle_transfer_min_outputs">FLOW_ERC1155_HANDLE_TRANSFER_MIN_OUTPUTS</a></h3>
+<p><em>Minimum number of outputs of the <code>handleTransfer</code> evaluation.
+This is 0 because the return stack is ignored.</em></p>
+<pre><code class="language-solidity">uint256 constant FLOW_ERC1155_HANDLE_TRANSFER_MIN_OUTPUTS = 0;
+</code></pre>
+<h3 id="flow_erc1155_handle_transfer_max_outputs"><a class="header" href="#flow_erc1155_handle_transfer_max_outputs">FLOW_ERC1155_HANDLE_TRANSFER_MAX_OUTPUTS</a></h3>
+<p><em>Maximum number of outputs of the <code>handleTransfer</code> evaluation.
+This is 0 because the return stack is ignored.</em></p>
+<pre><code class="language-solidity">uint16 constant FLOW_ERC1155_HANDLE_TRANSFER_MAX_OUTPUTS = 0;
+</code></pre>
+<h3 id="flow_erc1155_min_flow_sentinels"><a class="header" href="#flow_erc1155_min_flow_sentinels">FLOW_ERC1155_MIN_FLOW_SENTINELS</a></h3>
+<p><em>Minimum number of sentinels required by <code>FlowERC1155</code>.
+This is 2 more than the minimum required by <code>FlowCommon</code> because the
+mints and burns are included in the stack.</em></p>
+<pre><code class="language-solidity">uint256 constant FLOW_ERC1155_MIN_FLOW_SENTINELS = MIN_FLOW_SENTINELS + 2;
+</code></pre>
+<h3 id="rain_flow_erc1155_sentinel"><a class="header" href="#rain_flow_erc1155_sentinel">RAIN_FLOW_ERC1155_SENTINEL</a></h3>
+<p><em>v3 of <code>FlowERC1155</code> expected a sentinel different to
+<code>RAIN_FLOW_SENTINEL</code>, but this was generally more confusing than helpful.</em></p>
+<pre><code class="language-solidity">Sentinel constant RAIN_FLOW_ERC1155_SENTINEL =
+    Sentinel.wrap(uint256(keccak256(bytes(&quot;RAIN_FLOW_ERC1155_SENTINEL&quot;)) | SENTINEL_HIGH_BITS));
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="erc20supplychange-2"><a class="header" href="#erc20supplychange-2">ERC20SupplyChange</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/IFlowERC20V3.sol">Git Source</a></p>
+<p>Represents a single mint or burn of a single ERC20 token. Whether this is
+a mint or burn must be implied by the context.</p>
+<pre><code class="language-solidity">struct ERC20SupplyChange {
+    address account;
+    uint256 amount;
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="flowerc20iov1"><a class="header" href="#flowerc20iov1">FlowERC20IOV1</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/IFlowERC20V3.sol">Git Source</a></p>
+<p>Represents a set of ERC20 transfers, including self mints/burns.</p>
+<pre><code class="language-solidity">struct FlowERC20IOV1 {
+    ERC20SupplyChange[] mints;
+    ERC20SupplyChange[] burns;
+    FlowTransferV1 flow;
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="flowerc20config-2"><a class="header" href="#flowerc20config-2">FlowERC20Config</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/IFlowERC20V3.sol">Git Source</a></p>
+<p>Initializer config.</p>
+<pre><code class="language-solidity">struct FlowERC20Config {
+    string name;
+    string symbol;
+    EvaluableConfig evaluableConfig;
+    EvaluableConfig[] flowConfig;
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="iflowerc20v3"><a class="header" href="#iflowerc20v3">IFlowERC20V3</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/IFlowERC20V3.sol">Git Source</a></p>
+<p>Mints itself according to some predefined schedule. The schedule is
+expressed as an expression and the <code>claim</code> function is world-callable.
+Intended behaviour is to avoid sybils infinitely minting by putting the
+claim functionality behind a <code>TierV2</code> contract. The flow contract
+itself implements <code>ReadOnlyTier</code> and every time a claim is processed it
+logs the block number of the claim against every tier claimed. So the block
+numbers in the tier report for <code>FlowERC20</code> are the last time that tier
+was claimed against this contract. The simplest way to make use of this
+information is to take the max block for the underlying tier and the last
+claim and then diff it against the current block number.
+See <code>test/Claim/FlowERC20.sol.ts</code> for examples, including providing
+staggered rewards where more tokens are minted for higher tier accounts.</p>
+<h2 id="functions-18"><a class="header" href="#functions-18">Functions</a></h2>
+<h3 id="previewflow-9"><a class="header" href="#previewflow-9">previewFlow</a></h3>
+<p>As per <code>IFlowV3</code> but returns a <code>FlowERC20IOV1</code> instead of a
+<code>FlowTransferV1</code>.</p>
+<pre><code class="language-solidity">function previewFlow(
+    Evaluable calldata evaluable,
+    uint256[] calldata callerContext,
+    SignedContextV1[] calldata signedContexts
+) external view returns (FlowERC20IOV1 calldata flowERC20IO);
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>evaluable</code></td><td><code>Evaluable</code></td><td>The <code>Evaluable</code> to use to evaluate the flow.</td></tr>
+<tr><td><code>callerContext</code></td><td><code>uint256[]</code></td><td>The caller context to use to evaluate the flow.</td></tr>
+<tr><td><code>signedContexts</code></td><td><code>SignedContextV1[]</code></td><td>The signed contexts to use to evaluate the flow.</td></tr>
+</tbody></table>
+</div>
+<p><strong>Returns</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>flowERC20IO</code></td><td><code>FlowERC20IOV1</code></td><td>The <code>FlowERC20IOV1</code> that occurred.</td></tr>
+</tbody></table>
+</div>
+<h3 id="flow-18"><a class="header" href="#flow-18">flow</a></h3>
+<p>As per <code>IFlowV3</code> but returns a <code>FlowERC20IOV1</code> instead of a
+<code>FlowTransferV1</code> and mints/burns itself as an ERC20 accordingly.</p>
+<pre><code class="language-solidity">function flow(Evaluable calldata evaluable, uint256[] calldata callerContext, SignedContextV1[] calldata signedContexts)
+    external
+    returns (FlowERC20IOV1 calldata flowERC20IO);
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>evaluable</code></td><td><code>Evaluable</code></td><td>The <code>Evaluable</code> to use to evaluate the flow.</td></tr>
+<tr><td><code>callerContext</code></td><td><code>uint256[]</code></td><td>The caller context to use to evaluate the flow.</td></tr>
+<tr><td><code>signedContexts</code></td><td><code>SignedContextV1[]</code></td><td>The signed contexts to use to evaluate the flow.</td></tr>
+</tbody></table>
+</div>
+<p><strong>Returns</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>flowERC20IO</code></td><td><code>FlowERC20IOV1</code></td><td>The <code>FlowERC20IOV1</code> that occurred.</td></tr>
+</tbody></table>
+</div>
+<h2 id="events-14"><a class="header" href="#events-14">Events</a></h2>
+<h3 id="initialize-21"><a class="header" href="#initialize-21">Initialize</a></h3>
+<p>Contract has initialized.</p>
+<pre><code class="language-solidity">event Initialize(address sender, FlowERC20Config config);
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="constants-6"><a class="header" href="#constants-6">Constants</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/IFlowERC20V3.sol">Git Source</a></p>
+<h3 id="rain_flow_erc20_sentinel"><a class="header" href="#rain_flow_erc20_sentinel">RAIN_FLOW_ERC20_SENTINEL</a></h3>
+<p><em>v3 of <code>FlowERC20</code> expected a sentinel different to
+<code>RAIN_FLOW_SENTINEL</code>, but this was generally more confusing than helpful.</em></p>
+<pre><code class="language-solidity">Sentinel constant RAIN_FLOW_ERC20_SENTINEL =
+    Sentinel.wrap(uint256(keccak256(bytes(&quot;RAIN_FLOW_ERC20_SENTINEL&quot;)) | SENTINEL_HIGH_BITS));
+</code></pre>
+<h3 id="flow_erc20_handle_transfer_entrypoint"><a class="header" href="#flow_erc20_handle_transfer_entrypoint">FLOW_ERC20_HANDLE_TRANSFER_ENTRYPOINT</a></h3>
+<p><em>Entrypont of the <code>handleTransfer</code> evaluation.</em></p>
+<pre><code class="language-solidity">SourceIndex constant FLOW_ERC20_HANDLE_TRANSFER_ENTRYPOINT = SourceIndex.wrap(0);
+</code></pre>
+<h3 id="flow_erc20_handle_transfer_min_outputs"><a class="header" href="#flow_erc20_handle_transfer_min_outputs">FLOW_ERC20_HANDLE_TRANSFER_MIN_OUTPUTS</a></h3>
+<p><em>Minimum number of outputs of the <code>handleTransfer</code> evaluation.
+This is 0 because the return stack is ignored.</em></p>
+<pre><code class="language-solidity">uint256 constant FLOW_ERC20_HANDLE_TRANSFER_MIN_OUTPUTS = 0;
+</code></pre>
+<h3 id="flow_erc20_handle_transfer_max_outputs"><a class="header" href="#flow_erc20_handle_transfer_max_outputs">FLOW_ERC20_HANDLE_TRANSFER_MAX_OUTPUTS</a></h3>
+<p><em>Maximum number of outputs of the <code>handleTransfer</code> evaluation.
+This is 0 because the return stack is ignored.</em></p>
+<pre><code class="language-solidity">uint16 constant FLOW_ERC20_HANDLE_TRANSFER_MAX_OUTPUTS = 0;
+</code></pre>
+<h3 id="flow_erc20_min_flow_sentinels"><a class="header" href="#flow_erc20_min_flow_sentinels">FLOW_ERC20_MIN_FLOW_SENTINELS</a></h3>
+<p><em>Minimum number of sentinels required by <code>FlowERC20</code>.
+This is 2 more than the minimum required by <code>FlowCommon</code> because the
+mints and burns are included in the stack.</em></p>
+<pre><code class="language-solidity">uint256 constant FLOW_ERC20_MIN_FLOW_SENTINELS = MIN_FLOW_SENTINELS + 2;
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="flowerc721config-2"><a class="header" href="#flowerc721config-2">FlowERC721Config</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/IFlowERC721V3.sol">Git Source</a></p>
+<p>Initializer config.</p>
+<pre><code class="language-solidity">struct FlowERC721Config {
+    string name;
+    string symbol;
+    string baseURI;
+    EvaluableConfig evaluableConfig;
+    EvaluableConfig[] flowConfig;
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="erc721supplychange-2"><a class="header" href="#erc721supplychange-2">ERC721SupplyChange</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/IFlowERC721V3.sol">Git Source</a></p>
+<p>Represents a single mint or burn of a single ERC721 token. Whether this is
+a mint or burn must be implied by the context.</p>
+<pre><code class="language-solidity">struct ERC721SupplyChange {
+    address account;
+    uint256 id;
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="flowerc721iov1"><a class="header" href="#flowerc721iov1">FlowERC721IOV1</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/IFlowERC721V3.sol">Git Source</a></p>
+<p>Represents a set of ERC721 transfers, including self mints/burns.</p>
+<pre><code class="language-solidity">struct FlowERC721IOV1 {
+    ERC721SupplyChange[] mints;
+    ERC721SupplyChange[] burns;
+    FlowTransferV1 flow;
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="iflowerc721v3"><a class="header" href="#iflowerc721v3">IFlowERC721V3</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/IFlowERC721V3.sol">Git Source</a></p>
+<h2 id="functions-19"><a class="header" href="#functions-19">Functions</a></h2>
+<h3 id="previewflow-10"><a class="header" href="#previewflow-10">previewFlow</a></h3>
+<p>As per <code>IFlowV3</code> but returns a <code>FlowERC721IOV1</code> instead of a
+<code>FlowTransferV1</code>.</p>
+<pre><code class="language-solidity">function previewFlow(
+    Evaluable calldata evaluable,
+    uint256[] calldata callerContext,
+    SignedContextV1[] calldata signedContexts
+) external view returns (FlowERC721IOV1 calldata flowERC721IO);
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>evaluable</code></td><td><code>Evaluable</code></td><td>The <code>Evaluable</code> that is flowing.</td></tr>
+<tr><td><code>callerContext</code></td><td><code>uint256[]</code></td><td>The context of the caller.</td></tr>
+<tr><td><code>signedContexts</code></td><td><code>SignedContextV1[]</code></td><td>The signed contexts of the caller.</td></tr>
+</tbody></table>
+</div>
+<p><strong>Returns</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>flowERC721IO</code></td><td><code>FlowERC721IOV1</code></td><td>The <code>FlowERC721IOV1</code> that would occur if the flow was executed.</td></tr>
+</tbody></table>
+</div>
+<h3 id="flow-19"><a class="header" href="#flow-19">flow</a></h3>
+<p>As per <code>IFlowV3</code> but returns a <code>FlowERC721IOV1</code> instead of a
+<code>FlowTransferV1</code> and mints/burns itself as an ERC721 accordingly.</p>
+<pre><code class="language-solidity">function flow(Evaluable calldata evaluable, uint256[] calldata callerContext, SignedContextV1[] calldata signedContexts)
+    external
+    returns (FlowERC721IOV1 calldata flowERC721IO);
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>evaluable</code></td><td><code>Evaluable</code></td><td>The <code>Evaluable</code> that is flowing.</td></tr>
+<tr><td><code>callerContext</code></td><td><code>uint256[]</code></td><td>The context of the caller.</td></tr>
+<tr><td><code>signedContexts</code></td><td><code>SignedContextV1[]</code></td><td>The signed contexts of the caller.</td></tr>
+</tbody></table>
+</div>
+<p><strong>Returns</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>flowERC721IO</code></td><td><code>FlowERC721IOV1</code></td><td>The <code>FlowERC721IOV1</code> that occurred.</td></tr>
+</tbody></table>
+</div>
+<h2 id="events-15"><a class="header" href="#events-15">Events</a></h2>
+<h3 id="initialize-22"><a class="header" href="#initialize-22">Initialize</a></h3>
+<p>Contract has initialized.</p>
+<pre><code class="language-solidity">event Initialize(address sender, FlowERC721Config config);
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="constants-7"><a class="header" href="#constants-7">Constants</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/IFlowERC721V3.sol">Git Source</a></p>
+<h3 id="flow_erc721_handle_transfer_entrypoint"><a class="header" href="#flow_erc721_handle_transfer_entrypoint">FLOW_ERC721_HANDLE_TRANSFER_ENTRYPOINT</a></h3>
+<p><em>Entrypont of the <code>handleTransfer</code> evaluation.</em></p>
+<pre><code class="language-solidity">SourceIndex constant FLOW_ERC721_HANDLE_TRANSFER_ENTRYPOINT = SourceIndex.wrap(0);
+</code></pre>
+<h3 id="flow_erc721_token_uri_entrypoint"><a class="header" href="#flow_erc721_token_uri_entrypoint">FLOW_ERC721_TOKEN_URI_ENTRYPOINT</a></h3>
+<p><em>Entrypont of the <code>tokenURI</code> evaluation.</em></p>
+<pre><code class="language-solidity">SourceIndex constant FLOW_ERC721_TOKEN_URI_ENTRYPOINT = SourceIndex.wrap(1);
+</code></pre>
+<h3 id="flow_erc721_handle_transfer_min_outputs"><a class="header" href="#flow_erc721_handle_transfer_min_outputs">FLOW_ERC721_HANDLE_TRANSFER_MIN_OUTPUTS</a></h3>
+<p><em>Minimum number of outputs of the <code>handleTransfer</code> evaluation.
+This is 0 because the return stack is ignored.</em></p>
+<pre><code class="language-solidity">uint256 constant FLOW_ERC721_HANDLE_TRANSFER_MIN_OUTPUTS = 0;
+</code></pre>
+<h3 id="flow_erc721_token_uri_min_outputs"><a class="header" href="#flow_erc721_token_uri_min_outputs">FLOW_ERC721_TOKEN_URI_MIN_OUTPUTS</a></h3>
+<p><em>Minimum number of outputs of the <code>tokenURI</code> evaluation.
+This is 1 because we can only handle a single token ID value.</em></p>
+<pre><code class="language-solidity">uint256 constant FLOW_ERC721_TOKEN_URI_MIN_OUTPUTS = 1;
+</code></pre>
+<h3 id="flow_erc721_handle_transfer_max_outputs"><a class="header" href="#flow_erc721_handle_transfer_max_outputs">FLOW_ERC721_HANDLE_TRANSFER_MAX_OUTPUTS</a></h3>
+<p><em>Maximum number of outputs of the <code>handleTransfer</code> evaluation.
+This is 0 because the return stack is ignored.</em></p>
+<pre><code class="language-solidity">uint16 constant FLOW_ERC721_HANDLE_TRANSFER_MAX_OUTPUTS = 0;
+</code></pre>
+<h3 id="flow_erc721_token_uri_max_outputs"><a class="header" href="#flow_erc721_token_uri_max_outputs">FLOW_ERC721_TOKEN_URI_MAX_OUTPUTS</a></h3>
+<p><em>Maximum number of outputs of the <code>tokenURI</code> evaluation.
+This is 1 because we can only handle a single token ID value.</em></p>
+<pre><code class="language-solidity">uint16 constant FLOW_ERC721_TOKEN_URI_MAX_OUTPUTS = 1;
+</code></pre>
+<h3 id="rain_flow_erc721_sentinel"><a class="header" href="#rain_flow_erc721_sentinel">RAIN_FLOW_ERC721_SENTINEL</a></h3>
+<p><em>v3 of <code>FlowERC721</code> expected a sentinel different to
+<code>RAIN_FLOW_SENTINEL</code>, but this was generally more confusing than helpful.</em></p>
+<pre><code class="language-solidity">Sentinel constant RAIN_FLOW_ERC721_SENTINEL =
+    Sentinel.wrap(uint256(keccak256(bytes(&quot;RAIN_FLOW_ERC721_SENTINEL&quot;)) | SENTINEL_HIGH_BITS));
+</code></pre>
+<h3 id="flow_erc721_min_flow_sentinels"><a class="header" href="#flow_erc721_min_flow_sentinels">FLOW_ERC721_MIN_FLOW_SENTINELS</a></h3>
+<p><em>Minimum number of sentinels required by <code>FlowERC721</code>.
+This is 2 more than the minimum required by <code>FlowCommon</code> because the
+mints and burns are included in the stack.</em></p>
+<pre><code class="language-solidity">uint256 constant FLOW_ERC721_MIN_FLOW_SENTINELS = MIN_FLOW_SENTINELS + 2;
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="unregisteredflow"><a class="header" href="#unregisteredflow">UnregisteredFlow</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/IFlowV3.sol">Git Source</a></p>
+<p>Thrown when the flow being evaluated is unregistered.</p>
+<pre><code class="language-solidity">error UnregisteredFlow(bytes32 unregisteredHash);
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="unsupportednativeflow"><a class="header" href="#unsupportednativeflow">UnsupportedNativeFlow</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/IFlowV3.sol">Git Source</a></p>
+<p>Thrown for unsupported native transfers.</p>
+<pre><code class="language-solidity">error UnsupportedNativeFlow();
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="unsupportederc20flow"><a class="header" href="#unsupportederc20flow">UnsupportedERC20Flow</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/IFlowV3.sol">Git Source</a></p>
+<p>Thrown for unsupported erc20 transfers.</p>
+<pre><code class="language-solidity">error UnsupportedERC20Flow();
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="unsupportederc721flow"><a class="header" href="#unsupportederc721flow">UnsupportedERC721Flow</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/IFlowV3.sol">Git Source</a></p>
+<p>Thrown for unsupported erc721 transfers.</p>
+<pre><code class="language-solidity">error UnsupportedERC721Flow();
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="unsupportederc1155flow"><a class="header" href="#unsupportederc1155flow">UnsupportedERC1155Flow</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/IFlowV3.sol">Git Source</a></p>
+<p>Thrown for unsupported erc1155 transfers.</p>
+<pre><code class="language-solidity">error UnsupportedERC1155Flow();
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="flowconfig-2"><a class="header" href="#flowconfig-2">FlowConfig</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/IFlowV3.sol">Git Source</a></p>
+<p>Wraps <code>EvaluableConfig[]</code> to workaround a Solidity bug.
+https://github.com/ethereum/solidity/issues/13597</p>
+<pre><code class="language-solidity">struct FlowConfig {
+    EvaluableConfig dummyConfig;
+    EvaluableConfig[] config;
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="erc20transfer-2"><a class="header" href="#erc20transfer-2">ERC20Transfer</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/IFlowV3.sol">Git Source</a></p>
+<p>Represents a single transfer of a single ERC20 token.</p>
+<pre><code class="language-solidity">struct ERC20Transfer {
+    address token;
+    address from;
+    address to;
+    uint256 amount;
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="erc721transfer-2"><a class="header" href="#erc721transfer-2">ERC721Transfer</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/IFlowV3.sol">Git Source</a></p>
+<p>Represents a single transfer of a single ERC721 token.</p>
+<pre><code class="language-solidity">struct ERC721Transfer {
+    address token;
+    address from;
+    address to;
+    uint256 id;
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="erc1155transfer-2"><a class="header" href="#erc1155transfer-2">ERC1155Transfer</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/IFlowV3.sol">Git Source</a></p>
+<p>Represents a single transfer of a single ERC1155 token.</p>
+<pre><code class="language-solidity">struct ERC1155Transfer {
+    address token;
+    address from;
+    address to;
+    uint256 id;
+    uint256 amount;
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="flowtransferv1"><a class="header" href="#flowtransferv1">FlowTransferV1</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/IFlowV3.sol">Git Source</a></p>
+<p>Represents an ordered set of transfers that will be or have been executed.
+Supports ERC20, ERC721, and ERC1155 transfers.</p>
+<pre><code class="language-solidity">struct FlowTransferV1 {
+    ERC20Transfer[] erc20;
+    ERC721Transfer[] erc721;
+    ERC1155Transfer[] erc1155;
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="iflowv3"><a class="header" href="#iflowv3">IFlowV3</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/IFlowV3.sol">Git Source</a></p>
+<h2 id="functions-20"><a class="header" href="#functions-20">Functions</a></h2>
+<h3 id="previewflow-11"><a class="header" href="#previewflow-11">previewFlow</a></h3>
+<p>&quot;Dry run&quot; of a flow, returning the resulting token transfers without
+actually executing them.</p>
+<pre><code class="language-solidity">function previewFlow(
+    Evaluable calldata evaluable,
+    uint256[] calldata callerContext,
+    SignedContextV1[] calldata signedContexts
+) external view returns (FlowTransferV1 calldata flowTransfer);
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>evaluable</code></td><td><code>Evaluable</code></td><td>The evaluable to evaluate.</td></tr>
+<tr><td><code>callerContext</code></td><td><code>uint256[]</code></td><td>The caller context to use when evaluating the flow.</td></tr>
+<tr><td><code>signedContexts</code></td><td><code>SignedContextV1[]</code></td><td>The signed contexts to use when evaluating the flow.</td></tr>
+</tbody></table>
+</div>
+<h3 id="flow-20"><a class="header" href="#flow-20">flow</a></h3>
+<p>Given an evaluable, caller context, and signed contexts, evaluate the
+evaluable and return the resulting flow transfer. MUST process the
+flow transfer atomically, either all of it succeeds or none of it
+succeeds. MUST revert if the evaluable is not registered with the flow
+contract. MUST revert if the evaluable reverts. MUST revert if the
+evaluable returns a stack that is malformed. MUST revert if the evaluable
+returns a stack that contains a token transfer that is not allowed by
+the flow contract (e.g. if a token is being moved from an address that
+is not the caller or the flow contract).</p>
+<pre><code class="language-solidity">function flow(Evaluable calldata evaluable, uint256[] calldata callerContext, SignedContextV1[] calldata signedContexts)
+    external
+    returns (FlowTransferV1 calldata flowTransfer);
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>evaluable</code></td><td><code>Evaluable</code></td><td>The evaluable to evaluate.</td></tr>
+<tr><td><code>callerContext</code></td><td><code>uint256[]</code></td><td>The caller context to pass to the evaluable.</td></tr>
+<tr><td><code>signedContexts</code></td><td><code>SignedContextV1[]</code></td><td>The signed contexts to pass to the evaluable.</td></tr>
+</tbody></table>
+</div>
+<p><strong>Returns</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>flowTransfer</code></td><td><code>FlowTransferV1</code></td><td>The resulting flow transfer.</td></tr>
+</tbody></table>
+</div>
+<h2 id="events-16"><a class="header" href="#events-16">Events</a></h2>
+<h3 id="initialize-23"><a class="header" href="#initialize-23">Initialize</a></h3>
+<p>MUST be emitted when the flow contract is initialized.</p>
+<pre><code class="language-solidity">event Initialize(address sender, FlowConfig config);
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="constants-8"><a class="header" href="#constants-8">Constants</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/interface/IFlowV3.sol">Git Source</a></p>
+<h3 id="min_flow_sentinels"><a class="header" href="#min_flow_sentinels">MIN_FLOW_SENTINELS</a></h3>
+<p><em>The number of sentinels required by <code>FlowCommon</code>. An evaluable can never
+have fewer minimum outputs than required sentinels.</em></p>
+<pre><code class="language-solidity">uint256 constant MIN_FLOW_SENTINELS = 3;
+</code></pre>
+<h3 id="sentinel_high_bits"><a class="header" href="#sentinel_high_bits">SENTINEL_HIGH_BITS</a></h3>
+<p><em>Sets the high bits of all flow sentinels to guarantee that the numeric
+value of the sentinel will never collide with a token amount or address. This
+guarantee holds as long as the token supply is less than 2^252, and the
+that token IDs have no specific reason to collide with the sentinel.
+i.e. There won't be random collisions because the space of token IDs is
+too large.</em></p>
+<pre><code class="language-solidity">bytes32 constant SENTINEL_HIGH_BITS = bytes32(0xF000000000000000000000000000000000000000000000000000000000000000);
+</code></pre>
+<h3 id="rain_flow_sentinel"><a class="header" href="#rain_flow_sentinel">RAIN_FLOW_SENTINEL</a></h3>
+<p>*We want a sentinel with the following properties:</p>
+<ul>
+<li>Won't collide with token amounts (| with very large number)</li>
+<li>Won't collide with token addresses</li>
+<li>Won't collide with common values like <code>type(uint256).max</code> and
+<code>type(uint256).min</code></li>
+<li>Won't collide with other sentinels from unrelated contexts*</li>
+</ul>
+<pre><code class="language-solidity">Sentinel constant RAIN_FLOW_SENTINEL =
+    Sentinel.wrap(uint256(keccak256(bytes(&quot;RAIN_FLOW_SENTINEL&quot;)) | SENTINEL_HIGH_BITS));
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="contents-11"><a class="header" href="#contents-11">Contents</a></h1>
+<ul>
+<li><a href="src/lib/LibFlow.sol/library.LibFlow.html">LibFlow</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="libflow"><a class="header" href="#libflow">LibFlow</a></h1>
+<p><a href="https://github.com/rainprotocol/rain.flow/blob/b93f3e37ffc47aaff2e18f027f6f1a8544f6129f/src/lib/LibFlow.sol">Git Source</a></p>
+<h2 id="functions-21"><a class="header" href="#functions-21">Functions</a></h2>
+<h3 id="stacktoflow-8"><a class="header" href="#stacktoflow-8">stackToFlow</a></h3>
+<p>Converts pointers bounding an evaluated stack to a <code>FlowTransferV1</code>.
+Works by repeatedly consuming sentinel tuples from the stack, where the
+tuple size is 4 for ERC20, 4 for ERC721 and 5 for ERC1155. The sentinels
+are consumed from the stack from top to bottom, so the first sentinels
+consumed are the ERC20 transfers, followed by the ERC721 transfers and
+finally the ERC1155 transfers.</p>
+<pre><code class="language-solidity">function stackToFlow(Pointer stackBottom, Pointer stackTop) internal pure returns (FlowTransferV1 memory);
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>stackBottom</code></td><td><code>Pointer</code></td><td>The bottom of the stack.</td></tr>
+<tr><td><code>stackTop</code></td><td><code>Pointer</code></td><td>The top of the stack.</td></tr>
+</tbody></table>
+</div>
+<p><strong>Returns</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>&lt;none&gt;</code></td><td><code>FlowTransferV1</code></td><td>The <code>FlowTransferV1</code> representing the transfers in the stack.</td></tr>
+</tbody></table>
+</div>
+<h3 id="flowerc20-1"><a class="header" href="#flowerc20-1">flowERC20</a></h3>
+<p>Processes the ERC20 transfers in the flow.
+Reverts if the <code>from</code> address is not either the <code>msg.sender</code> or the
+flow contract. Uses <code>IERC20.safeTransferFrom</code> to transfer the tokens to
+ensure that reverts from the token are respected.</p>
+<pre><code class="language-solidity">function flowERC20(FlowTransferV1 memory flowTransfer) internal;
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>flowTransfer</code></td><td><code>FlowTransferV1</code></td><td>The <code>FlowTransferV1</code> to process. Tokens other than ERC20 tokens are ignored.</td></tr>
+</tbody></table>
+</div>
+<h3 id="flowerc721-1"><a class="header" href="#flowerc721-1">flowERC721</a></h3>
+<p>Processes the ERC721 transfers in the flow.
+Reverts if the <code>from</code> address is not either the <code>msg.sender</code> or the
+flow contract. Uses <code>IERC721.safeTransferFrom</code> to transfer the tokens to
+ensure that reverts from the token are respected.</p>
+<pre><code class="language-solidity">function flowERC721(FlowTransferV1 memory flowTransfer) internal;
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>flowTransfer</code></td><td><code>FlowTransferV1</code></td><td>The <code>FlowTransferV1</code> to process. Tokens other than ERC721 tokens are ignored.</td></tr>
+</tbody></table>
+</div>
+<h3 id="flowerc1155-1"><a class="header" href="#flowerc1155-1">flowERC1155</a></h3>
+<p>Processes the ERC1155 transfers in the flow.
+Reverts if the <code>from</code> address is not either the <code>msg.sender</code> or the
+flow contract. Uses <code>IERC1155.safeTransferFrom</code> to transfer the tokens to
+ensure that reverts from the token are respected.</p>
+<pre><code class="language-solidity">function flowERC1155(FlowTransferV1 memory flowTransfer) internal;
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>flowTransfer</code></td><td><code>FlowTransferV1</code></td><td>The <code>FlowTransferV1</code> to process. Tokens other than ERC1155 tokens are ignored.</td></tr>
+</tbody></table>
+</div>
+<h3 id="flow-21"><a class="header" href="#flow-21">flow</a></h3>
+<p>Processes a flow transfer. Firstly sets state for the interpreter on the
+interpreter store. Then processes the ERC20, ERC721 and ERC1155 transfers
+in the flow. Guarantees ordering of the transfers but DOES NOT prevent
+reentrancy attacks. This is the responsibility of the caller.</p>
+<pre><code class="language-solidity">function flow(FlowTransferV1 memory flowTransfer, IInterpreterStoreV1 interpreterStore, uint256[] memory kvs)
+    internal;
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>flowTransfer</code></td><td><code>FlowTransferV1</code></td><td>The <code>FlowTransferV1</code> to process.</td></tr>
+<tr><td><code>interpreterStore</code></td><td><code>IInterpreterStoreV1</code></td><td>The <code>IInterpreterStoreV1</code> to set state on.</td></tr>
+<tr><td><code>kvs</code></td><td><code>uint256[]</code></td><td>The key value pairs to set on the interpreter store.</td></tr>
+</tbody></table>
+</div>
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="solidity.min.js"></script>
+
+        <script>
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+    </div>
+    </body>
+</html>
