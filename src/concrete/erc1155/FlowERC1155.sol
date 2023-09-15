@@ -15,7 +15,11 @@ import {
     SignedContextV1,
     FlowERC1155ConfigV2,
     ERC1155SupplyChange,
-    RAIN_FLOW_ERC1155_SENTINEL
+    RAIN_FLOW_SENTINEL,
+    FLOW_ERC1155_HANDLE_TRANSFER_ENTRYPOINT,
+    FLOW_ERC1155_HANDLE_TRANSFER_MAX_OUTPUTS,
+    FLOW_ERC1155_HANDLE_TRANSFER_MIN_OUTPUTS,
+    FLOW_ERC1155_MIN_FLOW_SENTINELS
 } from "../../interface/unstable/IFlowERC1155V4.sol";
 import {LibBytecode} from "lib/rain.interpreter/src/lib/bytecode/LibBytecode.sol";
 import {IInterpreterV1} from "rain.interpreter/src/interface/IInterpreterV1.sol";
@@ -25,28 +29,27 @@ import {Pointer} from "rain.solmem/lib/LibPointer.sol";
 import {LibFlow} from "../../lib/LibFlow.sol";
 import {SourceIndex} from "rain.interpreter/src/interface/IInterpreterV1.sol";
 import {
-    MIN_FLOW_SENTINELS,
-    FlowCommon,
-    DeployerDiscoverableMetaV2ConstructionConfig,
-    ERC1155Receiver
+    FlowCommon, DeployerDiscoverableMetaV2ConstructionConfig, ERC1155Receiver
 } from "../../abstract/FlowCommon.sol";
 import {LibContext} from "rain.interpreter/src/lib/caller/LibContext.sol";
 
+/// @dev The hash of the meta data expected by the `FlowCommon` constructor.
 bytes32 constant CALLER_META_HASH = bytes32(0x7ea70f837234357ec1bb5b777e04453ebaf3ca778a98805c4bb20a738d559a21);
 
-SourceIndex constant HANDLE_TRANSFER_ENTRYPOINT = SourceIndex.wrap(0);
-uint256 constant HANDLE_TRANSFER_MIN_OUTPUTS = 0;
-uint16 constant HANDLE_TRANSFER_MAX_OUTPUTS = 0;
-
-uint256 constant FLOW_ERC1155_MIN_OUTPUTS = MIN_FLOW_SENTINELS + 2;
-
+/// @title FlowERC1155
+/// See `IFlowERC1155V4` for documentation.
 contract FlowERC1155 is ICloneableV2, IFlowERC1155V4, FlowCommon, ERC1155 {
     using LibStackSentinel for Pointer;
     using LibUint256Matrix for uint256[];
+    using LibUint256Array for uint256[];
 
+    /// True if the evaluable needs to be called on every transfer.
     bool private sEvalHandleTransfer;
+
+    /// The `Evaluable` that handles transfers.
     Evaluable internal sEvaluable;
 
+    /// Forwards the `FlowCommon` constructor.
     constructor(DeployerDiscoverableMetaV2ConstructionConfig memory config) FlowCommon(CALLER_META_HASH, config) {}
 
     /// Overloaded typed initialize function MUST revert with this error.
@@ -64,11 +67,11 @@ contract FlowERC1155 is ICloneableV2, IFlowERC1155V4, FlowCommon, ERC1155 {
         // Set state before external calls here.
         bool evalHandleTransfer = LibBytecode.sourceCount(flowERC1155Config.evaluableConfig.bytecode) > 0
             && LibBytecode.sourceOpsLength(
-                flowERC1155Config.evaluableConfig.bytecode, SourceIndex.unwrap(HANDLE_TRANSFER_ENTRYPOINT)
+                flowERC1155Config.evaluableConfig.bytecode, SourceIndex.unwrap(FLOW_ERC1155_HANDLE_TRANSFER_ENTRYPOINT)
             ) > 0;
         sEvalHandleTransfer = evalHandleTransfer;
 
-        flowCommonInit(flowERC1155Config.flowConfig, FLOW_ERC1155_MIN_OUTPUTS);
+        flowCommonInit(flowERC1155Config.flowConfig, FLOW_ERC1155_MIN_FLOW_SENTINELS);
 
         if (evalHandleTransfer) {
             (IInterpreterV1 interpreter, IInterpreterStoreV1 store, address expression) = flowERC1155Config
@@ -77,7 +80,7 @@ contract FlowERC1155 is ICloneableV2, IFlowERC1155V4, FlowCommon, ERC1155 {
                 .deployExpression(
                 flowERC1155Config.evaluableConfig.bytecode,
                 flowERC1155Config.evaluableConfig.constants,
-                LibUint256Array.arrayFrom(HANDLE_TRANSFER_MIN_OUTPUTS)
+                LibUint256Array.arrayFrom(FLOW_ERC1155_HANDLE_TRANSFER_MIN_OUTPUTS)
             );
             // There's no way to set this before the external call because the
             // output of the `deployExpression` call is the input to `Evaluable`.
@@ -90,10 +93,6 @@ contract FlowERC1155 is ICloneableV2, IFlowERC1155V4, FlowCommon, ERC1155 {
         }
 
         return ICLONEABLE_V2_SUCCESS;
-    }
-
-    function _dispatchHandleTransfer(address expression) internal pure returns (EncodedDispatch) {
-        return LibEncodedDispatch.encode(expression, HANDLE_TRANSFER_ENTRYPOINT, HANDLE_TRANSFER_MAX_OUTPUTS);
     }
 
     /// Needed here to fix Open Zeppelin implementing `supportsInterface` on
@@ -140,7 +139,14 @@ contract FlowERC1155 is ICloneableV2, IFlowERC1155V4, FlowCommon, ERC1155 {
                 }
 
                 (uint256[] memory stack, uint256[] memory kvs) = evaluable.interpreter.eval(
-                    evaluable.store, DEFAULT_STATE_NAMESPACE, _dispatchHandleTransfer(evaluable.expression), context
+                    evaluable.store,
+                    DEFAULT_STATE_NAMESPACE,
+                    LibEncodedDispatch.encode(
+                        evaluable.expression,
+                        FLOW_ERC1155_HANDLE_TRANSFER_ENTRYPOINT,
+                        FLOW_ERC1155_HANDLE_TRANSFER_MAX_OUTPUTS
+                    ),
+                    context
                 );
                 (stack);
                 if (kvs.length > 0) {
@@ -150,32 +156,57 @@ contract FlowERC1155 is ICloneableV2, IFlowERC1155V4, FlowCommon, ERC1155 {
         }
     }
 
-    function _previewFlow(Evaluable memory evaluable, uint256[][] memory context)
-        internal
-        view
-        returns (FlowERC1155IOV1 memory, uint256[] memory)
+    /// @inheritdoc IFlowERC1155V4
+    function stackToFlow(uint256[] memory stack)
+        external
+        pure
+        override
+        returns (FlowERC1155IOV1 memory flowERC1155IO)
     {
+        return _stackToFlow(stack.dataPointer(), stack.endPointer());
+    }
+
+    /// @inheritdoc IFlowERC1155V4
+    function flow(Evaluable memory evaluable, uint256[] memory callerContext, SignedContextV1[] memory signedContexts)
+        external
+        virtual
+        returns (FlowERC1155IOV1 memory)
+    {
+        return _flow(evaluable, callerContext, signedContexts);
+    }
+
+    /// Wraps the standard `LibFlow.stackToFlow` function with the addition of
+    /// consuming the mint/burn sentinels from the stack and returning them in
+    /// the `FlowERC1155IOV1`.
+    /// @param stackBottom The bottom of the stack.
+    /// @param stackTop The top of the stack.
+    /// @return flowERC1155IO The `FlowERC1155IOV1` representation of the stack.
+    function _stackToFlow(Pointer stackBottom, Pointer stackTop) internal pure returns (FlowERC1155IOV1 memory) {
         ERC1155SupplyChange[] memory mints;
         ERC1155SupplyChange[] memory burns;
         Pointer tuplesPointer;
-        (Pointer stackBottom, Pointer stackTop, uint256[] memory kvs) = flowStack(evaluable, context);
+
         // mints
         // https://github.com/crytic/slither/issues/2126
         //slither-disable-next-line unused-return
-        (stackTop, tuplesPointer) = stackBottom.consumeSentinelTuples(stackTop, RAIN_FLOW_ERC1155_SENTINEL, 3);
+        (stackTop, tuplesPointer) = stackBottom.consumeSentinelTuples(stackTop, RAIN_FLOW_SENTINEL, 3);
         assembly ("memory-safe") {
             mints := tuplesPointer
         }
         // burns
         // https://github.com/crytic/slither/issues/2126
         //slither-disable-next-line unused-return
-        (stackTop, tuplesPointer) = stackBottom.consumeSentinelTuples(stackTop, RAIN_FLOW_ERC1155_SENTINEL, 3);
+        (stackTop, tuplesPointer) = stackBottom.consumeSentinelTuples(stackTop, RAIN_FLOW_SENTINEL, 3);
         assembly ("memory-safe") {
             burns := tuplesPointer
         }
-        return (FlowERC1155IOV1(mints, burns, LibFlow.stackToFlow(stackBottom, stackTop)), kvs);
+        return FlowERC1155IOV1(mints, burns, LibFlow.stackToFlow(stackBottom, stackTop));
     }
 
+    /// Wraps the standard `LibFlow.flow` function to handle minting and burning
+    /// of the flow contract itself. This involves consuming the mint/burn
+    /// sentinels from the stack and minting/burning the tokens accordingly, then
+    /// calling `LibFlow.flow` to handle the rest of the flow.
     function _flow(Evaluable memory evaluable, uint256[] memory callerContext, SignedContextV1[] memory signedContexts)
         internal
         virtual
@@ -183,36 +214,18 @@ contract FlowERC1155 is ICloneableV2, IFlowERC1155V4, FlowCommon, ERC1155 {
         returns (FlowERC1155IOV1 memory)
     {
         unchecked {
-            uint256[][] memory context = LibContext.build(callerContext.matrixFrom(), signedContexts);
-            emit Context(msg.sender, context);
-            (FlowERC1155IOV1 memory flowIO, uint256[] memory kvs) = _previewFlow(evaluable, context);
-            for (uint256 i = 0; i < flowIO.mints.length; i++) {
+            (Pointer stackBottom, Pointer stackTop, uint256[] memory kvs) =
+                _flowStack(evaluable, callerContext, signedContexts);
+            FlowERC1155IOV1 memory flowERC1155IO = _stackToFlow(stackBottom, stackTop);
+            for (uint256 i = 0; i < flowERC1155IO.mints.length; i++) {
                 // @todo support data somehow.
-                _mint(flowIO.mints[i].account, flowIO.mints[i].id, flowIO.mints[i].amount, "");
+                _mint(flowERC1155IO.mints[i].account, flowERC1155IO.mints[i].id, flowERC1155IO.mints[i].amount, "");
             }
-            for (uint256 i = 0; i < flowIO.burns.length; i++) {
-                _burn(flowIO.burns[i].account, flowIO.burns[i].id, flowIO.burns[i].amount);
+            for (uint256 i = 0; i < flowERC1155IO.burns.length; i++) {
+                _burn(flowERC1155IO.burns[i].account, flowERC1155IO.burns[i].id, flowERC1155IO.burns[i].amount);
             }
-            LibFlow.flow(flowIO.flow, evaluable.store, kvs);
-            return flowIO;
+            LibFlow.flow(flowERC1155IO.flow, evaluable.store, kvs);
+            return flowERC1155IO;
         }
-    }
-
-    function previewFlow(
-        Evaluable memory evaluable,
-        uint256[] memory callerContext,
-        SignedContextV1[] memory signedContexts
-    ) external view virtual returns (FlowERC1155IOV1 memory) {
-        uint256[][] memory context = LibContext.build(callerContext.matrixFrom(), signedContexts);
-        (FlowERC1155IOV1 memory flowERC1155IO,) = _previewFlow(evaluable, context);
-        return flowERC1155IO;
-    }
-
-    function flow(Evaluable memory evaluable, uint256[] memory callerContext, SignedContextV1[] memory signedContexts)
-        external
-        virtual
-        returns (FlowERC1155IOV1 memory)
-    {
-        return _flow(evaluable, callerContext, signedContexts);
     }
 }

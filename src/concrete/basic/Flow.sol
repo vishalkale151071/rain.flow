@@ -2,13 +2,9 @@
 pragma solidity =0.8.19;
 
 import {ICloneableV2, ICLONEABLE_V2_SUCCESS} from "rain.factory/src/interface/ICloneableV2.sol";
-import {
-    FlowCommon,
-    DeployerDiscoverableMetaV2ConstructionConfig,
-    LibContext,
-    MIN_FLOW_SENTINELS
-} from "../../abstract/FlowCommon.sol";
-import {IFlowV4, LibFlow} from "../../lib/LibFlow.sol";
+import {FlowCommon, DeployerDiscoverableMetaV2ConstructionConfig, LibContext} from "../../abstract/FlowCommon.sol";
+import {IFlowV4, MIN_FLOW_SENTINELS} from "../../interface/unstable/IFlowV4.sol";
+import {LibFlow} from "../../lib/LibFlow.sol";
 import {LibUint256Matrix} from "rain.solmem/lib/LibUint256Matrix.sol";
 import {Pointer} from "rain.solmem/lib/LibPointer.sol";
 import {LibUint256Array} from "rain.solmem/lib/LibUint256Array.sol";
@@ -56,9 +52,8 @@ contract Flow is ICloneableV2, IFlowV4, FlowCommon {
         nonReentrant
         returns (FlowTransferV1 memory)
     {
-        uint256[][] memory context = LibContext.build(callerContext.matrixFrom(), signedContexts);
-        emit Context(msg.sender, context);
-        (Pointer stackBottom, Pointer stackTop, uint256[] memory kvs) = flowStack(evaluable, context);
+        (Pointer stackBottom, Pointer stackTop, uint256[] memory kvs) =
+            _flowStack(evaluable, callerContext, signedContexts);
         FlowTransferV1 memory flowTransfer = LibFlow.stackToFlow(stackBottom, stackTop);
         LibFlow.flow(flowTransfer, evaluable.store, kvs);
         return flowTransfer;
