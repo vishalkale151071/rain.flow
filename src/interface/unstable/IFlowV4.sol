@@ -15,7 +15,8 @@ import {
     UnregisteredFlow,
     UnsupportedERC20Flow,
     UnsupportedERC721Flow,
-    UnsupportedERC1155Flow
+    UnsupportedERC1155Flow,
+    MIN_FLOW_SENTINELS
 } from "../IFlowV3.sol";
 
 /// @title IFlowV4

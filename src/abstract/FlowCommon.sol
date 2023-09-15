@@ -6,7 +6,7 @@ import {Pointer} from "rain.solmem/lib/LibPointer.sol";
 import {IInterpreterCallerV2, SignedContextV1} from "rain.interpreter/src/interface/IInterpreterCallerV2.sol";
 import {LibEncodedDispatch} from "rain.interpreter/src/lib/caller/LibEncodedDispatch.sol";
 import {LibContext} from "rain.interpreter/src/lib/caller/LibContext.sol";
-import {UnregisteredFlow} from "../interface/unstable/IFlowV4.sol";
+import {UnregisteredFlow, MIN_FLOW_SENTINELS} from "../interface/unstable/IFlowV4.sol";
 import {
     DeployerDiscoverableMetaV2,
     DeployerDiscoverableMetaV2ConstructionConfig
@@ -37,10 +37,6 @@ import {LibUint256Matrix} from "rain.solmem/lib/LibUint256Matrix.sol";
 /// should both be compile time constants.
 /// @param flowMinOutputs The min outputs for the flow.
 error BadMinStackLength(uint256 flowMinOutputs);
-
-/// @dev The number of sentinels required by `FlowCommon`. An evaluable can never
-/// have fewer minimum outputs than required sentinels.
-uint256 constant MIN_FLOW_SENTINELS = 3;
 
 /// @dev The entrypoint for a flow is always `0` because each flow has its own
 /// evaluable with its own entrypoint. Running multiple flows involves evaluating
@@ -220,7 +216,11 @@ abstract contract FlowCommon is
     }
 
     /// TODO merge both flowStack functions into one.
-    function _flowStack(Evaluable memory evaluable, uint256[] memory callerContext, SignedContextV1[] memory signedContexts) internal returns (Pointer, Pointer, uint256[] memory) {
+    function _flowStack(
+        Evaluable memory evaluable,
+        uint256[] memory callerContext,
+        SignedContextV1[] memory signedContexts
+    ) internal returns (Pointer, Pointer, uint256[] memory) {
         uint256[][] memory context = LibContext.build(callerContext.matrixFrom(), signedContexts);
         emit Context(msg.sender, context);
         return _flowStack(evaluable, context);

@@ -14,18 +14,18 @@ import {
     SignedContextV1,
     FLOW_ERC20_HANDLE_TRANSFER_ENTRYPOINT,
     FLOW_ERC20_HANDLE_TRANSFER_MIN_OUTPUTS,
-    FLOW_ERC20_HANDLE_TRANSFER_MAX_OUTPUTS
+    FLOW_ERC20_HANDLE_TRANSFER_MAX_OUTPUTS,
+    RAIN_FLOW_SENTINEL,
+    FLOW_ERC20_MIN_FLOW_SENTINELS
 } from "../../interface/unstable/IFlowERC20V4.sol";
 import {LibBytecode} from "lib/rain.interpreter/src/lib/bytecode/LibBytecode.sol";
 import {EncodedDispatch, LibEncodedDispatch} from "rain.interpreter/src/lib/caller/LibEncodedDispatch.sol";
-import {RAIN_FLOW_SENTINEL} from "../../interface/unstable/IFlowERC20V4.sol";
 import {Sentinel, LibStackSentinel} from "rain.solmem/lib/LibStackSentinel.sol";
 import {LibFlow} from "../../lib/LibFlow.sol";
 import {
     FlowCommon,
     DeployerDiscoverableMetaV2,
-    DeployerDiscoverableMetaV2ConstructionConfig,
-    MIN_FLOW_SENTINELS
+    DeployerDiscoverableMetaV2ConstructionConfig
 } from "../../abstract/FlowCommon.sol";
 import {SourceIndex, IInterpreterV1} from "rain.interpreter/src/interface/IInterpreterV1.sol";
 import {IInterpreterStoreV1} from "rain.interpreter/src/interface/IInterpreterStoreV1.sol";
@@ -53,7 +53,7 @@ contract FlowERC20 is ICloneableV2, IFlowERC20V4, FlowCommon, ERC20 {
     /// every transfer. This is only set if `sEvalHandleTransfer` is true.
     Evaluable internal sEvaluable;
 
-    /// Forwards the `FlowCommon` constructor arguments to the `FlowCommon`
+    /// Forwards the `FlowCommon` constructor arguments to the `FlowCommon`.
     constructor(DeployerDiscoverableMetaV2ConstructionConfig memory config) FlowCommon(CALLER_META_HASH, config) {}
 
     /// Overloaded typed initialize function MUST revert with this error.
@@ -75,7 +75,7 @@ contract FlowERC20 is ICloneableV2, IFlowERC20V4, FlowCommon, ERC20 {
             ) > 0;
         sEvalHandleTransfer = evalHandleTransfer;
 
-        flowCommonInit(flowERC20Config.flowConfig, MIN_FLOW_SENTINELS + 2);
+        flowCommonInit(flowERC20Config.flowConfig, FLOW_ERC20_MIN_FLOW_SENTINELS);
 
         if (evalHandleTransfer) {
             (IInterpreterV1 interpreter, IInterpreterStoreV1 store, address expression) = flowERC20Config
@@ -162,6 +162,7 @@ contract FlowERC20 is ICloneableV2, IFlowERC20V4, FlowCommon, ERC20 {
         ERC20SupplyChange[] memory mints;
         ERC20SupplyChange[] memory burns;
         Pointer tuplesPointer;
+
         // mints
         // https://github.com/crytic/slither/issues/2126
         //slither-disable-next-line unused-return
@@ -191,7 +192,8 @@ contract FlowERC20 is ICloneableV2, IFlowERC20V4, FlowCommon, ERC20 {
         returns (FlowERC20IOV1 memory)
     {
         unchecked {
-            (Pointer stackBottom, Pointer stackTop, uint256[] memory kvs) = _flowStack(evaluable, callerContext, signedContexts);
+            (Pointer stackBottom, Pointer stackTop, uint256[] memory kvs) =
+                _flowStack(evaluable, callerContext, signedContexts);
             FlowERC20IOV1 memory flowERC20IO = _stackToFlow(stackBottom, stackTop);
             for (uint256 i = 0; i < flowERC20IO.mints.length; ++i) {
                 _mint(flowERC20IO.mints[i].account, flowERC20IO.mints[i].amount);
