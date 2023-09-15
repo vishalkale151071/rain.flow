@@ -3,7 +3,15 @@ pragma solidity ^0.8.18;
 
 import {IFlowV4, RAIN_FLOW_SENTINEL} from "../interface/unstable/IFlowV4.sol";
 import {Pointer} from "rain.solmem/lib/LibPointer.sol";
-import {FlowTransferV1, ERC20Transfer, ERC721Transfer, ERC1155Transfer} from "../interface/unstable/IFlowV4.sol";
+import {
+    FlowTransferV1,
+    ERC20Transfer,
+    ERC721Transfer,
+    ERC1155Transfer,
+    UnsupportedERC20Flow,
+    UnsupportedERC721Flow,
+    UnsupportedERC1155Flow
+} from "../interface/unstable/IFlowV4.sol";
 import {IInterpreterStoreV1, DEFAULT_STATE_NAMESPACE} from "rain.interpreter/src/interface/IInterpreterStoreV1.sol";
 import {LibStackSentinel} from "rain.solmem/lib/LibStackSentinel.sol";
 
@@ -11,18 +19,6 @@ import {IERC20} from "openzeppelin-contracts/contracts/token/ERC20/IERC20.sol";
 import {SafeERC20} from "openzeppelin-contracts/contracts/token/ERC20/utils/SafeERC20.sol";
 import {IERC721} from "openzeppelin-contracts/contracts/token/ERC721/IERC721.sol";
 import {IERC1155} from "openzeppelin-contracts/contracts/token/ERC1155/IERC1155.sol";
-
-/// @dev Thrown for unsupported native transfers.
-error UnsupportedNativeFlow();
-
-/// @dev Thrown for unsupported erc20 transfers.
-error UnsupportedERC20Flow();
-
-/// @dev Thrown for unsupported erc721 transfers.
-error UnsupportedERC721Flow();
-
-/// @dev Thrown for unsupported erc1155 transfers.
-error UnsupportedERC1155Flow();
 
 library LibFlow {
     using SafeERC20 for IERC20;

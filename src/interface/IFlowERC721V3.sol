@@ -6,6 +6,9 @@ import "rain.interpreter/src/lib/caller/LibEvaluable.sol";
 
 import "./IFlowV3.sol";
 
+Sentinel constant RAIN_FLOW_ERC721_SENTINEL =
+    Sentinel.wrap(uint256(keccak256(bytes("RAIN_FLOW_ERC721_SENTINEL")) | SENTINEL_HIGH_BITS));
+
 /// Constructor config.
 /// @param Constructor config for the ERC721 token minted according to flow
 /// schedule in `flow`.

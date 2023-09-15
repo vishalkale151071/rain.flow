@@ -6,6 +6,9 @@ import {EvaluableConfigV2} from "rain.interpreter/src/lib/caller/LibEvaluable.so
 
 import "./IFlowV3.sol";
 
+Sentinel constant RAIN_FLOW_ERC1155_SENTINEL =
+    Sentinel.wrap(uint256(keccak256(bytes("RAIN_FLOW_ERC1155_SENTINEL")) | SENTINEL_HIGH_BITS));
+
 struct FlowERC1155Config {
     string uri;
     EvaluableConfig evaluableConfig;

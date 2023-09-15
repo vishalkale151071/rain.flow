@@ -6,10 +6,7 @@ import "rain.interpreter/src/lib/caller/LibEvaluable.sol";
 
 import {FlowERC721IOV1, ERC721SupplyChange} from "../IFlowERC721V3.sol";
 
-import "./IFlowV4.sol";
-
-Sentinel constant RAIN_FLOW_ERC721_SENTINEL =
-    Sentinel.wrap(uint256(keccak256(bytes("RAIN_FLOW_ERC721_SENTINEL")) | SENTINEL_HIGH_BITS));
+import {RAIN_FLOW_SENTINEL} from "./IFlowV4.sol";
 
 /// Constructor config.
 /// @param name As per Open Zeppelin `ERC721Upgradeable`.

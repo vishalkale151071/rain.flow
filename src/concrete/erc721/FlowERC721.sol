@@ -30,7 +30,7 @@ import {Evaluable, DEFAULT_STATE_NAMESPACE} from "rain.interpreter/src/lib/calle
 import {IInterpreterV1} from "rain.interpreter/src/interface/IInterpreterV1.sol";
 import {IInterpreterStoreV1} from "rain.interpreter/src/interface/IInterpreterStoreV1.sol";
 import {Pointer} from "rain.solmem/lib/LibPointer.sol";
-import {RAIN_FLOW_ERC721_SENTINEL} from "../../interface/unstable/IFlowERC721V4.sol";
+import {RAIN_FLOW_SENTINEL} from "../../interface/unstable/IFlowERC721V4.sol";
 
 /// Thrown when burner of tokens is not the owner of tokens.
 error BurnerNotOwner();
@@ -194,18 +194,18 @@ contract FlowERC721 is ICloneableV2, IFlowERC721V4, FlowCommon, ERC721 {
         ERC721SupplyChange[] memory burns;
         Pointer tuplesPointer;
 
-        (Pointer stackBottom, Pointer stackTop, uint256[] memory kvs) = flowStack(evaluable, context);
+        (Pointer stackBottom, Pointer stackTop, uint256[] memory kvs) = _flowStack(evaluable, context);
         // mints
         // https://github.com/crytic/slither/issues/2126
         //slither-disable-next-line unused-return
-        (stackTop, tuplesPointer) = stackBottom.consumeSentinelTuples(stackTop, RAIN_FLOW_ERC721_SENTINEL, 2);
+        (stackTop, tuplesPointer) = stackBottom.consumeSentinelTuples(stackTop, RAIN_FLOW_SENTINEL, 2);
         assembly ("memory-safe") {
             mints := tuplesPointer
         }
         // burns
         // https://github.com/crytic/slither/issues/2126
         //slither-disable-next-line unused-return
-        (stackTop, tuplesPointer) = stackBottom.consumeSentinelTuples(stackTop, RAIN_FLOW_ERC721_SENTINEL, 2);
+        (stackTop, tuplesPointer) = stackBottom.consumeSentinelTuples(stackTop, RAIN_FLOW_SENTINEL, 2);
         assembly ("memory-safe") {
             burns := tuplesPointer
         }

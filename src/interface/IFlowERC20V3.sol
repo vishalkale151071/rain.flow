@@ -3,8 +3,15 @@ pragma solidity ^0.8.18;
 
 import "rain.interpreter/src/interface/IInterpreterCallerV2.sol";
 import "rain.interpreter/src/lib/caller/LibEvaluable.sol";
-
+import {Sentinel} from "rain.solmem/lib/LibStackSentinel.sol";
 import "./IFlowV3.sol";
+
+Sentinel constant RAIN_FLOW_ERC20_SENTINEL =
+    Sentinel.wrap(uint256(keccak256(bytes("RAIN_FLOW_ERC20_SENTINEL")) | SENTINEL_HIGH_BITS));
+
+SourceIndex constant FLOW_ERC20_HANDLE_TRANSFER_ENTRYPOINT = SourceIndex.wrap(0);
+uint256 constant FLOW_ERC20_HANDLE_TRANSFER_MIN_OUTPUTS = 0;
+uint16 constant FLOW_ERC20_HANDLE_TRANSFER_MAX_OUTPUTS = 0;
 
 struct ERC20SupplyChange {
     address account;

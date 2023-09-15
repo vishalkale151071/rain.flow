@@ -3,7 +3,7 @@ pragma solidity =0.8.19;
 
 import {LibUint256Array} from "rain.solmem/lib/LibUint256Array.sol";
 import {Pointer} from "rain.solmem/lib/LibPointer.sol";
-import {IInterpreterCallerV2} from "rain.interpreter/src/interface/IInterpreterCallerV2.sol";
+import {IInterpreterCallerV2, SignedContextV1} from "rain.interpreter/src/interface/IInterpreterCallerV2.sol";
 import {LibEncodedDispatch} from "rain.interpreter/src/lib/caller/LibEncodedDispatch.sol";
 import {LibContext} from "rain.interpreter/src/lib/caller/LibContext.sol";
 import {UnregisteredFlow} from "../interface/unstable/IFlowV4.sol";
@@ -30,6 +30,7 @@ import {
 } from "openzeppelin-contracts-upgradeable/contracts/token/ERC1155/utils/ERC1155HolderUpgradeable.sol";
 import {ReentrancyGuardUpgradeable as ReentrancyGuard} from
     "openzeppelin-contracts-upgradeable/contracts/security/ReentrancyGuardUpgradeable.sol";
+import {LibUint256Matrix} from "rain.solmem/lib/LibUint256Matrix.sol";
 
 /// Thrown when the min outputs for a flow is fewer than the sentinels.
 /// This is always an implementation bug as the min outputs and sentinel count
@@ -94,6 +95,7 @@ abstract contract FlowCommon is
     DeployerDiscoverableMetaV2
 {
     using LibUint256Array for uint256[];
+    using LibUint256Matrix for uint256[];
     using LibEvaluable for Evaluable;
 
     /// @dev This mapping tracks all flows that are registered at initialization.
@@ -195,7 +197,7 @@ abstract contract FlowCommon is
     /// @param context The context to evaluate the evaluable with. The inheriting
     /// contract is expected to provide the correct context for the flow,
     /// including checking signatures etc.
-    function flowStack(Evaluable memory evaluable, uint256[][] memory context)
+    function _flowStack(Evaluable memory evaluable, uint256[][] memory context)
         internal
         view
         returns (Pointer, Pointer, uint256[] memory)
@@ -215,5 +217,12 @@ abstract contract FlowCommon is
             context
         );
         return (stack.dataPointer(), stack.endPointer(), kvs);
+    }
+
+    /// TODO merge both flowStack functions into one.
+    function _flowStack(Evaluable memory evaluable, uint256[] memory callerContext, SignedContextV1[] memory signedContexts) internal returns (Pointer, Pointer, uint256[] memory) {
+        uint256[][] memory context = LibContext.build(callerContext.matrixFrom(), signedContexts);
+        emit Context(msg.sender, context);
+        return _flowStack(evaluable, context);
     }
 }

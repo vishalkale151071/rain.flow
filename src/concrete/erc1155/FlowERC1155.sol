@@ -15,7 +15,7 @@ import {
     SignedContextV1,
     FlowERC1155ConfigV2,
     ERC1155SupplyChange,
-    RAIN_FLOW_ERC1155_SENTINEL
+    RAIN_FLOW_SENTINEL
 } from "../../interface/unstable/IFlowERC1155V4.sol";
 import {LibBytecode} from "lib/rain.interpreter/src/lib/bytecode/LibBytecode.sol";
 import {IInterpreterV1} from "rain.interpreter/src/interface/IInterpreterV1.sol";
@@ -158,18 +158,18 @@ contract FlowERC1155 is ICloneableV2, IFlowERC1155V4, FlowCommon, ERC1155 {
         ERC1155SupplyChange[] memory mints;
         ERC1155SupplyChange[] memory burns;
         Pointer tuplesPointer;
-        (Pointer stackBottom, Pointer stackTop, uint256[] memory kvs) = flowStack(evaluable, context);
+        (Pointer stackBottom, Pointer stackTop, uint256[] memory kvs) = _flowStack(evaluable, context);
         // mints
         // https://github.com/crytic/slither/issues/2126
         //slither-disable-next-line unused-return
-        (stackTop, tuplesPointer) = stackBottom.consumeSentinelTuples(stackTop, RAIN_FLOW_ERC1155_SENTINEL, 3);
+        (stackTop, tuplesPointer) = stackBottom.consumeSentinelTuples(stackTop, RAIN_FLOW_SENTINEL, 3);
         assembly ("memory-safe") {
             mints := tuplesPointer
         }
         // burns
         // https://github.com/crytic/slither/issues/2126
         //slither-disable-next-line unused-return
-        (stackTop, tuplesPointer) = stackBottom.consumeSentinelTuples(stackTop, RAIN_FLOW_ERC1155_SENTINEL, 3);
+        (stackTop, tuplesPointer) = stackBottom.consumeSentinelTuples(stackTop, RAIN_FLOW_SENTINEL, 3);
         assembly ("memory-safe") {
             burns := tuplesPointer
         }

@@ -56,9 +56,7 @@ contract Flow is ICloneableV2, IFlowV4, FlowCommon {
         nonReentrant
         returns (FlowTransferV1 memory)
     {
-        uint256[][] memory context = LibContext.build(callerContext.matrixFrom(), signedContexts);
-        emit Context(msg.sender, context);
-        (Pointer stackBottom, Pointer stackTop, uint256[] memory kvs) = flowStack(evaluable, context);
+        (Pointer stackBottom, Pointer stackTop, uint256[] memory kvs) = _flowStack(evaluable, callerContext, signedContexts);
         FlowTransferV1 memory flowTransfer = LibFlow.stackToFlow(stackBottom, stackTop);
         LibFlow.flow(flowTransfer, evaluable.store, kvs);
         return flowTransfer;
