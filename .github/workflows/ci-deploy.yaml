@@ -16,8 +16,8 @@ jobs:
         uses: foundry-rs/foundry-toolchain@v1
         with:
           version: nightly
-      - name: Report public key to make it easy to send funds for deployments
-        run: cast wallet address "${DEPLOYMENT_KEY}"
+      # - name: Report public key to make it easy to send funds for deployments
+      #   run: cast wallet address "${DEPLOYMENT_KEY}"
       # - name: Install rain
       #   run: nix profile install github:rainprotocol/rain.cli
       # - run: rain --version
@@ -25,4 +25,4 @@ jobs:
         env:
           CI_DEPLOY_RPC_URL: ${{ secrets.CI_DEPLOY_RPC_URL }}
           EXPLORER_VERIFICATION_KEY: ${{ secrets.EXPLORER_VERIFICATION_KEY }}
-        run: forge build && forge script -vvvvv script/DeployDISPair.sol:DeployDISPair --verify --broadcast --rpc-url "${CI_DEPLOY_RPC_URL}" --etherscan-api-key "${EXPLORER_VERIFICATION_KEY}" --sig='run()'
+        run: forge build && forge script -vvvvv script/DeployDISPair.sol:DeployDISPair
