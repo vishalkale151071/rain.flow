@@ -2,6 +2,29 @@
 
 Docs at https://rainprotocol.github.io/rain.flow
 
+# Current version
+
+## V3
+
+V3 compatible contracts are still found in the monorepo at
+
+https://github.com/rainprotocol/rain-protocol
+
+The contracts in this repo are targetting V4 (see below).
+
+# Unstable versions
+
+## V4
+
+The main changes in V4 replace `previewFlow` with `stackToFlow` which is a more
+generalised version of the same basic idea. By allowing any stack to be passed
+to the flow contract, the reader can simulate flows based on differen callers,
+state, time, etc.
+
+V4 also targets a newer interpreter interface than V3, notably the native parsing
+functionality that works off a single `bytes` for the Rain bytecode rather than
+the `bytes[]` that older interpreters expected.
+
 # Deprecated versions
 
 ## V2
