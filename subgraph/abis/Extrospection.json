@@ -1,0 +1,1873 @@
+{
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "bytecode",
+      "outputs": [
+        {
+          "internalType": "bytes",
+          "name": "",
+          "type": "bytes"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "bytecodeHash",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "isERC1167Proxy",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "result",
+          "type": "bool"
+        },
+        {
+          "internalType": "address",
+          "name": "implementationAddress",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "scanEVMOpcodesPresentInAccount",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "scanEVMOpcodesReachableInAccount",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "interpreter",
+          "type": "address"
+        }
+      ],
+      "name": "scanOnlyAllowedInterpreterEVMOpcodes",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": {
+    "object": "0x608060405234801561001057600080fd5b50610562806100206000396000f3fe608060405234801561001057600080fd5b50600436106100725760003560e01c8063b8270b1e11610050578063b8270b1e14610104578063c7338a0214610127578063f5ac63351461014757600080fd5b806339676bce1461007757806374c6eb25146100b25780637d82a692146100f1575b600080fd5b61009f6100853660046104b9565b73ffffffffffffffffffffffffffffffffffffffff163f90565b6040519081526020015b60405180910390f35b6100c56100c03660046104b9565b61015a565b60408051921515835273ffffffffffffffffffffffffffffffffffffffff9091166020830152016100a9565b61009f6100ff3660046104b9565b6101a1565b6101176101123660046104b9565b6101e4565b60405190151581526020016100a9565b61013a6101353660046104b9565b610218565b6040516100a991906104f6565b61009f6101553660046104b9565b610253565b6000806101988373ffffffffffffffffffffffffffffffffffffffff16803b806020016040519081016040528181526000908060200190933c610290565b91509150915091565b60006101de8273ffffffffffffffffffffffffffffffffffffffff16803b806020016040519081016040528181526000908060200190933c61039d565b92915050565b60007f80370000000000000000001f0000000000000000003000000000000000000000610210836101a1565b161592915050565b60608173ffffffffffffffffffffffffffffffffffffffff16803b806020016040519081016040528181526000908060200190933c92915050565b60006101de8273ffffffffffffffffffffffffffffffffffffffff16803b806020016040519081016040528181526000908060200190933c610452565b80516000908190602d146102a957506000928392509050565b604080518082018252600a8082527f363d3d373d3d3d363d73000000000000000000000000000000000000000000006020928301528582018190208351808501909452600f8085527f5af43d82803e903d91602b57fd5bf3000000000000000000000000000000000094840194909452603e8701939093207f63d391efc3119310b9796819854d0555ea77fb380e9ef5190c2359a8094c1f3c9384147f11a195f66c9175f46895bae2006d40848a680c7068b9fc4af248ff9a54a47e459091141660011694509091841561039557601e86015173ffffffffffffffffffffffffffffffffffffffff1693505b505050915091565b80516000908290808201605b7fe008000000000000000000000000000000000000000000000000000000000001855b838610156104475760018601955060ff86511681600081146103f5576001811461042c57600080fd5b6001821b9889179884161561040f576001925050506103cc565b60608203602081101561042457978801600101975b5050506103cc565b84820361044057600092506001821b891798505b50506103cc565b505050505050919050565b805160009082908082015b808310156104b1576001928301805160ff1693841b9490941793927fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffa00160208110156104ab57928301600101925b5061045d565b505050919050565b6000602082840312156104cb57600080fd5b813573ffffffffffffffffffffffffffffffffffffffff811681146104ef57600080fd5b9392505050565b600060208083528351808285015260005b8181101561052357858101830151858201604001528201610507565b5060006040828601015260407fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe0601f830116850101925050509291505056",
+    "sourceMap": "461:1525:21:-:0;;;;;;;;;;;;;;;;;;;",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x608060405234801561001057600080fd5b50600436106100725760003560e01c8063b8270b1e11610050578063b8270b1e14610104578063c7338a0214610127578063f5ac63351461014757600080fd5b806339676bce1461007757806374c6eb25146100b25780637d82a692146100f1575b600080fd5b61009f6100853660046104b9565b73ffffffffffffffffffffffffffffffffffffffff163f90565b6040519081526020015b60405180910390f35b6100c56100c03660046104b9565b61015a565b60408051921515835273ffffffffffffffffffffffffffffffffffffffff9091166020830152016100a9565b61009f6100ff3660046104b9565b6101a1565b6101176101123660046104b9565b6101e4565b60405190151581526020016100a9565b61013a6101353660046104b9565b610218565b6040516100a991906104f6565b61009f6101553660046104b9565b610253565b6000806101988373ffffffffffffffffffffffffffffffffffffffff16803b806020016040519081016040528181526000908060200190933c610290565b91509150915091565b60006101de8273ffffffffffffffffffffffffffffffffffffffff16803b806020016040519081016040528181526000908060200190933c61039d565b92915050565b60007f80370000000000000000001f0000000000000000003000000000000000000000610210836101a1565b161592915050565b60608173ffffffffffffffffffffffffffffffffffffffff16803b806020016040519081016040528181526000908060200190933c92915050565b60006101de8273ffffffffffffffffffffffffffffffffffffffff16803b806020016040519081016040528181526000908060200190933c610452565b80516000908190602d146102a957506000928392509050565b604080518082018252600a8082527f363d3d373d3d3d363d73000000000000000000000000000000000000000000006020928301528582018190208351808501909452600f8085527f5af43d82803e903d91602b57fd5bf3000000000000000000000000000000000094840194909452603e8701939093207f63d391efc3119310b9796819854d0555ea77fb380e9ef5190c2359a8094c1f3c9384147f11a195f66c9175f46895bae2006d40848a680c7068b9fc4af248ff9a54a47e459091141660011694509091841561039557601e86015173ffffffffffffffffffffffffffffffffffffffff1693505b505050915091565b80516000908290808201605b7fe008000000000000000000000000000000000000000000000000000000000001855b838610156104475760018601955060ff86511681600081146103f5576001811461042c57600080fd5b6001821b9889179884161561040f576001925050506103cc565b60608203602081101561042457978801600101975b5050506103cc565b84820361044057600092506001821b891798505b50506103cc565b505050505050919050565b805160009082908082015b808310156104b1576001928301805160ff1693841b9490941793927fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffa00160208110156104ab57928301600101925b5061045d565b505050919050565b6000602082840312156104cb57600080fd5b813573ffffffffffffffffffffffffffffffffffffffff811681146104ef57600080fd5b9392505050565b600060208083528351808285015260005b8181101561052357858101830151858201604001528201610507565b5060006040828601015260407fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe0601f830116850101925050509291505056",
+    "sourceMap": "461:1525:21:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;797:111;;;;;;:::i;:::-;885:16;;;;797:111;;;;474:25:37;;;462:2;447:18;797:111:21;;;;;;;;1666:318;;;;;;:::i;:::-;;:::i;:::-;;;;703:14:37;;696:22;678:41;;767:42;755:55;;;750:2;735:18;;728:83;651:18;1666:318:21;510:307:37;1182:182:21;;;;;;:::i;:::-;;:::i;1415:199::-;;;;;;:::i;:::-;;:::i;:::-;;;1169:14:37;;1162:22;1144:41;;1132:2;1117:18;1415:199:21;1004:187:37;641:108:21;;;;;;:::i;:::-;;:::i;:::-;;;;;;;:::i;956:178::-;;;;;;:::i;:::-;;:::i;1666:318::-;1730:11;1743:29;1923:54;1964:7;:12;;;;;;;;;;;;;;;;;;;;;;;;;1923:40;:54::i;:::-;1916:61;;;;1666:318;;;:::o;1182:182::-;1262:7;1288:69;1344:7;:12;;;;;;;;;;;;;;;;;;;;;;;;;1288:55;:69::i;:::-;1281:76;1182:182;-1:-1:-1;;1182:182:21:o;1415:199::-;1505:4;637:359:24;1528:45:21;1561:11;1528:32;:45::i;:::-;:74;:79;;1415:199;-1:-1:-1;;1415:199:21:o;641:108::-;699:12;730:7;:12;;;;;;;;;;;;;;;;;;;;;;;;;723:19;641:108;-1:-1:-1;;641:108:21:o;956:178::-;1034:7;1060:67;1114:7;:12;;;;;;;;;;;;;;;;;;;;;;;;;1060:53;:67::i;2227:2203:28:-;2671:15;;2297:11;;;;1575:50;2671:39;2667:313;;-1:-1:-1;2742:5:28;;;;-1:-1:-1;2227:2203:28;-1:-1:-1;2227:2203:28:o;2667:313::-;607:14;;;;;;;;1327:2;607:14;;;;1014:4;607:14;;;;3310:26;;;3300:51;;;837:14;;;;;;;;1425:2;837:14;;;;;;;;;;;1180:51;3731:26;;3721:51;;;;597:25;3297:67;;;827:25;3718:67;;;3706:80;2957:4;3706:80;;-1:-1:-1;1014:4:28;;3850:550;;;;1745:26;4289:42;;4283:49;4136:17;4279:81;;-1:-1:-1;3850:550:28;2351:2073;;;2227:2203;;;:::o;813:1822:27:-;1002:15;;902:22;;1104:15:18;;1226:19:27;;;2441:4:26;5411:121;902:22:27;1286:1333;1304:3;1296:6;1293:15;1286:1333;;;1352:1;1344:6;1340:14;1330:24;;1400:4;1391:6;1385:13;1381:24;1429:6;1457:1;1452:728;;;;2202:1;2197:298;;;;2601:1;2598;2591:12;1452:728;1590:1;1582:10;;1563:30;;;;1682:28;;1679:124;;;1747:1;1737:11;;1773:8;;1286:1333;;1679:124;2050:4;2046:2;2042:13;2088:4;2082;2079:14;2076:57;;;2106:25;;;2128:1;2106:25;;2076:57;;2154:8;;1286:1333;;2197:298;2236:10;2232:2;2229:18;2226:222;;2284:1;2274:11;;2423:1;2419:2;2415:10;2399:14;2396:30;2378:48;;2226:222;2469:8;;1286:1333;;;1290:2;1165:1464;;;;;813:1822;;;:::o;3198:914::-;3383:15;;3285:20;;1104:15:18;;3498:19:27;;;3530:566;3548:3;3540:6;3537:15;3530:566;;;3596:1;3584:14;;;3630:13;;3645:4;3626:24;3760:10;;;3743:28;;;;;3584:14;3995:13;;4037:4;4028:14;;4025:57;;;4055:25;;;4077:1;4055:25;;4025:57;;3530:566;;;3534:2;3433:673;;3198:914;;;:::o;14:309:37:-;73:6;126:2;114:9;105:7;101:23;97:32;94:52;;;142:1;139;132:12;94:52;181:9;168:23;231:42;224:5;220:54;213:5;210:65;200:93;;289:1;286;279:12;200:93;312:5;14:309;-1:-1:-1;;;14:309:37:o;1196:605::-;1306:4;1335:2;1364;1353:9;1346:21;1396:6;1390:13;1439:6;1434:2;1423:9;1419:18;1412:34;1464:1;1474:140;1488:6;1485:1;1482:13;1474:140;;;1583:14;;;1579:23;;1573:30;1549:17;;;1568:2;1545:26;1538:66;1503:10;;1474:140;;;1478:3;1663:1;1658:2;1649:6;1638:9;1634:22;1630:31;1623:42;1792:2;1722:66;1717:2;1709:6;1705:15;1701:88;1690:9;1686:104;1682:113;1674:121;;;;1196:605;;;;:::o",
+    "linkReferences": {}
+  },
+  "methodIdentifiers": {
+    "bytecode(address)": "c7338a02",
+    "bytecodeHash(address)": "39676bce",
+    "isERC1167Proxy(address)": "74c6eb25",
+    "scanEVMOpcodesPresentInAccount(address)": "f5ac6335",
+    "scanEVMOpcodesReachableInAccount(address)": "7d82a692",
+    "scanOnlyAllowedInterpreterEVMOpcodes(address)": "b8270b1e"
+  },
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.18+commit.87f61d96\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"bytecode\",\"outputs\":[{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"bytecodeHash\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"isERC1167Proxy\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"result\",\"type\":\"bool\"},{\"internalType\":\"address\",\"name\":\"implementationAddress\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"scanEVMOpcodesPresentInAccount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"scanEVMOpcodesReachableInAccount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"interpreter\",\"type\":\"address\"}],\"name\":\"scanOnlyAllowedInterpreterEVMOpcodes\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"bytecode(address)\":{\"params\":{\"account\":\"The account to get bytecode for.\"},\"returns\":{\"_0\":\"The bytecode of `account`. Will be `0` length for non-contract accounts.\"}},\"bytecodeHash(address)\":{\"params\":{\"account\":\"The account to get the bytecode hash for.\"},\"returns\":{\"_0\":\"The hash of the bytecode of `account`. Will be `0` (NOT the hash of empty bytes) for non-contract accounts.\"}},\"isERC1167Proxy(address)\":{\"params\":{\"account\":\"The address to check.\"},\"returns\":{\"implementationAddress\":\"The address of the implementation contract. This is only valid if `result` is true, else it is zero.\",\"result\":\"True if the address is an ERC1167 proxy.\"}},\"scanEVMOpcodesPresentInAccount(address)\":{\"params\":{\"account\":\"The account to scan for opcodes.\"},\"returns\":{\"_0\":\"A single `uint256` where each bit represents the presence of an opcode in the source bytecode.\"}},\"scanEVMOpcodesReachableInAccount(address)\":{\"params\":{\"account\":\"The account to scan for opcodes.\"},\"returns\":{\"_0\":\"A single `uint256` where each bit represents the presence of a reachable opcode in the source bytecode.\"}}},\"title\":\"Extrospection\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"bytecode(address)\":{\"notice\":\"Return the bytecode for an address. Equivalent to `account.code`.\"},\"bytecodeHash(address)\":{\"notice\":\"Return the hash of the complete bytecode for an address. Equivalent to `account.codehash`.\"},\"isERC1167Proxy(address)\":{\"notice\":\"Checks if the given address is an ERC1167 proxy. The caller MUST check the result is true before using the implementation address, otherwise a valid proxy to `address(0)` and an invalid proxy will be indistinguishable.\"},\"scanEVMOpcodesPresentInAccount(address)\":{\"notice\":\"Scan every byte of the bytecode in some account and return an encoded list of every opcode present in that account's code. The list is encoded as a single `uint256` where each bit is a flag representing the presence of an opcode in the source bytecode. The opcode byte is the literal bitwise offset in the final output, starting from least significant bits. E.g. opcode `0` sets the 0th bit, i.e. `2 ** 0`, i.e. `1`, i.e. `1 << 0`. opcode `0x50` sets the `0x50`th bit, i.e. `2 ** 0x50`, i.e. `1 << 0x50`. The final output can be bitwise `&` against a reference set of bit flags to check for the presence of a list of (un)desired opcodes in a single logical operation. This allows for fewer branching operations (expensive) per byte, but precludes the ability to break the loop early upon discovering the prescence of a specific opcode. The scan MUST respect the inline skip behaviour of the `PUSH*` family of evm opcodes, starting from opcode `0x60` through `0x7F` inclusive. These opcodes are followed by literal bytes that will be pushed to the EVM stack at runtime and so are NOT opcodes themselves. Even though each byte of the data following a `PUSH*` is assigned program counter, it DOES NOT run as an opcode. Therefore, the scanner MUST ignore all push data, otherwise it will report false positives from stack data being treated as opcodes. The relative index of each `PUSH` opcode signifies how many bytes to skip, e.g. `0x60` skips 1 byte, `0x61` skips 2 bytes, etc.\"},\"scanEVMOpcodesReachableInAccount(address)\":{\"notice\":\"Identical to `scanEVMOpcodesPresentInAccount` except that it skips the regions of the bytecode that are unreachable by the EVM. This is generally achieved by pausing the scan any time a halting opcode is encountered then resuming the scan at the next jump destination. This scan results in fewer false positives but is less conservative as it relies on details of the EVM execution model that may change in the future, and is a more complex algorithm so more susceptible to potential implementation bugs.\"},\"scanOnlyAllowedInterpreterEVMOpcodes(address)\":{\"notice\":\"Scan the EVM opcodes present in the account's code to determine if there are any opcodes that would disqualify the interpreter from being safely used. In general any opcodes that would allow the interpreter to mutate its own code or storage or are disallowed by static calls are all in scope of the scan. The implementation is free to be more or less strict in how it determines which bytes to include in the scan, e.g. whether to consider reachable opcodes only or all opcodes.\"}},\"notice\":\"Implements all extrospection interfaces.\",\"version\":1}},\"settings\":{\"compilationTarget\":{\"src/concrete/Extrospection.sol\":\"Extrospection\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"appendCBOR\":false,\"bytecodeHash\":\"none\"},\"optimizer\":{\"enabled\":true,\"runs\":100000},\"remappings\":[\":ds-test/=lib/sol.lib.memory/lib/forge-std/lib/ds-test/src/\",\":forge-std/=lib/sol.lib.memory/lib/forge-std/src/\",\":sol.lib.memory/=lib/sol.lib.memory/src/\"]},\"sources\":{\"lib/sol.lib.memory/src/LibBytes.sol\":{\"keccak256\":\"0xcdc485d90d6d8a89a842b64c83efd15266c5c80916535736aa8a05497bcf5625\",\"license\":\"CAL\",\"urls\":[\"bzz-raw://a45d0edb1d404207ad328d7a4eb16ee52d68db8dbb44796caa521a4765dfe353\",\"dweb:/ipfs/QmVT8vbFLMmD1sg1sEz21mTrDRE58yFNsmKDPnZ3LX8yYk\"]},\"lib/sol.lib.memory/src/LibPointer.sol\":{\"keccak256\":\"0xcd833cbf588ec10836cdfbddd426fc14dfa145ed2e63054f6bbd06e296e698f7\",\"license\":\"CAL\",\"urls\":[\"bzz-raw://9ce0af4045e276c5e4c352c1c435f4ecea7552192b1d99e33732c1067bea0ad7\",\"dweb:/ipfs/Qmc5NCFTwgg2AemUz9K1fPei51ivge3eUrWP8k56kF8ADG\"]},\"src/concrete/Extrospection.sol\":{\"keccak256\":\"0x436b360e79c0d23ca928456909d9ba93ae692fe37bfbb464f99cfeec7f69ceb2\",\"license\":\"CAL\",\"urls\":[\"bzz-raw://9194e4d14b3fb89cb3e8b409e3afa83669ba8151d7428a31c5dc8f888f530792\",\"dweb:/ipfs/QmajGxCNfvrUUiqpbft8Cmoy8SM28qXhbvaiiRMY2fgiCZ\"]},\"src/interface/IExtrospectBytecodeV2.sol\":{\"keccak256\":\"0x0aad488437360ddb6d8ca033974115d06c7b6586154cf3da2a20944389d08a7a\",\"license\":\"CAL\",\"urls\":[\"bzz-raw://0cdf0c04a792e365ab2383585368b429ff06b8067c9b686d6756243a9513c584\",\"dweb:/ipfs/QmPCThchv29SmRjqUf18HVbiXJWXjKkvFCuXCugKXFGcm8\"]},\"src/interface/IExtrospectERC1167ProxyV1.sol\":{\"keccak256\":\"0xbe54ea56d5e828301dbeab9c7a6d3516733b74b5efd12c6143c2e57a93d3fafe\",\"license\":\"CAL\",\"urls\":[\"bzz-raw://bdc8bb91a4c4b2a94a2e99d8e3645c73eee1b50e73160f48dde8ea044e7c1d35\",\"dweb:/ipfs/QmPz7yiAU2YbzmD7fRnHY4m4VN2jeA9N7HthmLD1Ax2oUz\"]},\"src/interface/IExtrospectInterpreterV1.sol\":{\"keccak256\":\"0xa7e6f626469d9bfdb0038b6f76a8687d1fd990d0960212984779f5c71eca7635\",\"license\":\"CAL\",\"urls\":[\"bzz-raw://a0facff28fad30c63dafe5dfdf8f3b219818d1b999893a1a0c935f80875f9b11\",\"dweb:/ipfs/QmaRTxzo2TLQafyGHUjqwkXBtmPBKDdiVUPYPw9rReSSYe\"]},\"src/lib/EVMOpcodes.sol\":{\"keccak256\":\"0x12b4e655e61909c424c4e7ec59ea7eb6a6dc4694b96b8ccdd4e5a1b2bb54f5c5\",\"license\":\"CAL\",\"urls\":[\"bzz-raw://3034e70e43540f995f787b910f3a690729359319745b919d117c30219d4d5b42\",\"dweb:/ipfs/QmdByXcKYf5Vq2YxA2UbEaJk12Zq8dSKT2SEyqAhAetLDX\"]},\"src/lib/LibExtrospectBytecode.sol\":{\"keccak256\":\"0xa466d0f72a980f3d6ac1f34afd2b4660f40acd35853ff49033a3a882e6820010\",\"license\":\"CAL\",\"urls\":[\"bzz-raw://c997d6866e47920b05a5d6f3a4769e07c70d60dd011345dcf61d49d152ba076b\",\"dweb:/ipfs/QmRia3MgGk2aHZnp5Befqt3iDrnSBNCFwQGBdC4t4EsxXp\"]},\"src/lib/LibExtrospectERC1167Proxy.sol\":{\"keccak256\":\"0xe8e4f3766df3903f2aae5965fea7f6a5318aa21325181acb544a4158d5c34d34\",\"license\":\"CAL\",\"urls\":[\"bzz-raw://a8fb18a1d1fc6fcd56dcdc42b9a1dcbadf3aa8f542a80b1f798ebc1a2e2a169d\",\"dweb:/ipfs/QmaKYLJWDhYWFac3k9Yy28oe325YhAm7w9ArgXWAT9kFKK\"]}},\"version\":1}",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.18+commit.87f61d96"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "account",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "bytecode",
+          "outputs": [
+            {
+              "internalType": "bytes",
+              "name": "",
+              "type": "bytes"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "account",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "bytecodeHash",
+          "outputs": [
+            {
+              "internalType": "bytes32",
+              "name": "",
+              "type": "bytes32"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "account",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "isERC1167Proxy",
+          "outputs": [
+            {
+              "internalType": "bool",
+              "name": "result",
+              "type": "bool"
+            },
+            {
+              "internalType": "address",
+              "name": "implementationAddress",
+              "type": "address"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "account",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "scanEVMOpcodesPresentInAccount",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "account",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "scanEVMOpcodesReachableInAccount",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "interpreter",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "scanOnlyAllowedInterpreterEVMOpcodes",
+          "outputs": [
+            {
+              "internalType": "bool",
+              "name": "",
+              "type": "bool"
+            }
+          ]
+        }
+      ],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {
+          "bytecode(address)": {
+            "params": {
+              "account": "The account to get bytecode for."
+            },
+            "returns": {
+              "_0": "The bytecode of `account`. Will be `0` length for non-contract accounts."
+            }
+          },
+          "bytecodeHash(address)": {
+            "params": {
+              "account": "The account to get the bytecode hash for."
+            },
+            "returns": {
+              "_0": "The hash of the bytecode of `account`. Will be `0` (NOT the hash of empty bytes) for non-contract accounts."
+            }
+          },
+          "isERC1167Proxy(address)": {
+            "params": {
+              "account": "The address to check."
+            },
+            "returns": {
+              "implementationAddress": "The address of the implementation contract. This is only valid if `result` is true, else it is zero.",
+              "result": "True if the address is an ERC1167 proxy."
+            }
+          },
+          "scanEVMOpcodesPresentInAccount(address)": {
+            "params": {
+              "account": "The account to scan for opcodes."
+            },
+            "returns": {
+              "_0": "A single `uint256` where each bit represents the presence of an opcode in the source bytecode."
+            }
+          },
+          "scanEVMOpcodesReachableInAccount(address)": {
+            "params": {
+              "account": "The account to scan for opcodes."
+            },
+            "returns": {
+              "_0": "A single `uint256` where each bit represents the presence of a reachable opcode in the source bytecode."
+            }
+          }
+        },
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {
+          "bytecode(address)": {
+            "notice": "Return the bytecode for an address. Equivalent to `account.code`."
+          },
+          "bytecodeHash(address)": {
+            "notice": "Return the hash of the complete bytecode for an address. Equivalent to `account.codehash`."
+          },
+          "isERC1167Proxy(address)": {
+            "notice": "Checks if the given address is an ERC1167 proxy. The caller MUST check the result is true before using the implementation address, otherwise a valid proxy to `address(0)` and an invalid proxy will be indistinguishable."
+          },
+          "scanEVMOpcodesPresentInAccount(address)": {
+            "notice": "Scan every byte of the bytecode in some account and return an encoded list of every opcode present in that account's code. The list is encoded as a single `uint256` where each bit is a flag representing the presence of an opcode in the source bytecode. The opcode byte is the literal bitwise offset in the final output, starting from least significant bits. E.g. opcode `0` sets the 0th bit, i.e. `2 ** 0`, i.e. `1`, i.e. `1 << 0`. opcode `0x50` sets the `0x50`th bit, i.e. `2 ** 0x50`, i.e. `1 << 0x50`. The final output can be bitwise `&` against a reference set of bit flags to check for the presence of a list of (un)desired opcodes in a single logical operation. This allows for fewer branching operations (expensive) per byte, but precludes the ability to break the loop early upon discovering the prescence of a specific opcode. The scan MUST respect the inline skip behaviour of the `PUSH*` family of evm opcodes, starting from opcode `0x60` through `0x7F` inclusive. These opcodes are followed by literal bytes that will be pushed to the EVM stack at runtime and so are NOT opcodes themselves. Even though each byte of the data following a `PUSH*` is assigned program counter, it DOES NOT run as an opcode. Therefore, the scanner MUST ignore all push data, otherwise it will report false positives from stack data being treated as opcodes. The relative index of each `PUSH` opcode signifies how many bytes to skip, e.g. `0x60` skips 1 byte, `0x61` skips 2 bytes, etc."
+          },
+          "scanEVMOpcodesReachableInAccount(address)": {
+            "notice": "Identical to `scanEVMOpcodesPresentInAccount` except that it skips the regions of the bytecode that are unreachable by the EVM. This is generally achieved by pausing the scan any time a halting opcode is encountered then resuming the scan at the next jump destination. This scan results in fewer false positives but is less conservative as it relies on details of the EVM execution model that may change in the future, and is a more complex algorithm so more susceptible to potential implementation bugs."
+          },
+          "scanOnlyAllowedInterpreterEVMOpcodes(address)": {
+            "notice": "Scan the EVM opcodes present in the account's code to determine if there are any opcodes that would disqualify the interpreter from being safely used. In general any opcodes that would allow the interpreter to mutate its own code or storage or are disallowed by static calls are all in scope of the scan. The implementation is free to be more or less strict in how it determines which bytes to include in the scan, e.g. whether to consider reachable opcodes only or all opcodes."
+          }
+        },
+        "version": 1
+      }
+    },
+    "settings": {
+      "remappings": [
+        ":ds-test/=lib/sol.lib.memory/lib/forge-std/lib/ds-test/src/",
+        ":forge-std/=lib/sol.lib.memory/lib/forge-std/src/",
+        ":sol.lib.memory/=lib/sol.lib.memory/src/"
+      ],
+      "optimizer": {
+        "enabled": true,
+        "runs": 100000
+      },
+      "metadata": {
+        "bytecodeHash": "none",
+        "appendCBOR": false
+      },
+      "compilationTarget": {
+        "src/concrete/Extrospection.sol": "Extrospection"
+      },
+      "libraries": {}
+    },
+    "sources": {
+      "lib/sol.lib.memory/src/LibBytes.sol": {
+        "keccak256": "0xcdc485d90d6d8a89a842b64c83efd15266c5c80916535736aa8a05497bcf5625",
+        "urls": [
+          "bzz-raw://a45d0edb1d404207ad328d7a4eb16ee52d68db8dbb44796caa521a4765dfe353",
+          "dweb:/ipfs/QmVT8vbFLMmD1sg1sEz21mTrDRE58yFNsmKDPnZ3LX8yYk"
+        ],
+        "license": "CAL"
+      },
+      "lib/sol.lib.memory/src/LibPointer.sol": {
+        "keccak256": "0xcd833cbf588ec10836cdfbddd426fc14dfa145ed2e63054f6bbd06e296e698f7",
+        "urls": [
+          "bzz-raw://9ce0af4045e276c5e4c352c1c435f4ecea7552192b1d99e33732c1067bea0ad7",
+          "dweb:/ipfs/Qmc5NCFTwgg2AemUz9K1fPei51ivge3eUrWP8k56kF8ADG"
+        ],
+        "license": "CAL"
+      },
+      "src/concrete/Extrospection.sol": {
+        "keccak256": "0x436b360e79c0d23ca928456909d9ba93ae692fe37bfbb464f99cfeec7f69ceb2",
+        "urls": [
+          "bzz-raw://9194e4d14b3fb89cb3e8b409e3afa83669ba8151d7428a31c5dc8f888f530792",
+          "dweb:/ipfs/QmajGxCNfvrUUiqpbft8Cmoy8SM28qXhbvaiiRMY2fgiCZ"
+        ],
+        "license": "CAL"
+      },
+      "src/interface/IExtrospectBytecodeV2.sol": {
+        "keccak256": "0x0aad488437360ddb6d8ca033974115d06c7b6586154cf3da2a20944389d08a7a",
+        "urls": [
+          "bzz-raw://0cdf0c04a792e365ab2383585368b429ff06b8067c9b686d6756243a9513c584",
+          "dweb:/ipfs/QmPCThchv29SmRjqUf18HVbiXJWXjKkvFCuXCugKXFGcm8"
+        ],
+        "license": "CAL"
+      },
+      "src/interface/IExtrospectERC1167ProxyV1.sol": {
+        "keccak256": "0xbe54ea56d5e828301dbeab9c7a6d3516733b74b5efd12c6143c2e57a93d3fafe",
+        "urls": [
+          "bzz-raw://bdc8bb91a4c4b2a94a2e99d8e3645c73eee1b50e73160f48dde8ea044e7c1d35",
+          "dweb:/ipfs/QmPz7yiAU2YbzmD7fRnHY4m4VN2jeA9N7HthmLD1Ax2oUz"
+        ],
+        "license": "CAL"
+      },
+      "src/interface/IExtrospectInterpreterV1.sol": {
+        "keccak256": "0xa7e6f626469d9bfdb0038b6f76a8687d1fd990d0960212984779f5c71eca7635",
+        "urls": [
+          "bzz-raw://a0facff28fad30c63dafe5dfdf8f3b219818d1b999893a1a0c935f80875f9b11",
+          "dweb:/ipfs/QmaRTxzo2TLQafyGHUjqwkXBtmPBKDdiVUPYPw9rReSSYe"
+        ],
+        "license": "CAL"
+      },
+      "src/lib/EVMOpcodes.sol": {
+        "keccak256": "0x12b4e655e61909c424c4e7ec59ea7eb6a6dc4694b96b8ccdd4e5a1b2bb54f5c5",
+        "urls": [
+          "bzz-raw://3034e70e43540f995f787b910f3a690729359319745b919d117c30219d4d5b42",
+          "dweb:/ipfs/QmdByXcKYf5Vq2YxA2UbEaJk12Zq8dSKT2SEyqAhAetLDX"
+        ],
+        "license": "CAL"
+      },
+      "src/lib/LibExtrospectBytecode.sol": {
+        "keccak256": "0xa466d0f72a980f3d6ac1f34afd2b4660f40acd35853ff49033a3a882e6820010",
+        "urls": [
+          "bzz-raw://c997d6866e47920b05a5d6f3a4769e07c70d60dd011345dcf61d49d152ba076b",
+          "dweb:/ipfs/QmRia3MgGk2aHZnp5Befqt3iDrnSBNCFwQGBdC4t4EsxXp"
+        ],
+        "license": "CAL"
+      },
+      "src/lib/LibExtrospectERC1167Proxy.sol": {
+        "keccak256": "0xe8e4f3766df3903f2aae5965fea7f6a5318aa21325181acb544a4158d5c34d34",
+        "urls": [
+          "bzz-raw://a8fb18a1d1fc6fcd56dcdc42b9a1dcbadf3aa8f542a80b1f798ebc1a2e2a169d",
+          "dweb:/ipfs/QmaKYLJWDhYWFac3k9Yy28oe325YhAm7w9ArgXWAT9kFKK"
+        ],
+        "license": "CAL"
+      }
+    },
+    "version": 1
+  },
+  "ast": {
+    "absolutePath": "src/concrete/Extrospection.sol",
+    "id": 28777,
+    "exportedSymbols": {
+      "ERC1167_IMPLEMENTATION_ADDRESS_OFFSET": [29567],
+      "ERC1167_PREFIX": [29517],
+      "ERC1167_PREFIX_HASH": [29527],
+      "ERC1167_PREFIX_LENGTH": [29549],
+      "ERC1167_PREFIX_START": [29537],
+      "ERC1167_PROXY_LENGTH": [29561],
+      "ERC1167_SUFFIX": [29521],
+      "ERC1167_SUFFIX_HASH": [29533],
+      "ERC1167_SUFFIX_LENGTH": [29553],
+      "ERC1167_SUFFIX_START": [29545],
+      "EVM_OP_ADD": [28993],
+      "EVM_OP_ADDMOD": [29014],
+      "EVM_OP_ADDRESS": [29071],
+      "EVM_OP_AND": [29044],
+      "EVM_OP_BALANCE": [29074],
+      "EVM_OP_BASEFEE": [29143],
+      "EVM_OP_BLOCKHASH": [29119],
+      "EVM_OP_BYTE": [29056],
+      "EVM_OP_CALL": [29395],
+      "EVM_OP_CALLCODE": [29398],
+      "EVM_OP_CALLDATACOPY": [29092],
+      "EVM_OP_CALLDATALOAD": [29086],
+      "EVM_OP_CALLDATASIZE": [29089],
+      "EVM_OP_CALLER": [29080],
+      "EVM_OP_CALLVALUE": [29083],
+      "EVM_OP_CHAINID": [29137],
+      "EVM_OP_CODECOPY": [29098],
+      "EVM_OP_CODESIZE": [29095],
+      "EVM_OP_COINBASE": [29122],
+      "EVM_OP_CREATE": [29392],
+      "EVM_OP_CREATE2": [29407],
+      "EVM_OP_DELEGATECALL": [29404],
+      "EVM_OP_DIFFICULTY": [29131],
+      "EVM_OP_DIV": [29002],
+      "EVM_OP_DUP1": [29281],
+      "EVM_OP_DUP10": [29308],
+      "EVM_OP_DUP11": [29311],
+      "EVM_OP_DUP12": [29314],
+      "EVM_OP_DUP13": [29317],
+      "EVM_OP_DUP14": [29320],
+      "EVM_OP_DUP15": [29323],
+      "EVM_OP_DUP16": [29326],
+      "EVM_OP_DUP2": [29284],
+      "EVM_OP_DUP3": [29287],
+      "EVM_OP_DUP4": [29290],
+      "EVM_OP_DUP5": [29293],
+      "EVM_OP_DUP6": [29296],
+      "EVM_OP_DUP7": [29299],
+      "EVM_OP_DUP8": [29302],
+      "EVM_OP_DUP9": [29305],
+      "EVM_OP_EQ": [29038],
+      "EVM_OP_EXP": [29020],
+      "EVM_OP_EXTCODECOPY": [29107],
+      "EVM_OP_EXTCODEHASH": [29116],
+      "EVM_OP_EXTCODESIZE": [29104],
+      "EVM_OP_GAS": [29176],
+      "EVM_OP_GASLIMIT": [29134],
+      "EVM_OP_GASPRICE": [29101],
+      "EVM_OP_GT": [29029],
+      "EVM_OP_INVALID": [29416],
+      "EVM_OP_ISZERO": [29041],
+      "EVM_OP_JUMP": [29164],
+      "EVM_OP_JUMPDEST": [29179],
+      "EVM_OP_JUMPI": [29167],
+      "EVM_OP_LOG0": [29377],
+      "EVM_OP_LOG1": [29380],
+      "EVM_OP_LOG2": [29383],
+      "EVM_OP_LOG3": [29386],
+      "EVM_OP_LOG4": [29389],
+      "EVM_OP_LT": [29026],
+      "EVM_OP_MLOAD": [29149],
+      "EVM_OP_MOD": [29008],
+      "EVM_OP_MSIZE": [29173],
+      "EVM_OP_MSTORE": [29152],
+      "EVM_OP_MSTORE8": [29155],
+      "EVM_OP_MUL": [28996],
+      "EVM_OP_MULMOD": [29017],
+      "EVM_OP_NOT": [29053],
+      "EVM_OP_NUMBER": [29128],
+      "EVM_OP_OR": [29047],
+      "EVM_OP_ORIGIN": [29077],
+      "EVM_OP_PC": [29170],
+      "EVM_OP_POP": [29146],
+      "EVM_OP_PUSH0": [29182],
+      "EVM_OP_PUSH1": [29185],
+      "EVM_OP_PUSH10": [29212],
+      "EVM_OP_PUSH11": [29215],
+      "EVM_OP_PUSH12": [29218],
+      "EVM_OP_PUSH13": [29221],
+      "EVM_OP_PUSH14": [29224],
+      "EVM_OP_PUSH15": [29227],
+      "EVM_OP_PUSH16": [29230],
+      "EVM_OP_PUSH17": [29233],
+      "EVM_OP_PUSH18": [29236],
+      "EVM_OP_PUSH19": [29239],
+      "EVM_OP_PUSH2": [29188],
+      "EVM_OP_PUSH20": [29242],
+      "EVM_OP_PUSH21": [29245],
+      "EVM_OP_PUSH22": [29248],
+      "EVM_OP_PUSH23": [29251],
+      "EVM_OP_PUSH24": [29254],
+      "EVM_OP_PUSH25": [29257],
+      "EVM_OP_PUSH26": [29260],
+      "EVM_OP_PUSH27": [29263],
+      "EVM_OP_PUSH28": [29266],
+      "EVM_OP_PUSH29": [29269],
+      "EVM_OP_PUSH3": [29191],
+      "EVM_OP_PUSH30": [29272],
+      "EVM_OP_PUSH31": [29275],
+      "EVM_OP_PUSH32": [29278],
+      "EVM_OP_PUSH4": [29194],
+      "EVM_OP_PUSH5": [29197],
+      "EVM_OP_PUSH6": [29200],
+      "EVM_OP_PUSH7": [29203],
+      "EVM_OP_PUSH8": [29206],
+      "EVM_OP_PUSH9": [29209],
+      "EVM_OP_RETURN": [29401],
+      "EVM_OP_RETURNDATACOPY": [29113],
+      "EVM_OP_RETURNDATASIZE": [29110],
+      "EVM_OP_REVERT": [29413],
+      "EVM_OP_SAR": [29065],
+      "EVM_OP_SDIV": [29005],
+      "EVM_OP_SELFBALANCE": [29140],
+      "EVM_OP_SELFDESTRUCT": [29419],
+      "EVM_OP_SGT": [29035],
+      "EVM_OP_SHA3": [29068],
+      "EVM_OP_SHL": [29059],
+      "EVM_OP_SHR": [29062],
+      "EVM_OP_SIGNEXTEND": [29023],
+      "EVM_OP_SLOAD": [29158],
+      "EVM_OP_SLT": [29032],
+      "EVM_OP_SMOD": [29011],
+      "EVM_OP_SSTORE": [29161],
+      "EVM_OP_STATICCALL": [29410],
+      "EVM_OP_STOP": [28990],
+      "EVM_OP_SUB": [28999],
+      "EVM_OP_SWAP1": [29329],
+      "EVM_OP_SWAP10": [29356],
+      "EVM_OP_SWAP11": [29359],
+      "EVM_OP_SWAP12": [29362],
+      "EVM_OP_SWAP13": [29365],
+      "EVM_OP_SWAP14": [29368],
+      "EVM_OP_SWAP15": [29371],
+      "EVM_OP_SWAP16": [29374],
+      "EVM_OP_SWAP2": [29332],
+      "EVM_OP_SWAP3": [29335],
+      "EVM_OP_SWAP4": [29338],
+      "EVM_OP_SWAP5": [29341],
+      "EVM_OP_SWAP6": [29344],
+      "EVM_OP_SWAP7": [29347],
+      "EVM_OP_SWAP8": [29350],
+      "EVM_OP_SWAP9": [29353],
+      "EVM_OP_TIMESTAMP": [29125],
+      "EVM_OP_XOR": [29050],
+      "Extrospection": [28776],
+      "HALTING_BITMAP": [29445],
+      "IExtrospectBytecodeV2": [28812],
+      "IExtrospectERC1167ProxyV1": [28826],
+      "IExtrospectInterpreterV1": [28957],
+      "INTERPRETER_DISALLOWED_OPS": [28947],
+      "LibBytes": [28503],
+      "LibExtrospectBytecode": [29511],
+      "LibExtrospectERC1167Proxy": [29644],
+      "LibPointer": [28627],
+      "NON_STATIC_OPS": [28911],
+      "Pointer": [28507],
+      "TruncateError": [28435]
+    },
+    "nodeType": "SourceUnit",
+    "src": "32:1955:21",
+    "nodes": [
+      {
+        "id": 28670,
+        "nodeType": "PragmaDirective",
+        "src": "32:24:21",
+        "nodes": [],
+        "literals": ["solidity", "=", "0.8", ".18"]
+      },
+      {
+        "id": 28671,
+        "nodeType": "ImportDirective",
+        "src": "58:39:21",
+        "nodes": [],
+        "absolutePath": "lib/sol.lib.memory/src/LibPointer.sol",
+        "file": "sol.lib.memory/LibPointer.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 28777,
+        "sourceUnit": 28628,
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "id": 28672,
+        "nodeType": "ImportDirective",
+        "src": "98:37:21",
+        "nodes": [],
+        "absolutePath": "lib/sol.lib.memory/src/LibBytes.sol",
+        "file": "sol.lib.memory/LibBytes.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 28777,
+        "sourceUnit": 28504,
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "id": 28673,
+        "nodeType": "ImportDirective",
+        "src": "137:48:21",
+        "nodes": [],
+        "absolutePath": "src/interface/IExtrospectBytecodeV2.sol",
+        "file": "../interface/IExtrospectBytecodeV2.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 28777,
+        "sourceUnit": 28813,
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "id": 28674,
+        "nodeType": "ImportDirective",
+        "src": "186:51:21",
+        "nodes": [],
+        "absolutePath": "src/interface/IExtrospectInterpreterV1.sol",
+        "file": "../interface/IExtrospectInterpreterV1.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 28777,
+        "sourceUnit": 28958,
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "id": 28675,
+        "nodeType": "ImportDirective",
+        "src": "238:52:21",
+        "nodes": [],
+        "absolutePath": "src/interface/IExtrospectERC1167ProxyV1.sol",
+        "file": "../interface/IExtrospectERC1167ProxyV1.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 28777,
+        "sourceUnit": 28827,
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "id": 28676,
+        "nodeType": "ImportDirective",
+        "src": "292:42:21",
+        "nodes": [],
+        "absolutePath": "src/lib/LibExtrospectBytecode.sol",
+        "file": "../lib/LibExtrospectBytecode.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 28777,
+        "sourceUnit": 29512,
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "id": 28677,
+        "nodeType": "ImportDirective",
+        "src": "335:46:21",
+        "nodes": [],
+        "absolutePath": "src/lib/LibExtrospectERC1167Proxy.sol",
+        "file": "../lib/LibExtrospectERC1167Proxy.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 28777,
+        "sourceUnit": 29645,
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "id": 28776,
+        "nodeType": "ContractDefinition",
+        "src": "461:1525:21",
+        "nodes": [
+          {
+            "id": 28687,
+            "nodeType": "UsingForDirective",
+            "src": "568:25:21",
+            "nodes": [],
+            "global": false,
+            "libraryName": {
+              "id": 28685,
+              "name": "LibBytes",
+              "nameLocations": ["574:8:21"],
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 28503,
+              "src": "574:8:21"
+            },
+            "typeName": {
+              "id": 28686,
+              "name": "bytes",
+              "nodeType": "ElementaryTypeName",
+              "src": "587:5:21",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes_storage_ptr",
+                "typeString": "bytes"
+              }
+            }
+          },
+          {
+            "id": 28699,
+            "nodeType": "FunctionDefinition",
+            "src": "641:108:21",
+            "nodes": [],
+            "body": {
+              "id": 28698,
+              "nodeType": "Block",
+              "src": "713:36:21",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "expression": {
+                      "id": 28695,
+                      "name": "account",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 28690,
+                      "src": "730:7:21",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "id": 28696,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "738:4:21",
+                    "memberName": "code",
+                    "nodeType": "MemberAccess",
+                    "src": "730:12:21",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_memory_ptr",
+                      "typeString": "bytes memory"
+                    }
+                  },
+                  "functionReturnParameters": 28694,
+                  "id": 28697,
+                  "nodeType": "Return",
+                  "src": "723:19:21"
+                }
+              ]
+            },
+            "baseFunctions": [28787],
+            "documentation": {
+              "id": 28688,
+              "nodeType": "StructuredDocumentation",
+              "src": "599:37:21",
+              "text": "@inheritdoc IExtrospectBytecodeV2"
+            },
+            "functionSelector": "c7338a02",
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "bytecode",
+            "nameLocation": "650:8:21",
+            "parameters": {
+              "id": 28691,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 28690,
+                  "mutability": "mutable",
+                  "name": "account",
+                  "nameLocation": "667:7:21",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 28699,
+                  "src": "659:15:21",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 28689,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "659:7:21",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "658:17:21"
+            },
+            "returnParameters": {
+              "id": 28694,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 28693,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 28699,
+                  "src": "699:12:21",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 28692,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "699:5:21",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "698:14:21"
+            },
+            "scope": 28776,
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "id": 28711,
+            "nodeType": "FunctionDefinition",
+            "src": "797:111:21",
+            "nodes": [],
+            "body": {
+              "id": 28710,
+              "nodeType": "Block",
+              "src": "868:40:21",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "expression": {
+                      "id": 28707,
+                      "name": "account",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 28702,
+                      "src": "885:7:21",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "id": 28708,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "893:8:21",
+                    "memberName": "codehash",
+                    "nodeType": "MemberAccess",
+                    "src": "885:16:21",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "functionReturnParameters": 28706,
+                  "id": 28709,
+                  "nodeType": "Return",
+                  "src": "878:23:21"
+                }
+              ]
+            },
+            "baseFunctions": [28795],
+            "documentation": {
+              "id": 28700,
+              "nodeType": "StructuredDocumentation",
+              "src": "755:37:21",
+              "text": "@inheritdoc IExtrospectBytecodeV2"
+            },
+            "functionSelector": "39676bce",
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "bytecodeHash",
+            "nameLocation": "806:12:21",
+            "parameters": {
+              "id": 28703,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 28702,
+                  "mutability": "mutable",
+                  "name": "account",
+                  "nameLocation": "827:7:21",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 28711,
+                  "src": "819:15:21",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 28701,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "819:7:21",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "818:17:21"
+            },
+            "returnParameters": {
+              "id": 28706,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 28705,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 28711,
+                  "src": "859:7:21",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 28704,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "859:7:21",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "858:9:21"
+            },
+            "scope": 28776,
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "id": 28726,
+            "nodeType": "FunctionDefinition",
+            "src": "956:178:21",
+            "nodes": [],
+            "body": {
+              "id": 28725,
+              "nodeType": "Block",
+              "src": "1043:91:21",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "expression": {
+                          "id": 28721,
+                          "name": "account",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 28714,
+                          "src": "1114:7:21",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        },
+                        "id": 28722,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberLocation": "1122:4:21",
+                        "memberName": "code",
+                        "nodeType": "MemberAccess",
+                        "src": "1114:12:21",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes_memory_ptr",
+                          "typeString": "bytes memory"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bytes_memory_ptr",
+                          "typeString": "bytes memory"
+                        }
+                      ],
+                      "expression": {
+                        "id": 28719,
+                        "name": "LibExtrospectBytecode",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 29511,
+                        "src": "1060:21:21",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_contract$_LibExtrospectBytecode_$29511_$",
+                          "typeString": "type(library LibExtrospectBytecode)"
+                        }
+                      },
+                      "id": 28720,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "1082:31:21",
+                      "memberName": "scanEVMOpcodesPresentInBytecode",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 29510,
+                      "src": "1060:53:21",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_pure$_t_bytes_memory_ptr_$returns$_t_uint256_$",
+                        "typeString": "function (bytes memory) pure returns (uint256)"
+                      }
+                    },
+                    "id": 28723,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1060:67:21",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "functionReturnParameters": 28718,
+                  "id": 28724,
+                  "nodeType": "Return",
+                  "src": "1053:74:21"
+                }
+              ]
+            },
+            "baseFunctions": [28803],
+            "documentation": {
+              "id": 28712,
+              "nodeType": "StructuredDocumentation",
+              "src": "914:37:21",
+              "text": "@inheritdoc IExtrospectBytecodeV2"
+            },
+            "functionSelector": "f5ac6335",
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "scanEVMOpcodesPresentInAccount",
+            "nameLocation": "965:30:21",
+            "parameters": {
+              "id": 28715,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 28714,
+                  "mutability": "mutable",
+                  "name": "account",
+                  "nameLocation": "1004:7:21",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 28726,
+                  "src": "996:15:21",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 28713,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "996:7:21",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "995:17:21"
+            },
+            "returnParameters": {
+              "id": 28718,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 28717,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 28726,
+                  "src": "1034:7:21",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 28716,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1034:7:21",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1033:9:21"
+            },
+            "scope": 28776,
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "public"
+          },
+          {
+            "id": 28741,
+            "nodeType": "FunctionDefinition",
+            "src": "1182:182:21",
+            "nodes": [],
+            "body": {
+              "id": 28740,
+              "nodeType": "Block",
+              "src": "1271:93:21",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "expression": {
+                          "id": 28736,
+                          "name": "account",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 28729,
+                          "src": "1344:7:21",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        },
+                        "id": 28737,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberLocation": "1352:4:21",
+                        "memberName": "code",
+                        "nodeType": "MemberAccess",
+                        "src": "1344:12:21",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes_memory_ptr",
+                          "typeString": "bytes memory"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bytes_memory_ptr",
+                          "typeString": "bytes memory"
+                        }
+                      ],
+                      "expression": {
+                        "id": 28734,
+                        "name": "LibExtrospectBytecode",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 29511,
+                        "src": "1288:21:21",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_contract$_LibExtrospectBytecode_$29511_$",
+                          "typeString": "type(library LibExtrospectBytecode)"
+                        }
+                      },
+                      "id": 28735,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "1310:33:21",
+                      "memberName": "scanEVMOpcodesReachableInBytecode",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 29488,
+                      "src": "1288:55:21",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_pure$_t_bytes_memory_ptr_$returns$_t_uint256_$",
+                        "typeString": "function (bytes memory) pure returns (uint256)"
+                      }
+                    },
+                    "id": 28738,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1288:69:21",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "functionReturnParameters": 28733,
+                  "id": 28739,
+                  "nodeType": "Return",
+                  "src": "1281:76:21"
+                }
+              ]
+            },
+            "baseFunctions": [28811],
+            "documentation": {
+              "id": 28727,
+              "nodeType": "StructuredDocumentation",
+              "src": "1140:37:21",
+              "text": "@inheritdoc IExtrospectBytecodeV2"
+            },
+            "functionSelector": "7d82a692",
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "scanEVMOpcodesReachableInAccount",
+            "nameLocation": "1191:32:21",
+            "parameters": {
+              "id": 28730,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 28729,
+                  "mutability": "mutable",
+                  "name": "account",
+                  "nameLocation": "1232:7:21",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 28741,
+                  "src": "1224:15:21",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 28728,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1224:7:21",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1223:17:21"
+            },
+            "returnParameters": {
+              "id": 28733,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 28732,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 28741,
+                  "src": "1262:7:21",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 28731,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1262:7:21",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1261:9:21"
+            },
+            "scope": 28776,
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "public"
+          },
+          {
+            "id": 28758,
+            "nodeType": "FunctionDefinition",
+            "src": "1415:199:21",
+            "nodes": [],
+            "body": {
+              "id": 28757,
+              "nodeType": "Block",
+              "src": "1511:103:21",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "commonType": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    },
+                    "id": 28755,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftExpression": {
+                      "commonType": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      },
+                      "id": 28753,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "leftExpression": {
+                        "arguments": [
+                          {
+                            "id": 28750,
+                            "name": "interpreter",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 28744,
+                            "src": "1561:11:21",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          ],
+                          "id": 28749,
+                          "name": "scanEVMOpcodesReachableInAccount",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 28741,
+                          "src": "1528:32:21",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_internal_view$_t_address_$returns$_t_uint256_$",
+                            "typeString": "function (address) view returns (uint256)"
+                          }
+                        },
+                        "id": 28751,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "nameLocations": [],
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "1528:45:21",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "nodeType": "BinaryOperation",
+                      "operator": "&",
+                      "rightExpression": {
+                        "id": 28752,
+                        "name": "INTERPRETER_DISALLOWED_OPS",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 28947,
+                        "src": "1576:26:21",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "src": "1528:74:21",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "nodeType": "BinaryOperation",
+                    "operator": "==",
+                    "rightExpression": {
+                      "hexValue": "30",
+                      "id": 28754,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "number",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "1606:1:21",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_rational_0_by_1",
+                        "typeString": "int_const 0"
+                      },
+                      "value": "0"
+                    },
+                    "src": "1528:79:21",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "functionReturnParameters": 28748,
+                  "id": 28756,
+                  "nodeType": "Return",
+                  "src": "1521:86:21"
+                }
+              ]
+            },
+            "baseFunctions": [28956],
+            "documentation": {
+              "id": 28742,
+              "nodeType": "StructuredDocumentation",
+              "src": "1370:40:21",
+              "text": "@inheritdoc IExtrospectInterpreterV1"
+            },
+            "functionSelector": "b8270b1e",
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "scanOnlyAllowedInterpreterEVMOpcodes",
+            "nameLocation": "1424:36:21",
+            "parameters": {
+              "id": 28745,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 28744,
+                  "mutability": "mutable",
+                  "name": "interpreter",
+                  "nameLocation": "1469:11:21",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 28758,
+                  "src": "1461:19:21",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 28743,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1461:7:21",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1460:21:21"
+            },
+            "returnParameters": {
+              "id": 28748,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 28747,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 28758,
+                  "src": "1505:4:21",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 28746,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1505:4:21",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1504:6:21"
+            },
+            "scope": 28776,
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "id": 28775,
+            "nodeType": "FunctionDefinition",
+            "src": "1666:318:21",
+            "nodes": [],
+            "body": {
+              "id": 28774,
+              "nodeType": "Block",
+              "src": "1774:210:21",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "expression": {
+                          "id": 28770,
+                          "name": "account",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 28761,
+                          "src": "1964:7:21",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        },
+                        "id": 28771,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberLocation": "1972:4:21",
+                        "memberName": "code",
+                        "nodeType": "MemberAccess",
+                        "src": "1964:12:21",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes_memory_ptr",
+                          "typeString": "bytes memory"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bytes_memory_ptr",
+                          "typeString": "bytes memory"
+                        }
+                      ],
+                      "expression": {
+                        "id": 28768,
+                        "name": "LibExtrospectERC1167Proxy",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 29644,
+                        "src": "1923:25:21",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_contract$_LibExtrospectERC1167Proxy_$29644_$",
+                          "typeString": "type(library LibExtrospectERC1167Proxy)"
+                        }
+                      },
+                      "id": 28769,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "1949:14:21",
+                      "memberName": "isERC1167Proxy",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 29643,
+                      "src": "1923:40:21",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_pure$_t_bytes_memory_ptr_$returns$_t_bool_$_t_address_$",
+                        "typeString": "function (bytes memory) pure returns (bool,address)"
+                      }
+                    },
+                    "id": 28772,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1923:54:21",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$_t_bool_$_t_address_$",
+                      "typeString": "tuple(bool,address)"
+                    }
+                  },
+                  "functionReturnParameters": 28767,
+                  "id": 28773,
+                  "nodeType": "Return",
+                  "src": "1916:61:21"
+                }
+              ]
+            },
+            "baseFunctions": [28825],
+            "documentation": {
+              "id": 28759,
+              "nodeType": "StructuredDocumentation",
+              "src": "1620:41:21",
+              "text": "@inheritdoc IExtrospectERC1167ProxyV1"
+            },
+            "functionSelector": "74c6eb25",
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "isERC1167Proxy",
+            "nameLocation": "1675:14:21",
+            "parameters": {
+              "id": 28762,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 28761,
+                  "mutability": "mutable",
+                  "name": "account",
+                  "nameLocation": "1698:7:21",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 28775,
+                  "src": "1690:15:21",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 28760,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1690:7:21",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1689:17:21"
+            },
+            "returnParameters": {
+              "id": 28767,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 28764,
+                  "mutability": "mutable",
+                  "name": "result",
+                  "nameLocation": "1735:6:21",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 28775,
+                  "src": "1730:11:21",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 28763,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1730:4:21",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 28766,
+                  "mutability": "mutable",
+                  "name": "implementationAddress",
+                  "nameLocation": "1751:21:21",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 28775,
+                  "src": "1743:29:21",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 28765,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1743:7:21",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1729:44:21"
+            },
+            "scope": 28776,
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "abstract": false,
+        "baseContracts": [
+          {
+            "baseName": {
+              "id": 28679,
+              "name": "IExtrospectBytecodeV2",
+              "nameLocations": ["487:21:21"],
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 28812,
+              "src": "487:21:21"
+            },
+            "id": 28680,
+            "nodeType": "InheritanceSpecifier",
+            "src": "487:21:21"
+          },
+          {
+            "baseName": {
+              "id": 28681,
+              "name": "IExtrospectInterpreterV1",
+              "nameLocations": ["510:24:21"],
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 28957,
+              "src": "510:24:21"
+            },
+            "id": 28682,
+            "nodeType": "InheritanceSpecifier",
+            "src": "510:24:21"
+          },
+          {
+            "baseName": {
+              "id": 28683,
+              "name": "IExtrospectERC1167ProxyV1",
+              "nameLocations": ["536:25:21"],
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 28826,
+              "src": "536:25:21"
+            },
+            "id": 28684,
+            "nodeType": "InheritanceSpecifier",
+            "src": "536:25:21"
+          }
+        ],
+        "canonicalName": "Extrospection",
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": {
+          "id": 28678,
+          "nodeType": "StructuredDocumentation",
+          "src": "383:78:21",
+          "text": "@title Extrospection\n @notice Implements all extrospection interfaces."
+        },
+        "fullyImplemented": true,
+        "linearizedBaseContracts": [28776, 28826, 28957, 28812],
+        "name": "Extrospection",
+        "nameLocation": "470:13:21",
+        "scope": 28777,
+        "usedErrors": []
+      }
+    ],
+    "license": "CAL"
+  },
+  "id": 21
+}

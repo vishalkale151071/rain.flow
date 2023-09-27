@@ -434,6 +434,11 @@
   resolved "https://registry.yarnpkg.com/@protobufjs/utf8/-/utf8-1.1.0.tgz#a777360b5b39a1a2e5106f8e858f2fd2d060c570"
   integrity sha512-Vvn3zZrhQZkkBE8LSuW3em98c0FwgO4nxzv6OdSxPKJIEKY2bGbHn+mhGIPerzI4twdxaP8/0+06HBpwf345Lw==
 
+"@rainprotocol/assemblyscript-cbor@^0.0.6":
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/@rainprotocol/assemblyscript-cbor/-/assemblyscript-cbor-0.0.6.tgz#5202dc4e584373ce43e2ddfa95c28f5abc335600"
+  integrity sha512-RNQfi/BH3fTJCGjU3b2AGHOduziPr+9QTRXz7kt0QBcX2LxYCByXm+d2Hc87Ozh2XKjccemy3iSLHe7TEkq/EA==
+
 "@rescript/std@9.0.0":
   version "9.0.0"
   resolved "https://registry.yarnpkg.com/@rescript/std/-/std-9.0.0.tgz#df53f3fa5911cb4e85bd66b92e9e58ddf3e4a7e1"
@@ -1007,6 +1012,13 @@ caseless@^0.12.0, caseless@~0.12.0:
   version "0.12.0"
   resolved "https://registry.yarnpkg.com/caseless/-/caseless-0.12.0.tgz#1b681c21ff84033c826543090689420d187151dc"
   integrity sha512-4tYFyifaFfGacoiObjJegolkwSU4xQNGbVgUiNYVUxbQ2x2lUsFvY4hVgVzGiIe6WLOPqycWXA40l+PWsxthUw==
+
+cbor@=8.1.0:
+  version "8.1.0"
+  resolved "https://registry.yarnpkg.com/cbor/-/cbor-8.1.0.tgz#cfc56437e770b73417a2ecbfc9caf6b771af60d5"
+  integrity sha512-DwGjNW9omn6EwP70aXsn7FQJx5kO12tX0bZkaTjzdVFM6/7nhA4t0EENocKGx6D2Bch9PE2KzCUf5SceBdeijg==
+  dependencies:
+    nofilter "^3.1.0"
 
 cborg@^1.5.4, cborg@^1.6.0:
   version "1.10.2"
@@ -2627,6 +2639,11 @@ node-gyp-build@^4.2.0:
   version "4.6.1"
   resolved "https://registry.yarnpkg.com/node-gyp-build/-/node-gyp-build-4.6.1.tgz#24b6d075e5e391b8d5539d98c7fc5c210cac8a3e"
   integrity sha512-24vnklJmyRS8ViBNI8KbtK/r/DmXQMRiOMXTNz2nrTnAYUwjmEEbnnpB/+kt+yWRv73bPsSPRFddrcIbAxSiMQ==
+
+nofilter@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/nofilter/-/nofilter-3.1.0.tgz#c757ba68801d41ff930ba2ec55bab52ca184aa66"
+  integrity sha512-l2NNj07e9afPnhAhvgVrCD/oy2Ai1yfLpuo3EpiO1jFTsB4sFz6oIfAfSZyQzVpkZQ9xS8ZS5g1jCBgq4Hwo0g==
 
 normalize-path@^3.0.0, normalize-path@~3.0.0:
   version "3.0.0"

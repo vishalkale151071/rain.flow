@@ -1,0 +1,116 @@
+type FlowERC1155 @entity {
+    id: ID!
+    address: Bytes!
+    sender: Bytes!
+    uri: String!
+    version: Int
+    evaluableConfig: EvaluableConfig! @derivedFrom(field: "contract")
+    flowConfigs: [FlowConfig!]! @derivedFrom(field: "contract")
+    evaluable: Evaluable! @derivedFrom(field: "contract")
+    meta: RainMetaV1!
+}
+
+type Evaluable @entity {
+  id: ID!
+  "Base contract"
+  contract: FlowERC1155!
+  "Config data"
+  store: Bytes!
+  interpreter: Bytes!
+  expression: Bytes!
+}
+
+type EvaluableConfig @entity {
+  id: ID!
+  "Base contract"
+  contract: FlowERC1155!
+  "Config data"
+  deployer: Bytes!
+  constants: [BigInt!]!
+  bytecode: Bytes!
+}
+
+type FlowConfig @entity {
+  id: ID!
+  "Base contract"
+  contract: FlowERC1155!
+  "Config data"
+  deployer: Bytes!
+  constants: [BigInt!]!
+  bytecode: Bytes!
+}
+
+type ContextEntity implements Event @entity {
+  id: ID!
+  "Base caller"
+  caller: Account!
+  "Base contract"
+  contract: FlowERC1155!
+
+  "Contextual data available to both calculate order and handle IO"
+  callingContext: [BigInt!]
+
+  "Optional signed context relevant to the transaction"
+  signedContext: [SignedContext!] @derivedFrom(field: "contextEntity")
+
+  "Transaction where this event was emitted."
+  transaction: Transaction!
+  "Account that sent the transaction this event was emitted in."
+  emitter: Account!
+  timestamp: BigInt!
+}
+
+type SignedContext @entity {
+  id: ID!
+  signer: Account!
+  context: [BigInt!]
+  contextEntity: ContextEntity!
+}
+
+type Transaction @entity(immutable: true) {
+  id: ID!
+  timestamp: BigInt!
+  blockNumber: BigInt!
+  from: Bytes!
+  events: [Event!] @derivedFrom(field: "transaction")
+}
+
+type Account @entity {
+  id: ID!
+  events: [Event!] @derivedFrom(field: "emitter")
+}
+
+interface Event {
+  id: ID!
+  "Transaction this event was emitted in."
+  transaction: Transaction!
+  "Account that sent the transaction this event was emitted in."
+  emitter: Account!
+  timestamp: BigInt!
+}
+
+type RainMetaV1 @entity {
+  "Hash of the meta directly emitted by the contract"
+  id: Bytes! # Include the RainMeta MagicNumber.
+  "Original meta bytes directly emitted from the contract"
+  metaBytes: Bytes! # Original meta bytes emitted from the contract
+  "The meta content V1 decoded from the meta bytes emitted"
+  content: [MetaContentV1!] @derivedFrom(field: "documents")
+}
+
+type MetaContentV1 @entity {
+  "The hash of the Map Rain Meta document or CBOR Item"
+  id: Bytes! # Hash of the whole stringify data.
+  "The payload present on the index 0 of the Rain meta Document"
+  payload: Bytes!
+  "The magic number that is used to track the payload"
+  magicNumber: BigInt!
+  "The header name info for Content-Type"
+  contentType: String
+  "The header name info for Content-Encoding. It's optional"
+  contentEncoding: String
+  "The header name info for Content-Language. It's optional"
+  contentLanguage: String
+  "RainMeta documents bytes that have this content"
+  documents: [RainMetaV1!]!
+}

@@ -21,6 +21,7 @@ dataSources:
       eventHandlers:
         - event: Context(address,uint256[][])
           handler: handleContext
+          receipt: true
         - event: FlowInitialized(address,(address,address,address))
           handler: handleFlowInitialized
         - event: Initialize(address,(string,(address,bytes,uint256[]),(address,bytes,uint256[])[]))
@@ -29,4 +30,4 @@ dataSources:
           handler: handleInitialized
         - event: MetaV1(address,uint256,bytes)
           handler: handleMetaV1
-      file: ./src/flowERC1155/flowERC1155.ts
+      file: ./src/flowERC1155.ts
