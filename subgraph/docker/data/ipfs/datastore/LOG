@@ -1,0 +1,52 @@
+=============== Oct 7, 2023 (UTC) ===============
+11:51:13.722140 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+11:51:13.732146 db@open opening
+11:51:13.734591 version@stat F·[] S·0B[] Sc·[]
+11:51:13.736309 db@janitor F·2 G·0
+11:51:13.737147 db@open done T·4.6515ms
+11:51:13.951793 db@close closing
+11:51:13.953220 db@close done T·1.414917ms
+=============== Oct 7, 2023 (UTC) ===============
+11:51:13.960390 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+11:51:13.963293 version@stat F·[] S·0B[] Sc·[]
+11:51:13.964017 db@open opening
+11:51:13.965601 journal@recovery F·1
+11:51:13.966452 journal@recovery recovering @1
+11:51:13.971498 memdb@flush created L0@2 N·12 S·1KiB "/pi..ZWQ,v10":"/pr..crQ,v12"
+11:51:13.973569 version@stat F·[1] S·1KiB[1KiB] Sc·[0.25]
+11:51:13.978565 db@janitor F·3 G·0
+11:51:13.978805 db@open done T·14.375125ms
+11:51:14.013788 db@close closing
+11:51:14.014855 db@close done T·1.057333ms
+=============== Oct 7, 2023 (UTC) ===============
+11:51:14.445809 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+11:51:14.458937 version@stat F·[1] S·1KiB[1KiB] Sc·[0.25]
+11:51:14.459614 db@open opening
+11:51:14.461067 journal@recovery F·1
+11:51:14.463102 journal@recovery recovering @3
+11:51:14.484235 memdb@flush created L0@5 N·6 S·1KiB "/F5..KKY,v19":"/pi..rty,v14"
+11:51:14.485485 version@stat F·[2] S·2KiB[2KiB] Sc·[0.50]
+11:51:14.491809 db@janitor F·4 G·0
+11:51:14.492705 db@open done T·32.163ms
+11:51:14.511175 db@close closing
+11:51:14.513824 db@close done T·2.544333ms
+=============== Oct 7, 2023 (UTC) ===============
+11:51:14.937587 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+11:51:14.958249 version@stat F·[2] S·2KiB[2KiB] Sc·[0.50]
+11:51:14.959052 db@open opening
+11:51:14.964196 journal@recovery F·1
+11:51:14.976928 journal@recovery recovering @6
+11:51:14.978864 version@stat F·[2] S·2KiB[2KiB] Sc·[0.50]
+11:51:14.984880 db@janitor F·4 G·0
+11:51:14.985932 db@open done T·26.046167ms
+11:51:15.005986 db@close closing
+11:51:15.007884 db@close done T·1.861375ms
+=============== Oct 7, 2023 (UTC) ===============
+11:51:15.414979 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+11:51:15.426855 version@stat F·[2] S·2KiB[2KiB] Sc·[0.50]
+11:51:15.427456 db@open opening
+11:51:15.428891 journal@recovery F·1
+11:51:15.430766 journal@recovery recovering @8
+11:51:15.448622 version@stat F·[2] S·2KiB[2KiB] Sc·[0.50]
+11:51:15.456401 db@janitor F·4 G·0
+11:51:15.457672 db@open done T·29.171416ms
