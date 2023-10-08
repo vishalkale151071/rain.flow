@@ -4,6 +4,7 @@ mod utils;
 use utils::{
     deploy::{
         clone_factory::get_clone_factory_address,
+        flow::deploy_flow,
         implementations::{
             flow1155_implementation, flow20_implementation, flow721_implementation,
             flow_implementation,
@@ -16,21 +17,12 @@ use utils::{
 #[tokio::main]
 #[test]
 async fn flow_entity_test() -> anyhow::Result<()> {
-    // Deploy
+    // Deploy expression deployer
     let expression_deployer = deploy_touch_deployer(None)
         .await
         .expect("cannot deploy expression_deployer");
 
-    // Deploy CloneFactory
-    let clone_factory = get_clone_factory_address(expression_deployer.address())
-        .await
-        .expect("cannot deploy clone_factory");
-
-    println!("clone_factory: {:?}", clone_factory);
-
-    let flow_implementation_ = flow_implementation(expression_deployer.address().clone())
-        .await
-        .expect("cannot deploy flow_implementation");
+    let _flow = deploy_flow(None, expression_deployer.address()).await?;
 
     let _ = is_sugraph_node_init()
         .await
