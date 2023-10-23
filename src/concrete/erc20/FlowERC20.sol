@@ -70,7 +70,7 @@ contract FlowERC20 is ICloneableV2, IFlowERC20V4, FlowCommon, ERC20 {
 
         // Set state before external calls here.
         bool evalHandleTransfer = LibBytecode.sourceCount(flowERC20Config.evaluableConfig.bytecode) > 0
-            && LibBytecode.sourceOpsLength(
+            && LibBytecode.sourceOpsCount(
                 flowERC20Config.evaluableConfig.bytecode, SourceIndex.unwrap(FLOW_ERC20_HANDLE_TRANSFER_ENTRYPOINT)
             ) > 0;
         sEvalHandleTransfer = evalHandleTransfer;

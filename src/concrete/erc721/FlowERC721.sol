@@ -100,11 +100,11 @@ contract FlowERC721 is ICloneableV2, IFlowERC721V4, FlowCommon, ERC721 {
         // Set state before external calls here.
         uint256 sourceCount = LibBytecode.sourceCount(flowERC721Config.evaluableConfig.bytecode);
         bool evalHandleTransfer = sourceCount > 0
-            && LibBytecode.sourceOpsLength(
+            && LibBytecode.sourceOpsCount(
                 flowERC721Config.evaluableConfig.bytecode, SourceIndex.unwrap(FLOW_ERC721_HANDLE_TRANSFER_ENTRYPOINT)
             ) > 0;
         bool evalTokenURI = sourceCount > 1
-            && LibBytecode.sourceOpsLength(
+            && LibBytecode.sourceOpsCount(
                 flowERC721Config.evaluableConfig.bytecode, SourceIndex.unwrap(FLOW_ERC721_TOKEN_URI_ENTRYPOINT)
             ) > 0;
         sEvalHandleTransfer = evalHandleTransfer;

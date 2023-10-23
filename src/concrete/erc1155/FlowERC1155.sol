@@ -66,7 +66,7 @@ contract FlowERC1155 is ICloneableV2, IFlowERC1155V4, FlowCommon, ERC1155 {
 
         // Set state before external calls here.
         bool evalHandleTransfer = LibBytecode.sourceCount(flowERC1155Config.evaluableConfig.bytecode) > 0
-            && LibBytecode.sourceOpsLength(
+            && LibBytecode.sourceOpsCount(
                 flowERC1155Config.evaluableConfig.bytecode, SourceIndex.unwrap(FLOW_ERC1155_HANDLE_TRANSFER_ENTRYPOINT)
             ) > 0;
         sEvalHandleTransfer = evalHandleTransfer;
