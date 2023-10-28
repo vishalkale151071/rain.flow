@@ -70,7 +70,8 @@ contract FlowERC721 is ICloneableV2, IFlowERC721V4, FlowCommon, ERC721 {
     string private sBaseURI;
 
     /// Forwards the `FlowCommon` constructor arguments to the `FlowCommon`.
-    constructor(DeployerDiscoverableMetaV2ConstructionConfig memory config) FlowCommon(CALLER_META_HASH, config) {}
+    constructor(DeployerDiscoverableMetaV2ConstructionConfig memory config) FlowCommon(CALLER_META_HASH, config) {
+    }
 
     /// Needed here to fix Open Zeppelin implementing `supportsInterface` on
     /// multiple base contracts.
@@ -84,14 +85,13 @@ contract FlowERC721 is ICloneableV2, IFlowERC721V4, FlowCommon, ERC721 {
         return super.supportsInterface(interfaceId);
     }
 
-    /// Overloaded typed initialize function MUST revert with this error.
+      /// Overloaded typed initialize function MUST revert with this error.
     /// As per `ICloneableV2` interface.
     function initialize(FlowERC721ConfigV2 memory) external pure {
         revert InitializeSignatureFn();
     }
 
-    /// @inheritdoc ICloneableV2
-    function initialize(bytes calldata data) external initializer returns (bytes32) {
+    function initialize(bytes calldata data) public virtual initializer returns (bytes32) {
         FlowERC721ConfigV2 memory flowERC721Config = abi.decode(data, (FlowERC721ConfigV2));
         emit Initialize(msg.sender, flowERC721Config);
         __ERC721_init(flowERC721Config.name, flowERC721Config.symbol);
