@@ -190,14 +190,19 @@ abstract contract FlowCommon is
     /// contracts can easily scan the stack for sentinels, which is the expected
     /// pattern to determine what token moments are required.
     /// @param evaluable The evaluable to evaluate.
-    /// @param context The context to evaluate the evaluable with. The inheriting
-    /// contract is expected to provide the correct context for the flow,
-    /// including checking signatures etc.
-    function _flowStack(Evaluable memory evaluable, uint256[][] memory context)
-        internal
-        view
-        returns (Pointer, Pointer, uint256[] memory)
-    {
+    /// @param callerContext The caller context to evaluate the evaluable with.
+    /// @param signedContexts The signed contexts to evaluate the evaluable with.
+    /// @return The bottom of the stack after evaluation.
+    /// @return The top of the stack after evaluation.
+    /// @return The key-value pairs that were emitted during evaluation.
+    function _flowStack(
+        Evaluable memory evaluable,
+        uint256[] memory callerContext,
+        SignedContextV1[] memory signedContexts
+    ) internal returns (Pointer, Pointer, uint256[] memory) {
+        uint256[][] memory context = LibContext.build(callerContext.matrixFrom(), signedContexts);
+        emit Context(msg.sender, context);
+
         // Refuse to evaluate unregistered flows.
         {
             bytes32 evaluableHash = evaluable.hash();
@@ -213,16 +218,5 @@ abstract contract FlowCommon is
             context
         );
         return (stack.dataPointer(), stack.endPointer(), kvs);
-    }
-
-    /// TODO merge both flowStack functions into one.
-    function _flowStack(
-        Evaluable memory evaluable,
-        uint256[] memory callerContext,
-        SignedContextV1[] memory signedContexts
-    ) internal returns (Pointer, Pointer, uint256[] memory) {
-        uint256[][] memory context = LibContext.build(callerContext.matrixFrom(), signedContexts);
-        emit Context(msg.sender, context);
-        return _flowStack(evaluable, context);
     }
 }

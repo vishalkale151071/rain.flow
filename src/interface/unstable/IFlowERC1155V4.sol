@@ -15,11 +15,11 @@ import {
     FLOW_ERC1155_MIN_FLOW_SENTINELS
 } from "../IFlowERC1155V3.sol";
 
-/// Constructor config.
+/// Initialization config.
 /// @param uri As per Open Zeppelin `ERC1155Upgradeable`.
 /// @param evaluableConfig The `EvaluableConfigV2` to use to build the
 /// `evaluable` that can be used to handle transfers.
-/// @param flowConfig Constructor config for the `Evaluable`s that define the
+/// @param flowConfig Initialization config for the `Evaluable`s that define the
 /// flow behaviours outside self mints/burns.
 struct FlowERC1155ConfigV2 {
     string uri;
