@@ -93,7 +93,8 @@ contract FlowERC721 is IFlowERC721V4, FlowCommon, ERC721 {
     //     revert InitializeSignatureFn();
     // }
 
-    // Renaming this form `initialize` to `init` because it is being implemented in NorClaim.sol
+    // Renaming this form `initialize` to `flowERC721Init` because it is being implemented in NorClaim.sol
+    // removed initializer modifier.
     // FlowERC721 no longer implemets ICloneableV2 its inherited in NorClaim.sol
     // removed initializer modifier
     // this moethod is being called in initialize method of NorClaim.sol
