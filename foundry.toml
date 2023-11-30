@@ -19,6 +19,8 @@ optimizer_runs = 1000000
 bytecode_hash = "none"
 cbor_metadata = false
 
+fs_permissions = [{ access = "read-write", path = "./meta"}]
+
 [fuzz]
 runs = 2048
 seed = "0xdeadbeef"
