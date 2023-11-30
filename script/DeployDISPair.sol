@@ -7,7 +7,6 @@ import "rain.interpreter/src/concrete/RainterpreterNP.sol";
 import "rain.interpreter/src/concrete/RainterpreterExpressionDeployerNP.sol";
 import {LibAllStandardOpsNP} from "rain.interpreter/src/lib/op/LibAllStandardOpsNP.sol";
 
-
 /// @title DeployDISPair
 /// @notice A script that deploys a DeployDISPair.
 /// This is intended to be run on every commit by CI to a testnet such as mumbai,
@@ -19,12 +18,9 @@ contract DeployDISPair is Script {
         vm.startBroadcast(deployerPrivateKey);
         RainterpreterNP interpreter = new RainterpreterNP();
         RainterpreterStore store = new RainterpreterStore();
-        RainterpreterExpressionDeployerNP deployer =
-        new RainterpreterExpressionDeployerNP(RainterpreterExpressionDeployerConstructionConfig(
-            address(interpreter),
-            address(store),
-            authoringMeta
-        ));
+        RainterpreterExpressionDeployerNP deployer = new RainterpreterExpressionDeployerNP(
+            RainterpreterExpressionDeployerConstructionConfig(address(interpreter), address(store), authoringMeta)
+        );
         (deployer);
         vm.stopBroadcast();
 
@@ -36,4 +32,3 @@ contract DeployDISPair is Script {
         console2.logAddress(address(deployer));
     }
 }
-
