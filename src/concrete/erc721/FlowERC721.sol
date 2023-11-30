@@ -44,6 +44,7 @@ bytes32 constant CALLER_META_HASH = bytes32(0x95db2b42853e072a46b00f0f346105d52a
 
 /// @title FlowERC721
 /// See `IFlowERC721V4` for documentation.
+contract FlowERC721 is ICloneableV2, IFlowERC721V4, FlowCommon, ERC721, Ownable {
     using LibUint256Matrix for uint256[];
     using LibUint256Array for uint256[];
     using LibStackSentinel for Pointer;
@@ -69,9 +70,7 @@ bytes32 constant CALLER_META_HASH = bytes32(0x95db2b42853e072a46b00f0f346105d52a
     string private sBaseURI;
 
     /// Forwards the `FlowCommon` constructor arguments to the `FlowCommon`.
-    constructor(DeployerDiscoverableMetaV2ConstructionConfig memory config) FlowCommon(CALLER_META_HASH, config) {
-        _disableInitializers();
-    }
+    constructor(DeployerDiscoverableMetaV2ConstructionConfig memory config) FlowCommon(CALLER_META_HASH, config) {}
 
     /// Needed here to fix Open Zeppelin implementing `supportsInterface` on
     /// multiple base contracts.
@@ -85,19 +84,14 @@ bytes32 constant CALLER_META_HASH = bytes32(0x95db2b42853e072a46b00f0f346105d52a
         return super.supportsInterface(interfaceId);
     }
 
-    // Implemented in Parent Contract
-    // /// Overloaded typed initialize function MUST revert with this error.
-    // /// As per `ICloneableV2` interface.
-    // function initialize(FlowERC721ConfigV2 memory) public virtual pure {
-    //     revert InitializeSignatureFn();
-    // }
+    /// Overloaded typed initialize function MUST revert with this error.
+    /// As per `ICloneableV2` interface.
+    function initialize(FlowERC721ConfigV2 memory) external pure {
+        revert InitializeSignatureFn();
+    }
 
-    // Renaming this form `initialize` to `flowERC721Init` because it is being implemented in NorClaim.sol
-    // removed initializer modifier.
-    // FlowERC721 no longer implemets ICloneableV2 its inherited in NorClaim.sol
-    // removed initializer modifier
-    // this moethod is being called in initialize method of NorClaim.sol
-    function flowERC721Init(bytes memory data) public virtual returns (bytes32) {
+    /// @inheritdoc ICloneableV2
+    function initialize(bytes calldata data) external initializer returns (bytes32) {
         FlowERC721ConfigV2 memory flowERC721Config = abi.decode(data, (FlowERC721ConfigV2));
         emit Initialize(msg.sender, flowERC721Config);
         __ERC721_init(flowERC721Config.name, flowERC721Config.symbol);
