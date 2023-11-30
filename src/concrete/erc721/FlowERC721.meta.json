@@ -3,7 +3,6 @@
   "abiName": "FlowERC721",
   "desc": "A flow contract that is also an ERC721 token that can be minted by expressions. Transfers can be restricted by an expression.",
   "alias": "flow-erc721",
-  "source": "https://github.com/rainprotocol/rain-protocol",
   "methods": [
     {
       "name": "initialize",
@@ -41,19 +40,16 @@
               "name": "Base",
               "desc": "Base context column",
               "alias": "base",
-              "columnIndex": 0,
               "cells": [
                 {
                   "name": "Transfer caller",
                   "desc": "The contract or wallet that called transfer.",
-                  "alias": "transfer-caller",
-                  "cellIndex": 0
+                  "alias": "transfer-caller"
                 },
                 {
                   "name": "Flow contract",
                   "desc": "The address of the FlowERC721 contract.",
-                  "alias": "flow-contract",
-                  "cellIndex": 1
+                  "alias": "flow-contract"
                 }
               ]
             },
@@ -61,25 +57,21 @@
               "name": "Transfer information",
               "desc": "Information about the current transfer.",
               "alias": "transfer-information",
-              "columnIndex": 1,
               "cells": [
                 {
                   "name": "Transfer from address",
                   "desc": "The address the token is being transferred from.",
-                  "alias": "transfer-from-address",
-                  "cellIndex": 0
+                  "alias": "transfer-from-address"
                 },
                 {
                   "name": "Transfer to address",
                   "desc": "The address the token is being transferred to.",
-                  "alias": "transfer-to-address",
-                  "cellIndex": 1
+                  "alias": "transfer-to-address"
                 },
                 {
                   "name": "Token ID",
                   "desc": "The ID of the token being transferred.",
-                  "alias": "transfer-token-id",
-                  "cellIndex": 2
+                  "alias": "transfer-token-id"
                 }
               ]
             }
@@ -97,19 +89,16 @@
               "name": "Base",
               "desc": "Base context column.",
               "alias": "base",
-              "columnIndex": 0,
               "cells": [
                 {
                   "name": "Flow caller",
                   "desc": "The contract or wallet that called flow.",
-                  "alias": "flow-caller",
-                  "cellIndex": 0
+                  "alias": "flow-caller"
                 },
                 {
                   "name": "Flow contract",
                   "desc": "The address of the FlowERC721 contract.",
-                  "alias": "flow-contract",
-                  "cellIndex": 1
+                  "alias": "flow-contract"
                 }
               ]
             }

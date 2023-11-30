@@ -3,7 +3,7 @@ pragma solidity =0.8.19;
 
 import {ERC721Upgradeable as ERC721} from
     "openzeppelin-contracts-upgradeable/contracts/token/ERC721/ERC721Upgradeable.sol";
-
+import {OwnableUpgradeable as Ownable} from "openzeppelin-contracts-upgradeable/contracts/access/OwnableUpgradeable.sol";
 import {LibUint256Array} from "rain.solmem/lib/LibUint256Array.sol";
 import {LibUint256Matrix} from "rain.solmem/lib/LibUint256Matrix.sol";
 import {Sentinel, LibStackSentinel} from "rain.solmem/lib/LibStackSentinel.sol";
@@ -40,11 +40,10 @@ import {RAIN_FLOW_SENTINEL, BurnerNotOwner} from "../../interface/unstable/IFlow
 
 /// @dev The hash of the meta data expected to be passed to `FlowCommon`'s
 /// constructor.
-bytes32 constant CALLER_META_HASH = bytes32(0x362442d187946e7b1f1362d8e700f93cc4d48c90d21937a270db76cda8a5210c);
+bytes32 constant CALLER_META_HASH = bytes32(0x95db2b42853e072a46b00f0f346105d52ae5d292ddbc4db40e92351a29441717);
 
 /// @title FlowERC721
 /// See `IFlowERC721V4` for documentation.
-contract FlowERC721 is IFlowERC721V4, FlowCommon, ERC721 {
     using LibUint256Matrix for uint256[];
     using LibUint256Array for uint256[];
     using LibStackSentinel for Pointer;
@@ -102,6 +101,8 @@ contract FlowERC721 is IFlowERC721V4, FlowCommon, ERC721 {
         FlowERC721ConfigV2 memory flowERC721Config = abi.decode(data, (FlowERC721ConfigV2));
         emit Initialize(msg.sender, flowERC721Config);
         __ERC721_init(flowERC721Config.name, flowERC721Config.symbol);
+        __Ownable_init();
+        transferOwnership(flowERC721Config.owner);
         sBaseURI = flowERC721Config.baseURI;
 
         // Set state before external calls here.

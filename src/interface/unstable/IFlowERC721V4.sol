@@ -34,6 +34,7 @@ struct FlowERC721ConfigV2 {
     string name;
     string symbol;
     string baseURI;
+    address owner;
     EvaluableConfigV2 evaluableConfig;
     EvaluableConfigV2[] flowConfig;
 }
