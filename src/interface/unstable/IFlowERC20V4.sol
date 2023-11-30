@@ -14,7 +14,7 @@ import {
 } from "../IFlowERC20V3.sol";
 import {RAIN_FLOW_SENTINEL} from "./IFlowV4.sol";
 
-/// Constructor config.
+/// Initialization config.
 /// @param name As per Open Zeppelin `ERC20Upgradeable`.
 /// @param symbol As per Open Zeppelin `ERC20Upgradeable`.
 /// @param evaluableConfig The `EvaluableConfigV2` to use to build the

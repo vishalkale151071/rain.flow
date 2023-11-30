@@ -21,14 +21,14 @@ import {RAIN_FLOW_SENTINEL} from "./IFlowV4.sol";
 /// Thrown when burner of tokens is not the owner of tokens.
 error BurnerNotOwner();
 
-/// Constructor config.
+/// Initialization config.
 /// @param name As per Open Zeppelin `ERC721Upgradeable`.
 /// @param symbol As per Open Zeppelin `ERC721Upgradeable`.
 /// @param baseURI As per Open Zeppelin `ERC721Upgradeable`.
 /// @param evaluableConfig The `EvaluableConfigV2` to use to build the
 /// `evaluable` that can be used to handle transfers and build token IDs for the
 /// token URI.
-/// @param flowConfig Constructor config for the `Evaluable`s that define the
+/// @param flowConfig Initialization config for the `Evaluable`s that define the
 /// flow behaviours outside self mints/burns.
 struct FlowERC721ConfigV2 {
     string name;
