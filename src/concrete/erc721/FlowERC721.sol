@@ -40,7 +40,7 @@ import {RAIN_FLOW_SENTINEL, BurnerNotOwner} from "../../interface/unstable/IFlow
 
 /// @dev The hash of the meta data expected to be passed to `FlowCommon`'s
 /// constructor.
-bytes32 constant CALLER_META_HASH = bytes32(0x95db2b42853e072a46b00f0f346105d52ae5d292ddbc4db40e92351a29441717);
+bytes32 constant CALLER_META_HASH = bytes32(0x15806dca3da7e4b733287624aabfe698211111fcbb278acb388821e77b141dbb);
 
 /// @title FlowERC721
 /// See `IFlowERC721V4` for documentation.
